@@ -99,7 +99,10 @@ ws.onmessage = (ev) => {
     if (msg.error) rej(new Error(msg.error.message))
     else res(msg.result)
   } else if (msg.method === 'Runtime.exceptionThrown') {
-    consoleErrors.push(msg.params.exceptionDetails.text)
+    const d = msg.params.exceptionDetails
+    consoleErrors.push(
+      `${(d.exception?.description ?? d.text).split(String.fromCharCode(10))[0]} (${d.url ?? 'sin url'})`,
+    )
   }
 }
 const send = (method, params = {}) =>
@@ -122,6 +125,8 @@ const INIT_SCRIPT = `
 
 await send('Page.enable')
 await send('Runtime.enable')
+// La página siempre se considera enfocada (las capturas de pantalla, si no, le quitan el foco).
+await send('Emulation.setFocusEmulationEnabled', { enabled: true })
 await send('Page.addScriptToEvaluateOnNewDocument', { source: INIT_SCRIPT })
 
 async function viewport(width, height = 800) {
@@ -377,8 +382,11 @@ await assert('Recargar la página conserva lo registrado (perfil creado sobreviv
 await assert('Primera vez: con almacenamiento vacío se cargan los datos de demostración en el mapa', async () => {
   await evaluate(`localStorage.clear()`)
   await goto('/mapa')
-  await sleep(600)
-  const n = await evaluate(`document.querySelectorAll('.leaflet-marker-icon, .leaflet-interactive').length`)
+  const n = await waitFor(
+    () => evaluate(`document.querySelectorAll('.leaflet-marker-icon, .leaflet-interactive').length`),
+    'marcadores del mapa',
+    40,
+  ).catch(() => 0)
   expect(n > 0, 'el mapa no muestra marcadores')
   return `${n} elementos en el mapa`
 })
@@ -394,11 +402,12 @@ await assert('Navegador sin almacenamiento: muestra "Los datos no se guardarán 
   expect(role.includes('Los datos no se guardarán'), 'el aviso no tiene role=status')
   // La plataforma sigue funcionando en memoria.
   await goto('/mapa')
-  await sleep(500)
-  expect(
-    (await evaluate(`document.querySelectorAll('.leaflet-interactive, .leaflet-marker-icon').length`)) > 0,
-    'el mapa no funciona en memoria',
-  )
+  const markers = await waitFor(
+    () => evaluate(`document.querySelectorAll('.leaflet-interactive, .leaflet-marker-icon').length`),
+    'marcadores del mapa en memoria',
+    40,
+  ).catch(() => 0)
+  expect(markers > 0, 'el mapa no funciona en memoria')
   await send('Page.removeScriptToEvaluateOnNewDocument', { identifier })
 })
 
@@ -570,9 +579,19 @@ await assert(
   },
 )
 
+/** Espera a que el mapa termine de pintar los marcadores (el conteo deja de cambiar) y lo devuelve. */
+async function stableRedPins() {
+  let prev = -1
+  for (let i = 0; i < 20; i++) {
+    const n = await redPins()
+    if (n > 0 && n === prev) return n
+    prev = n
+    await sleep(300)
+  }
+  return prev
+}
 await goto('/mapa')
-await sleep(700)
-const pinsAntes = await redPins()
+const pinsAntes = await stableRedPins()
 
 await assert(
   'Registrar › Familia pide carpas: 5 carpas, 18 personas, niños, Quimbaya, La Española -> detalle "Sin ayuda"',
@@ -591,7 +610,7 @@ await assert(
 
 await assert('Registrar › Familia pide carpas: aparece en el mapa en rojo ("Sin ayuda") con su prioridad', async () => {
   await goto('/mapa')
-  await sleep(700)
+  const despues = await stableRedPins()
   const card =
     await evaluate(`(() => { const a = [...document.querySelectorAll('article')].find(x => x.querySelector('h3')?.innerText.trim() === 'Carpas');
     return a ? a.innerText : null })()`)
@@ -600,7 +619,6 @@ await assert('Registrar › Familia pide carpas: aparece en el mapa en rojo ("Si
     card.includes('Sin ayuda') && card.includes('Quimbaya · La Española') && /Prioridad/.test(card),
     `tarjeta: ${card.replace(/\n/g, ' | ')}`,
   )
-  const despues = await redPins()
   expect(despues === pinsAntes + 1, `marcadores rojos: antes ${pinsAntes}, después ${despues}`)
   await shot('mapa-con-necesidad-nueva-1440')
 })
@@ -732,7 +750,12 @@ await assert(
     )
     expect(!r.hrefs.includes(`/necesidades/${carpasId}`), 'se sugiere la misma necesidad cubierta')
     expect((await mainText()).includes('cubierta al 100 %'), 'sin mensaje de redirección')
-    expect(r.focus === 'puntos-cercanos', `el foco quedó en ${r.focus}`)
+    const focoFinal = await waitFor(
+      () => evaluate(`document.activeElement?.id === 'puntos-cercanos'`),
+      'foco en los puntos cercanos',
+      20,
+    ).catch(() => false)
+    expect(focoFinal, `el foco quedó en "${r.focus}"`)
     await shot('detalle-cubierta-redireccion-1440')
     return r.links[0]
   },
@@ -910,31 +933,45 @@ await assert('Detalle: necesidad inexistente muestra un mensaje amable con un so
   expect((await evaluate(`document.querySelectorAll('h1').length`)) === 1, 'h1 != 1')
 })
 
-// Observación de frontend-dev: ítems con la misma etiqueta se confunden (se identifican por `label`).
-{
-  await evaluate(`localStorage.clear()`)
-  await signInAs('Familia damnificada')
-  const id = await publishNeed({
-    ...CARPAS,
-    items: [
-      { label: 'Carpas', quantity: 3, unit: 'carpas' },
-      { label: 'Carpas', quantity: 4, unit: 'carpas' },
-    ],
-    barrio: 'Centro',
-  })
-  await signInAs('Empresa que ayuda')
-  await goto(`/necesidades/${id}`)
-  const both = await evaluate(`[0, 1].map(i => document.getElementById('commit-item-' + i).checked)`)
-  await clickId('commit-item-1')
-  await setValue('#commit-quantity', 2)
-  await clickText('main button', 'Me comprometo')
-  await sleep(400)
-  const items = (await store()).needs.find((n) => n.id === id).items
-  finding(
-    'Ítems con el mismo nombre se confunden',
-    `radios marcados a la vez: ${both}; tras elegir el 2.º ítem, committed = [${items.map((i) => i.committed)}] (esperado [0,2])`,
-  )
-}
+await assert(
+  'Ítems con el mismo nombre se rechazan: dos «Carpas» (y «carpas ») muestran el error junto a los ítems y no publican',
+  async () => {
+    await evaluate(`localStorage.clear()`)
+    await signInAs('Familia damnificada')
+    await goto('/pedir-ayuda')
+    const antes = (await store()).needs.length
+    await fillNeedForm({
+      ...CARPAS,
+      items: [
+        { label: 'Carpas', quantity: 3, unit: 'carpas' },
+        { label: 'Carpas', quantity: 4, unit: 'carpas' },
+        { label: ' carpas ', quantity: 1, unit: 'carpas' },
+      ],
+      barrio: 'Centro',
+    })
+    await evaluate(`document.querySelector('form button[type=submit]').click()`)
+    await waitFor(() => evaluate(`!!document.getElementById('need-items-error')`), 'error de ítems repetidos')
+    await waitFor(
+      () => evaluate(`document.getElementById('need-items')?.contains(document.activeElement) ?? false`),
+      'foco en el grupo de ítems',
+      30,
+    ).catch(() => undefined) // si no llega, el expect de abajo lo reporta con el elemento activo
+    const r = await evaluate(`(() => {
+      const err = document.getElementById('need-items-error');
+      const group = document.getElementById('need-items');
+      const active = document.activeElement;
+      return { text: err?.innerText ?? '', inGroup: !!err && !!group && group.contains(err),
+        describedby: group?.getAttribute('aria-describedby'),
+        active: active?.id || active?.tagName, focusInGroup: !!active && !!group && group.contains(active) } })()`)
+    expect((await pathNow()) === '/pedir-ayuda', `navegó a ${await pathNow()}`)
+    expect(/nombre distinto/i.test(r.text), `sin error de nombre repetido: "${r.text}"`)
+    expect(r.inGroup, 'el error no está junto al grupo de ítems')
+    expect(r.describedby === 'need-items-error', `aria-describedby del grupo: ${r.describedby}`)
+    expect(r.focusInGroup, `el foco no quedó en el grupo de ítems (activo: ${r.active})`)
+    expect((await store()).needs.length === antes, 'se publicó una necesidad con ítems repetidos')
+    await shot('pedir-ayuda-items-repetidos-1440')
+  },
+)
 
 // ---------- Recorrido guiado (plan de pruebas de usuario, tarea 5) ----------
 await assert(
@@ -1026,6 +1063,18 @@ const ROUTES = [
   { path: '/coordinacion', session: 'Comerciante afectado', label: 'Acceso restringido' },
   { path: '/coordinacion', session: 'Coordinador', label: 'Coordinación con datos de demostración' },
   { path: '/ingresar', session: 'Comerciante afectado', label: 'Ingresar con sesión' },
+  // add-necesidades
+  { path: '/pedir-ayuda', session: 'Familia damnificada', label: 'Pedir ayuda con sesión' },
+  {
+    path: '/pedir-ayuda',
+    session: 'Familia damnificada',
+    label: 'Pedir ayuda con errores de validación',
+    after: `document.querySelector('form button[type=submit]').click()`,
+  },
+  { path: '/necesidades/n-482', session: null, label: 'Detalle de necesidad sin sesión' },
+  { path: '/necesidades/n-482', session: 'Empresa que ayuda', label: 'Detalle de necesidad con sesión (quien ayuda)' },
+  { path: '/necesidades/n-482', session: 'Familia damnificada', label: 'Detalle de necesidad con sesión (dueña)' },
+  { path: '/necesidades/n-500', session: 'Empresa que ayuda', label: 'Detalle de necesidad cubierta' },
 ]
 const responsive = []
 for (const route of ROUTES) {
@@ -1034,7 +1083,13 @@ for (const route of ROUTES) {
     await evaluate(`localStorage.clear()`)
     if (route.session) await signInAs(route.session)
     await goto(route.path)
+    if (route.after) {
+      await evaluate(route.after)
+      await sleep(400)
+    }
     const a = await evaluate(AUDIT)
+    if (route.path !== '/' && (w === 390 || w === 1440))
+      await shot(`resp-${route.path.replace(/\W+/g, '_')}-${route.label.replace(/\W+/g, '_')}-${w}`)
     const problems = []
     if (a.overflow > 0) problems.push(`desplazamiento horizontal +${a.overflow}px`)
     if (a.h1 !== 1) problems.push(`h1=${a.h1}`)
@@ -1080,7 +1135,72 @@ await assert('Accesibilidad: foco visible al navegar con teclado en /ingresar', 
   expect(bad.length === 0, `sin indicador de foco: ${bad.join(', ')}`)
 })
 
+await assert('Accesibilidad: foco visible al navegar con teclado en /pedir-ayuda y en el detalle', async () => {
+  await viewport(1440)
+  await evaluate(`localStorage.clear()`)
+  await signInAs('Empresa que ayuda')
+  const bad = []
+  for (const path of ['/pedir-ayuda', '/necesidades/n-482']) {
+    await goto(path)
+    // Sin dar la vuelta completa: al volver al inicio el navegador enfoca sin :focus-visible.
+    const focusables = await evaluate(
+      `document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select, textarea').length`,
+    )
+    for (let i = 0; i < Math.min(30, focusables - 1); i++) {
+      await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 })
+      await send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 })
+      // Se reintenta unos instantes: el indicador de foco puede tardar en pintarse tras el Tab.
+      let f
+      for (let k = 0; k < 8; k++) {
+        await sleep(60)
+        f = await evaluate(`(() => { const e = document.activeElement; const s = getComputedStyle(e);
+        const box = e.closest('label') ? getComputedStyle(e.closest('label')) : null;
+        return { id: e.id || e.innerText?.slice(0, 20) || e.tagName,
+          outline: s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0, shadow: s.boxShadow !== 'none',
+          label: !!box && (box.outlineStyle !== 'none' || box.boxShadow !== 'none') } })()`)
+        if (f.outline || f.shadow || f.label) break
+      }
+      if (i > 0 && f.id.trim() === 'Saltar al contenido') break // dio la vuelta completa a la página
+      if (!f.outline && !f.shadow && !f.label) bad.push(`${path}: ${f.id.trim()}`)
+    }
+  }
+  expect(bad.length === 0, `sin indicador de foco: ${bad.join(', ')}`)
+})
+
+await assert(
+  'Accesibilidad: cada error del formulario y del compromiso está enlazado al campo (aria-describedby + aria-invalid)',
+  async () => {
+    await evaluate(`localStorage.clear()`)
+    await signInAs('Familia damnificada')
+    await goto('/pedir-ayuda')
+    await evaluate(`document.querySelector('form button[type=submit]').click()`)
+    await sleep(300)
+    const r = await evaluate(`[...document.querySelectorAll('main [id$="-error"]')].map(e => {
+    const f = document.querySelector('[aria-describedby~="' + e.id + '"]');
+    return { id: e.id, linked: !!f, invalid: f?.getAttribute('aria-invalid') === 'true' || !!f?.closest('fieldset') } })`)
+    expect(r.length >= 4, `errores visibles: ${r.length}`)
+    expect(
+      r.every((e) => e.linked && e.invalid),
+      `sin enlace al campo: ${r.filter((e) => !e.linked || !e.invalid).map((e) => e.id)}`,
+    )
+    const focused = await evaluate(`document.activeElement?.id || document.activeElement?.tagName`)
+    expect(focused !== 'BODY', 'el foco no pasó al primer campo con error')
+    await signInAs('Empresa que ayuda')
+    await goto('/necesidades/n-482')
+    await setValue('#commit-quantity', 0)
+    await clickText('main button', 'Me comprometo')
+    await sleep(300)
+    expect(
+      (await evaluate(`document.getElementById('commit-quantity').getAttribute('aria-describedby')`)) ===
+        'commit-error',
+      'commit-quantity no apunta a commit-error',
+    )
+  },
+)
+
 await assert('Accesibilidad: casilla de autorización y radios enlazan su texto (label) y la descripción', async () => {
+  await evaluate(`localStorage.clear()`)
+  await goto('/ingresar')
   const r = await evaluate(`(() => { const c = document.getElementById('perfil-autorizacion');
     return { label: c.labels[0]?.innerText.includes('Autorizo'), desc: c.getAttribute('aria-describedby')?.includes('aviso-datos'),
       radios: ['CC','NIT'].every(t => document.getElementById('perfil-tipo-' + t).labels.length === 1) } })()`)
@@ -1088,7 +1208,10 @@ await assert('Accesibilidad: casilla de autorización y radios enlazan su texto 
 })
 
 await assert('Sin errores de JavaScript no capturados durante la sesión', async () => {
-  expect(consoleErrors.length === 0, consoleErrors.join(' | '))
+  expect(
+    consoleErrors.length === 0,
+    [...new Set(consoleErrors)].slice(0, 5).join(' | ') + ` (${consoleErrors.length} en total)`,
+  )
 })
 
 // ---------- Observación: barra a 1024–1279 px ----------

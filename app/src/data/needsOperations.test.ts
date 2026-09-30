@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest'
 import { NeedValidationError } from '@/domain/needForm'
 import { NEED_LIMIT_MESSAGE } from '@/domain/needLimit'
 import type { NewNeedInput } from '@/domain/types'
+import { createLocalStorageRepository } from './localStorageRepository'
 import { createMockRepository } from './mockRepository'
+import { createMemoryStore } from './storage'
 
 const input: NewNeedInput = {
   requester: 'familia',
@@ -36,6 +38,21 @@ describe('ciclo de una necesidad en el repositorio', () => {
     await expect(repo.createNeed({ ...input, barrio: '' }, 'u-x')).rejects.toBeInstanceOf(NeedValidationError)
     for (let i = 0; i < 3; i++) await repo.createNeed(input, 'u-x')
     await expect(repo.createNeed(input, 'u-x')).rejects.toThrow(NEED_LIMIT_MESSAGE)
+  })
+
+  it('ambos adaptadores rechazan ítems con nombre repetido', async () => {
+    const dup: NewNeedInput = {
+      ...input,
+      items: [
+        { label: 'Carpas', unit: 'carpas', requested: 3 },
+        { label: ' carpas ', unit: 'carpas', requested: 4 },
+      ],
+    }
+    const local = createLocalStorageRepository(createMemoryStore())
+    for (const repo of [createMockRepository(), local]) {
+      await expect(repo.createNeed(dup, 'u-x')).rejects.toBeInstanceOf(NeedValidationError)
+      await expect(repo.createNeed(dup, 'u-x')).rejects.toThrow('nombre distinto')
+    }
   })
 
   it('registra reportes con motivo', async () => {

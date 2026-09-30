@@ -21,8 +21,8 @@
 - [x] 3.6 Reemplazar las rutas pendientes en `App.tsx`
 
 ## 4. Verificación · test-engineer
-- [ ] Pruebas de los escenarios del delta de spec (una prueba por `#### Scenario:` con lógica)
-- [ ] Revisión responsive 360 / 390 / 768 / 1024 / 1440 px y accesibilidad básica
-- [ ] 4.1 Pruebas de dominio en verde
-- [ ] 4.2 Tareas 1 y 5 del plan de pruebas de usuario (`docs/05-plan-de-pruebas.md`)
-- [ ] 4.3 Revisión visual contra Stitch en desktop y celular
+- [x] Pruebas de los escenarios del delta de spec (una prueba por `#### Scenario:` con lógica)
+- [x] Revisión responsive 360 / 390 / 768 / 1024 / 1440 px y accesibilidad básica
+- [x] 4.1 Pruebas de dominio en verde
+- [x] 4.2 Tareas 1 y 5 del plan de pruebas de usuario (`docs/05-plan-de-pruebas.md`)
+- [x] 4.3 Revisión visual contra Stitch en desktop y celular

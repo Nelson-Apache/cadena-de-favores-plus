@@ -40,6 +40,17 @@ describe('validateNewNeed', () => {
     expect(validateNewNeed({ ...valid, peopleAffected: 2.5 }).ok).toBe(false)
   })
 
+  it('rechaza ítems con el mismo nombre (sin distinguir mayúsculas, tildes ni espacios)', () => {
+    const item = (label: string, requested: number) => ({ label, unit: 'u', requested })
+    const withItems = (...items: ReturnType<typeof item>[]) => validateNewNeed({ ...valid, items })
+    const expected = 'Cada ítem debe tener un nombre distinto: «Carpas» aparece más de una vez.'
+    expect(withItems(item('Carpas', 3), item('Carpas', 4)).errors.items).toBe(expected)
+    expect(withItems(item('Carpas', 3), item('  carpas ', 4)).ok).toBe(false)
+    expect(withItems(item('Colchón', 1), item('COLCHON', 2)).ok).toBe(false)
+    expect(withItems(item('Agua  potable', 1), item('agua potable', 2)).ok).toBe(false)
+    expect(withItems(item('Carpas', 3), item('Colchonetas', 4)).ok).toBe(true)
+  })
+
   it('el barrio no puede ser solo espacios; sin vulnerables es válido', () => {
     expect(validateNewNeed({ ...valid, barrio: '   ' }).errors.barrio).toBe(NEED_ERRORS.barrio)
     expect(validateNewNeed({ ...valid, vulnerabilities: [] }).ok).toBe(true)

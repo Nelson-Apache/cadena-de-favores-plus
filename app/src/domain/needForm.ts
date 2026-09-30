@@ -25,7 +25,26 @@ export class NeedValidationError extends Error {
   }
 }
 
+/** Mensaje cuando un ítem se repite; incluye el nombre tal como lo escribió la persona. */
+export const duplicateItemError = (label: string): string =>
+  `Cada ítem debe tener un nombre distinto: «${label}» aparece más de una vez.`
+
 const isPositiveInt = (n: unknown): n is number => typeof n === 'number' && Number.isInteger(n) && n > 0
+
+/** Clave de comparación: sin mayúsculas, tildes ni espacios sobrantes. */
+const labelKey = (label: string): string =>
+  label.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim().replace(/\s+/g, ' ')
+
+/** Devuelve la primera etiqueta repetida (tal como se escribió) o `undefined` si todas son distintas. */
+export function findDuplicateLabel(items: { label: string }[]): string | undefined {
+  const seen = new Set<string>()
+  for (const { label } of items) {
+    const key = labelKey(label)
+    if (seen.has(key)) return label.trim()
+    seen.add(key)
+  }
+  return undefined
+}
 
 /** Valida el formulario. Acepta datos parciales porque el formulario puede enviarse con campos vacíos. */
 export function validateNewNeed(input: Partial<NewNeedInput>): ValidationResult<NeedFormErrors> {
@@ -35,6 +54,9 @@ export function validateNewNeed(input: Partial<NewNeedInput>): ValidationResult<
   const items = input.items ?? []
   if (items.length === 0 || items.some((i) => !i.label?.trim() || !isPositiveInt(i.requested))) {
     errors.items = NEED_ERRORS.items
+  } else {
+    const duplicate = findDuplicateLabel(items)
+    if (duplicate) errors.items = duplicateItemError(duplicate)
   }
   if (!isPositiveInt(input.peopleAffected)) errors.peopleAffected = NEED_ERRORS.peopleAffected
   if ((input.vulnerabilities ?? []).some((v) => !VULNERABILITIES.includes(v))) {
