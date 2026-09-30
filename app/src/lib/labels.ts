@@ -1,5 +1,7 @@
 import type {
   AidStatus,
+  CommitmentStatus,
+  RequesterProfile,
   Availability,
   DocType,
   HousingOfferType,
@@ -76,4 +78,49 @@ export const ROLE_LABEL: Record<Role, string> = {
 export const DOC_TYPE_LABEL: Record<DocType, string> = {
   CC: 'Cédula (CC)',
   NIT: 'NIT',
+}
+export const NEED_TYPE_ICON: Record<NeedType, string> = {
+  techo: 'home',
+  agua: 'water_drop',
+  alimento: 'nutrition',
+  carpas: 'camping',
+  salud: 'health',
+  transporte: 'local_shipping',
+  bodega: 'warehouse',
+  reparacion: 'construction',
+  mano_de_obra: 'handyman',
+  equipos: 'bolt',
+  asesoria: 'gavel',
+  visibilidad: 'campaign',
+}
+export const NEED_TYPE_HINT: Record<NeedType, string> = {
+  techo: 'Hospedaje temporal o albergue',
+  agua: 'Botellones, bidones y filtros',
+  alimento: 'Víveres y kits de comida',
+  carpas: 'Carpas, plásticos y toldos',
+  salud: 'Medicinas y primeros auxilios',
+  transporte: 'Vehículos para traslados',
+  bodega: 'Espacio seco para guardar enseres',
+  reparacion: 'Puntales, tejas y apoyo técnico',
+  mano_de_obra: 'Manos para reconstruir',
+  equipos: 'Herramientas y maquinaria',
+  asesoria: 'Trámites, seguros y reclamaciones',
+  visibilidad: 'Difusión para tu negocio',
+}
+export const REQUESTER_LABEL: Record<RequesterProfile, string> = {
+  familia: 'Soy una familia damnificada',
+  comerciante: 'Soy comerciante afectado',
+}
+export const REQUESTER_HINT: Record<RequesterProfile, string> = {
+  familia: 'Vivienda, abrigo, enseres o apoyo vital',
+  comerciante: 'Recuperar tu local, inventario o bodega',
+}
+export const REQUESTER_ICON: Record<RequesterProfile, string> = {
+  familia: 'family_restroom',
+  comerciante: 'storefront',
+}
+export const COMMITMENT_STATUS_LABEL: Record<CommitmentStatus, string> = {
+  comprometido: 'Comprometido',
+  entregado: 'Entregado, falta confirmar',
+  confirmado: 'Entrega confirmada',
 }

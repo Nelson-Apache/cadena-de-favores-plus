@@ -99,6 +99,8 @@ const storedData = (overrides: Partial<StoredData> = {}): StoredData => ({
     { profileId: 'u-duena', name: 'Dueña de la vivienda', phone: '300 222 2222' },
   ],
   privateAddresses: [{ housingId: 'h-prueba', address: 'Calle 1 # 2-3, Centro, Circasia' }],
+  commitments: [],
+  reports: [],
   ...overrides,
 })
 
@@ -136,8 +138,8 @@ describe('Datos guardados en el equipo', () => {
     expect(storedIn(store)).toEqual(createSeedData())
   })
 
-  it('Primera vez: la clave guardada es cdf-plus:v1 con version 1', () => {
-    expect([DATA_KEY, DATA_VERSION, SESSION_KEY]).toEqual(['cdf-plus:v1', 1, 'cdf-plus:v1:sesion'])
+  it('Primera vez: la clave guardada es cdf-plus:v2 con version 2', () => {
+    expect([DATA_KEY, DATA_VERSION, SESSION_KEY]).toEqual(['cdf-plus:v2', 2, 'cdf-plus:v2:sesion'])
   })
 
   it('Primera vez: si ya hay datos guardados válidos, no se vuelve a sembrar', async () => {

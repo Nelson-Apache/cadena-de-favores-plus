@@ -28,7 +28,7 @@
 - No agregues `<script src="https://cdn...">` ni enlaces a Google Fonts: todo se instala por npm.
 
 ## Estado actual
-- Implementado: `plataforma-web`, `mapa-de-prioridades` (con datos de prueba).
-- Siguiente change sugerido: `add-persistencia-local` (base: guardar datos, ingreso simulado, roles), luego
-  `add-necesidades`, `add-red-lista`, `add-vivienda-solidaria` y `add-panel-coordinacion`.
+- Implementado: `plataforma-web`, `mapa-de-prioridades`, `cuentas-y-privacidad` (persistencia local, ingreso simulado, roles).
+- Siguiente change sugerido: `add-necesidades` (completa los escenarios parciales de persistencia), luego
+  `add-red-lista`, `add-vivienda-solidaria` y `add-panel-coordinacion`.
 - El proyecto es **100 % local** (sin despliegue ni base de datos en la nube). Ver ADR-003.

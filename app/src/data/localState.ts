@@ -1,23 +1,35 @@
 import { roundCoordinates } from '@/domain/privacy'
 import type {
+  Commitment,
   DemoProfile,
   HousingOffer,
   HousingRequest,
   Need,
+  NeedReport,
   PrivateAddress,
   PrivateContact,
   Profile,
   Resource,
 } from '@/domain/types'
-import { demoProfiles, housing, housingRequests, needs, privateAddresses, privateContacts, resources } from './mockData'
+import {
+  commitments,
+  demoProfiles,
+  housing,
+  housingRequests,
+  needs,
+  privateAddresses,
+  privateContacts,
+  resources,
+} from './mockData'
 import type { KeyValueStore } from './storage'
 
 /**
  * Estado guardado en el navegador bajo una sola clave versionada (design.md de add-persistencia-local).
  * Si la forma de los datos cambia, se sube `DATA_VERSION`: los datos viejos se descartan y se vuelve a sembrar.
+ * v2: se agregan `commitments` y `reports` (change add-necesidades); los datos v1 se resiembran.
  * Lo comparten `localStorageRepository` (datos) y `session` (perfiles) sobre el mismo `KeyValueStore`.
  */
-export const DATA_VERSION = 1
+export const DATA_VERSION = 2
 export const DATA_KEY = `cdf-plus:v${DATA_VERSION}`
 /** La sesión va en su propia clave para que "Restablecer datos" no cierre la sesión del coordinador. */
 export const SESSION_KEY = `${DATA_KEY}:sesion`
@@ -31,6 +43,8 @@ export interface StoredData {
   profiles: Profile[]
   privateContacts: PrivateContact[]
   privateAddresses: PrivateAddress[]
+  commitments: Commitment[]
+  reports: NeedReport[]
 }
 
 const COLLECTIONS = [
@@ -41,6 +55,8 @@ const COLLECTIONS = [
   'profiles',
   'privateContacts',
   'privateAddresses',
+  'commitments',
+  'reports',
 ] as const satisfies readonly (keyof StoredData)[]
 
 export const SAVE_ERROR =
@@ -80,6 +96,8 @@ export function createSeedData(): StoredData {
       profiles: demoProfiles.map(toProfile),
       privateContacts,
       privateAddresses,
+      commitments,
+      reports: [],
     }),
   )
 }

@@ -20,6 +20,10 @@ npm run build   # chequeo de tipos + build
 | `data/localState.test.ts` | Recargar la página conserva necesidades, perfiles y sesión; restablecer y recargar vuelve al inicio |
 | `data/session.test.ts` | Ingreso simulado, cierre de sesión, crear perfil con/sin autorización, efecto de restablecer en la sesión |
 | `data/index.test.ts` | Módulo `@/data`: navegador o memoria (`isPersistent`), restablecer solo para coordinador |
+| `domain/{commitment,delivery,needForm,needLimit,redirect}.test.ts` | Compromiso (limita a lo que falta), entrega y permisos, validación del formulario, límite de 3 activas, puntos cercanos |
+| `data/needsOperations.test.ts` | Ciclo de una necesidad sobre las operaciones compartidas |
+| `data/needsContract.test.ts` | **Suite de contrato de necesidades**: `createNeed`, `commit`, `markDelivered`, `confirmDelivery`, `listCommitments`, `reportNeed`, `listReports` en `mockRepository` y `localStorageRepository` |
+| `data/needsPersistence.test.ts` | Recarga con `createNeed`, coordenadas a 3 decimales, sin `address`/`phone`, suscriptores, versión 2 de los datos, coherencia de la semilla |
 
 | `app/e2e/verificar-ui.mjs` | Pruebas de UI en Edge/Chrome sin ventana (CDP, sin dependencias): escenarios de la spec, responsive y accesibilidad. Ejecutar desde `app/`: `npm run build && node e2e/verificar-ui.mjs` (56 comprobaciones) |
 
@@ -42,6 +46,26 @@ Nombres de prueba: `describe('<Requisito>') / it('<Scenario>: <detalle>')`. Ruta
 | Roles › Usuario sin rol coordinador | `domain/profile.test.ts`, `data/index.test.ts` (restablecer prohibido sin coordinador) | ✔ Pasa (datos). `/coordinacion` con rol usuario muestra "Acceso restringido" y sin botón de restablecer; sin sesión pide ingresar: ✔ `e2e` |
 | Tarea 4.1 · Suite de contrato | `data/repository.test.ts` | ✔ Pasa (ambos adaptadores) |
 | Tarea 4.2 · Recargar conserva / Restablecer vuelve al inicio | `data/localState.test.ts` | ✔ Pasa (capa de datos) |
+
+### Cobertura de escenarios · `add-necesidades` (spec `necesidades`), ronda de dominio y datos
+Rutas relativas a `app/src/`. Los escenarios de UI se verifican en la ronda final. Resultado al 2026-09-29: 293 pruebas pasan, 4 fallan por H-001 (backend-dev).
+
+| Requisito › Escenario | Prueba | Resultado |
+|---|---|---|
+| Registrar › Familia pide carpas | `data/needsContract.test.ts` (sin ayuda, prioridad alta = 9, solo barrio y municipio, sin `address`/`phone`); `domain/needForm.test.ts` | Falla 1 prueba (H-001: `createNeed` devuelve 4 decimales y no coincide con `getNeed` en `localStorageRepository`); el resto pasa. En el mapa: pendiente ronda final |
+| Registrar › Datos incompletos | `data/needsContract.test.ts` (falta tipo, cantidad, municipio, varios a la vez; no se crea); `domain/needForm.test.ts` | Pasa (datos). Mensaje junto al campo: ronda final |
+| Registrar › Perfil preseleccionado | UI (`?perfil=`) | Pendiente ronda final |
+| Detalle › Explicación de la prioridad | `data/needsContract.test.ts` (4 criterios suman el total, nivel por umbral) | Pasa (datos). Pantalla: ronda final |
+| Comprometerse › Compromiso parcial | `data/needsContract.test.ts` (2 de 5, `en_camino`, historial) | Pasa |
+| Comprometerse › Cantidad mayor a lo que falta | `data/needsContract.test.ts` (faltan 3, piden 5: efectivo 3, `notice`) | Pasa |
+| Confirmar entrega › Entrega confirmada completa | `data/needsContract.test.ts` (atendida; parcial sigue en camino; permisos receptor/coordinador/tercero; doble confirmación; semilla sin dueño) | Pasa |
+| Redirigir › Oferta a necesidad cubierta | `data/needsContract.test.ts` (`acceptsOffers` falso, `COMMITMENT_ERRORS.covered`, `nearestUnattended` con `distanceKm`) | Pasa (datos). Lista en pantalla: ronda final |
+| Reportar › Reporte | `data/needsContract.test.ts` (registrado, anónimo, motivo vacío, necesidad inexistente) | Pasa |
+| Límite de 3 necesidades activas (decisión) | `data/needsContract.test.ts`, `domain/needLimit.test.ts`, `data/needsPersistence.test.ts` | Pasa |
+| `cuentas-y-privacidad` › Recargar la página (cierra el parcial) | `data/needsPersistence.test.ts` (`createNeed` + recarga; compromisos, reportes, límite) | Falla 1 prueba por H-001 (igualdad con lo devuelto por `createNeed`); compromisos, reportes y límite tras recargar pasan |
+| Ubicación aproximada pública (necesidad creada) | `data/needsPersistence.test.ts` | Local pasa; `mockRepository` falla (H-001) |
+| Contrato: equivalencia entre adaptadores | `data/needsContract.test.ts` (mismo ciclo, mismos datos) | Falla (H-001) |
+| Persistencia: versión 2, suscriptores, semilla | `data/needsPersistence.test.ts` | Pasa |
 
 Responsive y accesibilidad de las pantallas nuevas (Ingresar, acceso restringido / pedir ingreso, menú de usuario, coordinación con restablecer y diálogo), medidas con `e2e/verificar-ui.mjs` en 7 vistas × 5 anchos (35 combinaciones):
 

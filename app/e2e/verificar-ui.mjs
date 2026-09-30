@@ -4,9 +4,17 @@
 // Uso (desde app/):   npm run build && node e2e/verificar-ui.mjs
 // Variables: BROWSER (ruta del ejecutable), PORT (servidor de vista previa, 4173 por defecto).
 import { spawn } from 'node:child_process'
-import { existsSync, mkdtempSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+
+// Claves de almacenamiento: se leen de src/data/localState.ts para que un cambio de versión no rompa este script.
+const DATA_VERSION = Number(
+  /export const DATA_VERSION = (\d+)/.exec(readFileSync('src/data/localState.ts', 'utf8'))?.[1],
+)
+if (!DATA_VERSION) throw new Error('No se pudo leer DATA_VERSION de src/data/localState.ts')
+const DATA_KEY = `cdf-plus:v${DATA_VERSION}`
+const SESSION_KEY = `${DATA_KEY}:sesion`
 
 const PORT = Number(process.env.PORT ?? 4173)
 const BASE = `http://localhost:${PORT}`
@@ -88,7 +96,8 @@ ws.onmessage = (ev) => {
   if (msg.id && pending.has(msg.id)) {
     const { res, rej } = pending.get(msg.id)
     pending.delete(msg.id)
-    msg.error ? rej(new Error(msg.error.message)) : res(msg.result)
+    if (msg.error) rej(new Error(msg.error.message))
+    else res(msg.result)
   } else if (msg.method === 'Runtime.exceptionThrown') {
     consoleErrors.push(msg.params.exceptionDetails.text)
   }
@@ -237,7 +246,7 @@ await assert('Ingresar como comerciante: en celular (390 px) el botón de menú 
 
 await assert('Ingresar como comerciante: la sesión persiste al recargar', async () => {
   await goto('/')
-  const before = await evaluate(`localStorage.getItem('cdf-plus:v1:sesion')`)
+  const before = await evaluate(`localStorage.getItem('${SESSION_KEY}')`)
   expect(!!before, 'no hay sesión guardada')
   await reload()
   const header = await evaluate(`document.querySelector('header').innerText`)
@@ -252,7 +261,7 @@ await assert('Usuario sin rol coordinador: /coordinacion muestra "Acceso restrin
 })
 
 await assert('Usuario sin rol coordinador: sin sesión también se le pide ingresar', async () => {
-  await evaluate(`localStorage.removeItem('cdf-plus:v1:sesion')`)
+  await evaluate(`localStorage.removeItem('${SESSION_KEY}')`)
   await goto('/coordinacion')
   expect((await text()).includes('Ingresa para continuar'), 'no pide ingresar')
 })
@@ -268,7 +277,7 @@ await assert('Crear perfil: sin marcar la autorización no se crea y se indica q
     /debes autorizar/i.test(await evaluate(`document.getElementById('aviso-datos-error')?.innerText ?? ''`)),
     'sin mensaje de error junto a la casilla',
   )
-  expect(!(await evaluate(`localStorage.getItem('cdf-plus:v1:sesion')`)), 'se inició sesión sin autorización')
+  expect(!(await evaluate(`localStorage.getItem('${SESSION_KEY}')`)), 'se inició sesión sin autorización')
   expect((await pathNow()) === '/ingresar', 'salió de /ingresar')
   const focused = await evaluate(`document.activeElement?.id`)
   expect(focused === 'perfil-autorizacion', `el foco quedó en ${focused}`)
@@ -310,7 +319,7 @@ await assert('Restablecer: coordinador ve diálogo en pantalla (sin confirm()) y
   await clickText('dialog[open] button', 'Entendido')
   await sleep(200)
   expect((await evaluate(`document.querySelector('dialog[open]')`)) === null, 'el diálogo no se cerró')
-  const sesion = await evaluate(`localStorage.getItem('cdf-plus:v1:sesion')`)
+  const sesion = await evaluate(`localStorage.getItem('${SESSION_KEY}')`)
   expect(!!sesion, 'se perdió la sesión del coordinador')
 })
 
@@ -339,7 +348,7 @@ await assert('Restablecer: borra lo creado (perfil nuevo desaparece) y conserva 
   await evaluate(`document.querySelector('form button[type=submit]').click()`)
   await sleep(400)
   await signInAs('Coordinador')
-  const antes = await evaluate(`localStorage.getItem('cdf-plus:v1')`)
+  const antes = await evaluate(`localStorage.getItem('${DATA_KEY}')`)
   expect(String(antes).includes('Persona Temporal'), 'el perfil creado no quedó guardado')
   await goto('/coordinacion')
   await clickText('main button', 'Restablecer datos de demostración')
@@ -397,6 +406,586 @@ await assert('Con almacenamiento disponible el aviso de "no se guardarán" no ap
   await goto('/')
   expect(!(await text()).includes('Los datos no se guardarán'), 'aparece el aviso sin motivo')
 })
+
+// ---------- Escenarios de la spec `necesidades` (add-necesidades) ----------
+const CAPTURAS = process.env.CAPTURAS // carpeta opcional para guardar capturas (fuera del repositorio)
+const shot = async (name) => {
+  if (!CAPTURAS) return
+  const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })
+  writeFileSync(join(CAPTURAS, `${name}.png`), Buffer.from(data, 'base64'))
+}
+const hallazgos = []
+const finding = (name, detail) => {
+  hallazgos.push({ name, detail })
+  console.log(`HALLAZGO  ${name} · ${detail}`)
+}
+const setValue = (selector, value) =>
+  evaluate(`(() => {
+    const el = document.querySelector(${JSON.stringify(selector)});
+    if (!el) throw new Error('No existe ${selector}');
+    const proto = el instanceof HTMLSelectElement ? HTMLSelectElement.prototype
+      : el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+    Object.getOwnPropertyDescriptor(proto, 'value').set.call(el, ${JSON.stringify(String(value))});
+    el.dispatchEvent(new Event(el instanceof HTMLSelectElement ? 'change' : 'input', { bubbles: true }));
+    return true })()`)
+const clickId = (id) =>
+  evaluate(
+    `(() => { const el = document.getElementById(${JSON.stringify(id)}); if (!el) throw new Error('No existe #${id}'); el.click(); return true })()`,
+  )
+const mainText = () => evaluate(`document.querySelector('main').innerText`)
+const store = async () => JSON.parse(await evaluate(`localStorage.getItem('${DATA_KEY}')`))
+const redPins = () =>
+  evaluate(
+    `[...document.querySelectorAll('.cdf-pin')].filter(p => (p.getAttribute('style') || '').toLowerCase().includes('d64545')).length`,
+  )
+
+/** Llena el formulario "Pedir ayuda" con lo indicado (sin publicar). */
+async function fillNeedForm({ requester, type, items, people, vulnerabilities = [], municipio, barrio }) {
+  await clickId(`need-requester-${requester}`)
+  await clickId(`need-type-${type}`)
+  for (const [i, item] of items.entries()) {
+    if (i > 0) await clickText('main button', 'Agregar otro ítem')
+    await setValue(`#need-item-${i}-label`, item.label)
+    await setValue(`#need-item-${i}-quantity`, item.quantity)
+    await setValue(`#need-item-${i}-unit`, item.unit)
+  }
+  await setValue('#need-people', people)
+  for (const v of vulnerabilities) await clickId(`need-vulnerability-${v}`)
+  await setValue('#need-municipio', municipio)
+  await setValue('#need-barrio', barrio)
+}
+/** Publica y devuelve el id de la necesidad creada (la pantalla navega a su detalle). */
+async function publishNeed(spec) {
+  await goto('/pedir-ayuda')
+  await fillNeedForm(spec)
+  await evaluate(`document.querySelector('form button[type=submit]').click()`)
+  await waitFor(async () => (await pathNow()).startsWith('/necesidades/'), 'navegar al detalle tras publicar')
+  await sleep(400)
+  return (await pathNow()).split('/')[2]
+}
+const CARPAS = {
+  requester: 'familia',
+  type: 'carpas',
+  items: [{ label: 'Carpas', quantity: 5, unit: 'carpas' }],
+  people: 18,
+  vulnerabilities: ['ninos'],
+  municipio: 'Quimbaya',
+  barrio: 'La Española',
+}
+let carpasId = ''
+
+await resetBrowser()
+await signInAs('Familia damnificada')
+
+await assert(
+  'Registrar › Perfil preseleccionado: ?perfil=comerciante y ?perfil=familia abren con ese perfil',
+  async () => {
+    const checked = () =>
+      evaluate(
+        `['comerciante','familia'].filter(p => document.getElementById('need-requester-' + p)?.checked).join(',')`,
+      )
+    await goto('/pedir-ayuda?perfil=comerciante')
+    expect((await checked()) === 'comerciante', `con ?perfil=comerciante quedó: "${await checked()}"`)
+    await goto('/pedir-ayuda?perfil=familia')
+    expect((await checked()) === 'familia', `con ?perfil=familia quedó: "${await checked()}"`)
+    await goto('/pedir-ayuda?perfil=otro')
+    expect((await checked()) === '', 'un valor desconocido no debe preseleccionar nada')
+    await goto('/pedir-ayuda')
+    expect((await checked()) === '', 'sin parámetro no debe preseleccionar nada')
+  },
+)
+
+await assert(
+  'Registrar › Perfil preseleccionado: "Comerciante afectado" del inicio lleva al formulario con ese perfil',
+  async () => {
+    await goto('/')
+    await evaluate(`document.querySelector('a[href="/pedir-ayuda?perfil=comerciante"]').click()`)
+    await sleep(500)
+    expect((await pathNow()) === '/pedir-ayuda?perfil=comerciante', `llegó a ${await pathNow()}`)
+    expect(
+      await evaluate(`document.getElementById('need-requester-comerciante').checked`),
+      'el perfil comerciante no está marcado',
+    )
+  },
+)
+
+await assert(
+  'Registrar › Datos incompletos: formulario vacío indica cada campo faltante junto al campo y no publica',
+  async () => {
+    await goto('/pedir-ayuda')
+    const antes = (await store()).needs.length
+    await evaluate(`document.querySelector('form button[type=submit]').click()`)
+    await sleep(400)
+    const r = await evaluate(`(() => {
+    const err = (id) => document.getElementById(id)?.innerText.trim() ?? null;
+    const adjacent = (fieldId, errId) => { const f = document.getElementById(fieldId); const e = document.getElementById(errId);
+      return !!f && !!e && (f.parentElement.contains(e) || f.closest('fieldset')?.contains(e) || f.parentElement.parentElement.contains(e)) };
+    return { requester: err('need-requester-error'), type: err('need-type-error'), items: err('need-items-error'),
+      municipio: err('need-municipio-error'), barrio: err('need-barrio-error'),
+      near: [adjacent('need-municipio', 'need-municipio-error'), adjacent('need-barrio', 'need-barrio-error'), adjacent('need-item-0-label', 'need-items-error')],
+      describedby: document.getElementById('need-municipio').getAttribute('aria-describedby'),
+      invalid: document.getElementById('need-municipio').getAttribute('aria-invalid'),
+      focusId: document.activeElement?.id || document.activeElement?.tagName } })()`)
+    expect(/perfil|comerciante o familia/i.test(r.requester ?? ''), `sin error de perfil: ${r.requester}`)
+    expect(/tipo/i.test(r.type ?? ''), `sin error de tipo: ${r.type}`)
+    expect(/cantidad|ítem/i.test(r.items ?? ''), `sin error de cantidad: ${r.items}`)
+    expect(/municipio/i.test(r.municipio ?? ''), `sin error de municipio: ${r.municipio}`)
+    expect(/barrio/i.test(r.barrio ?? ''), `sin error de barrio: ${r.barrio}`)
+    expect(r.near.every(Boolean), `error no adyacente al campo: ${r.near}`)
+    expect(
+      r.invalid === 'true' && r.describedby === 'need-municipio-error',
+      `aria del municipio: ${r.invalid} / ${r.describedby}`,
+    )
+    expect((await pathNow()) === '/pedir-ayuda', 'salió del formulario')
+    expect((await store()).needs.length === antes, 'se publicó una necesidad con datos incompletos')
+    await shot('pedir-ayuda-errores-1440')
+    return `foco en ${r.focusId}`
+  },
+)
+
+await assert(
+  'Registrar › Datos incompletos: falta solo la cantidad (o solo el municipio) -> error del campo y no publica',
+  async () => {
+    await goto('/pedir-ayuda')
+    const antes = (await store()).needs.length
+    await fillNeedForm({ ...CARPAS, items: [{ label: 'Carpas', quantity: '', unit: 'carpas' }] })
+    await evaluate(`document.querySelector('form button[type=submit]').click()`)
+    await sleep(300)
+    const t1 = await evaluate(`document.getElementById('need-items-error')?.innerText ?? ''`)
+    expect(/cantidad/i.test(t1), `no pide la cantidad: "${t1}"`)
+    expect(
+      (await evaluate(`document.getElementById('need-item-0-quantity').getAttribute('aria-invalid')`)) === 'true',
+      'la cantidad no está marcada aria-invalid',
+    )
+    await setValue('#need-item-0-quantity', 5)
+    await setValue('#need-municipio', '')
+    await evaluate(`document.querySelector('form button[type=submit]').click()`)
+    await sleep(300)
+    expect(!(await evaluate(`!!document.getElementById('need-items-error')`)), 'el error de cantidad no se limpió')
+    expect(
+      /municipio/i.test(await evaluate(`document.getElementById('need-municipio-error')?.innerText ?? ''`)),
+      'no pide el municipio',
+    )
+    expect((await store()).needs.length === antes, 'se publicó con datos incompletos')
+  },
+)
+
+await goto('/mapa')
+await sleep(700)
+const pinsAntes = await redPins()
+
+await assert(
+  'Registrar › Familia pide carpas: 5 carpas, 18 personas, niños, Quimbaya, La Española -> detalle "Sin ayuda"',
+  async () => {
+    carpasId = await publishNeed(CARPAS)
+    const t = await mainText()
+    expect(t.includes('Sin ayuda'), 'el detalle no dice "Sin ayuda"')
+    expect(t.includes('Quimbaya') && t.includes('Barrio La Española'), 'no muestra municipio y barrio')
+    expect(t.includes('ubicación aproximada'), 'no avisa que la ubicación es aproximada')
+    expect(/Prioridad (alta|media|baja)/.test(t) && /\d+ \/ 12 puntos/.test(t), 'no muestra la prioridad calculada')
+    expect(t.includes('Tu necesidad ya está publicada'), 'no confirma la publicación')
+    await shot('detalle-recien-publicada-1440')
+    return `${carpasId} · ${t.match(/\d+ \/ 12 puntos/)[0]}`
+  },
+)
+
+await assert('Registrar › Familia pide carpas: aparece en el mapa en rojo ("Sin ayuda") con su prioridad', async () => {
+  await goto('/mapa')
+  await sleep(700)
+  const card =
+    await evaluate(`(() => { const a = [...document.querySelectorAll('article')].find(x => x.querySelector('h3')?.innerText.trim() === 'Carpas');
+    return a ? a.innerText : null })()`)
+  expect(!!card, 'no hay tarjeta "Carpas" en la lista del mapa')
+  expect(
+    card.includes('Sin ayuda') && card.includes('Quimbaya · La Española') && /Prioridad/.test(card),
+    `tarjeta: ${card.replace(/\n/g, ' | ')}`,
+  )
+  const despues = await redPins()
+  expect(despues === pinsAntes + 1, `marcadores rojos: antes ${pinsAntes}, después ${despues}`)
+  await shot('mapa-con-necesidad-nueva-1440')
+})
+
+await assert(
+  'Registrar › Familia pide carpas: la ubicación pública es el barrio (≤ 3 decimales, sin dirección ni teléfono)',
+  async () => {
+    const need = (await store()).needs.find((n) => n.id === carpasId)
+    const decimals = (x) => (String(x).split('.')[1] ?? '').length
+    expect(
+      decimals(need.location.lat) <= 3 && decimals(need.location.lng) <= 3,
+      `coordenadas: ${need.location.lat}, ${need.location.lng}`,
+    )
+    expect(
+      !('address' in need) && !('phone' in need) && !('address' in need.location),
+      'la necesidad guarda dirección o teléfono',
+    )
+    expect(
+      need.location.barrio === 'La Española' && need.location.municipio === 'Quimbaya',
+      JSON.stringify(need.location),
+    )
+    return `${need.location.lat}, ${need.location.lng}`
+  },
+)
+
+await assert(
+  'Detalle › Explicación de la prioridad: muestra tipo, personas, vulnerabilidad y días de espera',
+  async () => {
+    await goto(`/necesidades/${carpasId}`)
+    const r = await evaluate(`(() => { const s = document.getElementById('por-que-prioridad')?.closest('section');
+    return s ? { h2: s.querySelector('h2').innerText, items: [...s.querySelectorAll('li')].map(l => l.innerText.replace(/\\n/g, ' ')) } : null })()`)
+    expect(!!r, 'no existe la sección de prioridad')
+    expect(r.items.length === 4, `criterios visibles: ${r.items.length}`)
+    const joined = r.items.join(' | ')
+    expect(
+      /Tipo de necesidad/.test(joined) &&
+        /18 personas afectadas/.test(joined) &&
+        /Vulnerabilidad/.test(joined) &&
+        /días? de espera/.test(joined),
+      joined,
+    )
+    expect(
+      r.items.every((i) => /\d de 3/.test(i)),
+      `algún criterio sin puntos: ${joined}`,
+    )
+    expect(/Niños/i.test(joined), 'la vulnerabilidad no menciona a los niños')
+    return r.h2
+  },
+)
+
+await assert(
+  'Detalle › Explicación de la prioridad: una necesidad sembrada (n-484) también muestra los 4 criterios',
+  async () => {
+    await goto('/necesidades/n-484')
+    const t = await mainText()
+    expect(t.includes('Por qué es prioridad alta') || t.includes('Por qué esta prioridad'), 'sin explicación')
+    expect(
+      (await evaluate(`document.querySelectorAll('section[aria-labelledby=por-que-prioridad] li').length`)) === 4,
+      'no muestra los 4 criterios',
+    )
+  },
+)
+
+// Compromisos: los hace la empresa que ayuda sobre la necesidad recién publicada.
+await signInAs('Empresa que ayuda')
+
+await assert('Comprometerse › Compromiso parcial: 2 de 5 carpas -> "2 de 5 carpas" y "Ayuda en camino"', async () => {
+  await goto(`/necesidades/${carpasId}`)
+  await clickId('commit-item-0')
+  await setValue('#commit-quantity', 2)
+  await clickText('main button', 'Me comprometo')
+  await sleep(500)
+  const t = await mainText()
+  expect(t.includes('2 de 5 carpas'), 'el ítem no muestra "2 de 5 carpas"')
+  expect(t.includes('Ayuda en camino'), 'el estado no pasó a "Ayuda en camino"')
+  expect(t.includes('Se comprometió con 2 carpas de «Carpas»'), 'el historial no registra el compromiso')
+  expect(t.includes('Quedaste comprometido con 2 carpas'), 'sin mensaje de gracias')
+  await shot('detalle-compromiso-parcial-1440')
+})
+
+await assert(
+  'Comprometerse › Cantidad mayor a lo que falta: faltan 3 y se piden 5 -> queda en 3 y avisa que el resto no hace falta',
+  async () => {
+    await goto(`/necesidades/${carpasId}`)
+    await clickId('commit-item-0')
+    await setValue('#commit-quantity', 5)
+    await clickText('main button', 'Me comprometo')
+    await sleep(500)
+    const t = await mainText()
+    expect(t.includes('Quedaste comprometido con 3 carpas'), 'no limitó a 3')
+    expect(t.includes('El resto ya no hace falta'), 'no avisa que el resto no hace falta')
+    expect(t.includes('5 de 5 carpas'), 'el ítem no quedó en 5 de 5')
+  },
+)
+
+await assert('Comprometerse › Cantidad inválida (0): error junto al campo y no registra', async () => {
+  await publishNeed({
+    ...CARPAS,
+    items: [{ label: 'Colchonetas', quantity: 4, unit: 'colchonetas' }],
+    barrio: 'Centro',
+  })
+  const before = (await store()).commitments.length
+  await setValue('#commit-quantity', 0)
+  await clickText('main button', 'Me comprometo')
+  await sleep(300)
+  const err = await evaluate(`document.getElementById('commit-error')?.innerText ?? ''`)
+  expect(/entera mayor que cero/i.test(err), `error: "${err}"`)
+  expect(
+    (await evaluate(`document.getElementById('commit-quantity').getAttribute('aria-invalid')`)) === 'true',
+    'sin aria-invalid',
+  )
+  expect((await store()).commitments.length === before, 'registró un compromiso inválido')
+})
+
+await assert(
+  'Redirigir › Oferta a necesidad cubierta: "ya está cubierta" y lista hasta 3 puntos sin ayuda cercanos',
+  async () => {
+    await goto(`/necesidades/${carpasId}`)
+    expect((await mainText()).includes('Esta necesidad ya está cubierta'), 'no avisa que está cubierta')
+    await clickText('main button', 'Me comprometo')
+    await sleep(400)
+    const r = await evaluate(`(() => { const s = document.getElementById('puntos-cercanos');
+    return { links: [...s.querySelectorAll('a')].map(a => a.innerText.replace(/\\n/g, ' ')),
+      focus: document.activeElement?.id, hrefs: [...s.querySelectorAll('a')].map(a => a.getAttribute('href')) } })()`)
+    expect(r.links.length >= 1 && r.links.length <= 3, `puntos cercanos: ${r.links.length}`)
+    expect(
+      r.links.every((l) => l.includes('Sin ayuda') && /\d,\d km/.test(l)),
+      r.links.join(' | '),
+    )
+    expect(!r.hrefs.includes(`/necesidades/${carpasId}`), 'se sugiere la misma necesidad cubierta')
+    expect((await mainText()).includes('cubierta al 100 %'), 'sin mensaje de redirección')
+    expect(r.focus === 'puntos-cercanos', `el foco quedó en ${r.focus}`)
+    await shot('detalle-cubierta-redireccion-1440')
+    return r.links[0]
+  },
+)
+
+await assert(
+  'Detalle › Necesidad cerrada (sembrada n-500): avisa que está cubierta y redirige al intentar',
+  async () => {
+    await goto('/necesidades/n-500')
+    const t = await mainText()
+    expect(t.includes('Atendida') && t.includes('ya está cubierta'), 'no muestra Atendida / cubierta')
+    await clickText('main button', 'Me comprometo')
+    await sleep(300)
+    expect((await mainText()).includes('cubierta al 100 %'), 'no redirige a puntos cercanos')
+  },
+)
+
+await assert('Confirmar entrega › quien ayuda marca "entregado"; un tercero no ve "Confirmar entrega"', async () => {
+  await goto(`/necesidades/${carpasId}`)
+  expect((await mainText()).includes('Comprometido'), 'los compromisos no están en estado comprometido')
+  expect(!(await mainText()).includes('Confirmar entrega'), 'quien ayuda ve "Confirmar entrega" sin ser el receptor')
+  for (let i = 0; i < 2; i++) {
+    await clickText('main button', 'Marqué como entregado')
+    await sleep(400)
+  }
+  const t = await mainText()
+  expect(
+    (t.match(/Entregado, falta confirmar/g) ?? []).length === 2,
+    'los 2 compromisos no quedaron "Entregado, falta confirmar"',
+  )
+  expect(!t.includes('Marqué como entregado'), 'siguen los botones de marcar')
+  expect(!t.includes('Atendida'), 'pasó a Atendida sin confirmación del receptor')
+})
+
+await signInAs('Familia damnificada')
+
+await assert(
+  'Confirmar entrega › Entrega confirmada completa: el receptor confirma todo -> "Atendida"; parcial sigue en camino',
+  async () => {
+    await goto(`/necesidades/${carpasId}`)
+    expect(!(await mainText()).includes('Marqué como entregado'), 'el receptor ve "Marqué como entregado"')
+    await clickText('main button', 'Confirmar entrega')
+    await sleep(400)
+    let t = await mainText()
+    expect(
+      t.includes('Ayuda en camino') && !t.includes('Atendida'),
+      'con una confirmación parcial debe seguir "Ayuda en camino"',
+    )
+    await clickText('main button', 'Confirmar entrega')
+    await sleep(400)
+    t = await mainText()
+    expect(t.includes('Atendida'), 'no pasó a "Atendida"')
+    expect(
+      t.includes('5 entregadas') && (t.match(/Entrega confirmada/g) ?? []).length >= 2,
+      'no registra 5 entregadas / 2 confirmadas',
+    )
+    const data = await store()
+    expect(
+      data.commitments.filter((c) => c.needId === carpasId).every((c) => c.status === 'confirmado'),
+      'compromisos sin confirmar en el almacén',
+    )
+    await shot('detalle-atendida-1440')
+  },
+)
+
+await assert('Confirmar entrega › Un coordinador puede confirmar por el receptor -> "Atendida"', async () => {
+  await signInAs('Familia damnificada')
+  const id = await publishNeed({
+    ...CARPAS,
+    type: 'alimento',
+    items: [{ label: 'Mercados', quantity: 2, unit: 'mercados' }],
+    barrio: 'Obrero',
+  })
+  await signInAs('Empresa que ayuda')
+  await goto(`/necesidades/${id}`)
+  await setValue('#commit-quantity', 2)
+  await clickText('main button', 'Me comprometo')
+  await sleep(400)
+  expect(!(await mainText()).includes('Confirmar entrega'), 'un tercero (empresa) puede confirmar')
+  await signInAs('Coordinador')
+  await goto(`/necesidades/${id}`)
+  await clickText('main button', 'Confirmar entrega')
+  await sleep(400)
+  expect((await mainText()).includes('Atendida'), 'el coordinador no logró dejarla Atendida')
+})
+
+await assert(
+  'Reportar › Reporte: motivo vacío se rechaza en el diálogo; con motivo queda registrado en reports',
+  async () => {
+    await signInAs('Empresa que ayuda')
+    await goto('/necesidades/n-483')
+    await clickText('main button', 'Reportar esta publicación')
+    await sleep(300)
+    expect(await evaluate(`!!document.querySelector('dialog[open] #report-reason')`), 'no abrió el diálogo')
+    await clickText('dialog[open] button', 'Enviar reporte')
+    await sleep(300)
+    const err = await evaluate(`document.getElementById('report-reason-error')?.innerText ?? ''`)
+    expect(err.length > 0, 'sin error con motivo vacío')
+    expect((await store()).reports.length === 0, 'registró un reporte sin motivo')
+    await setValue('#report-reason', 'Parece una publicación repetida')
+    await clickText('dialog[open] button', 'Enviar reporte')
+    await sleep(400)
+    expect((await mainText()).includes('Gracias por avisar'), 'sin confirmación')
+    const reports = (await store()).reports
+    expect(
+      reports.length === 1 && reports[0].needId === 'n-483' && reports[0].reason.includes('repetida'),
+      JSON.stringify(reports),
+    )
+    expect(reports[0].reporterId === 'u-10', `reporterId: ${reports[0].reporterId}`)
+  },
+)
+
+await assert(
+  'Reportar › Sin sesión: se ofrece ingresar para reportar y para comprometerse (conserva la ruta)',
+  async () => {
+    await evaluate(`localStorage.removeItem('${SESSION_KEY}')`)
+    await goto('/necesidades/n-483')
+    const href = await evaluate(
+      `[...document.querySelectorAll('main a')].find(a => a.innerText.includes('Ingresa para reportar'))?.getAttribute('href')`,
+    )
+    expect(href === `/ingresar?volver=${encodeURIComponent('/necesidades/n-483')}`, `enlace: ${href}`)
+    expect((await mainText()).includes('Ingresa para comprometerte'), 'sin invitación a ingresar para comprometerse')
+  },
+)
+
+await assert('Límite: con 3 necesidades activas el formulario avisa y el botón queda deshabilitado', async () => {
+  await evaluate(`localStorage.clear()`)
+  await signInAs('Familia damnificada') // n-482 ya cuenta como 1 activa
+  await goto('/pedir-ayuda')
+  expect(
+    (await evaluate(`document.querySelector('form button[type=submit]').disabled`)) === false,
+    'con 1 activa el botón no debe estar deshabilitado',
+  )
+  await publishNeed({ ...CARPAS, barrio: 'Centro' })
+  await publishNeed({
+    ...CARPAS,
+    type: 'agua',
+    items: [{ label: 'Agua', quantity: 50, unit: 'litros' }],
+    barrio: 'El Jardín',
+  })
+  await goto('/pedir-ayuda')
+  const r =
+    await evaluate(`({ alert: [...document.querySelectorAll('main [role=alert]')].map(a => a.innerText).join(' '),
+    disabled: document.querySelector('form button[type=submit]').disabled })`)
+  expect(r.alert.includes('Ya tienes 3 necesidades activas'), `aviso: "${r.alert}"`)
+  expect(r.disabled === true, 'el botón sigue habilitado')
+  const antes = (await store()).needs.length
+  await evaluate(`document.querySelector('form').requestSubmit()`)
+  await sleep(300)
+  expect((await store()).needs.length === antes, 'se publicó una cuarta necesidad')
+  await shot('pedir-ayuda-limite-1440')
+})
+
+await assert(
+  'Privacidad: el detalle público no muestra ownerId, documento, teléfono ni dirección (sin y con sesión)',
+  async () => {
+    const forbidden = /u-familia|ownerId|1000000001|1000000004|300 000 00|address|Calle 40|docNumber|"phone"/
+    for (const who of [null, 'Empresa que ayuda', 'Coordinador']) {
+      await evaluate(`localStorage.removeItem('${SESSION_KEY}')`)
+      if (who) await signInAs(who)
+      for (const id of ['n-482', 'n-500']) {
+        await goto(`/necesidades/${id}`)
+        const html = await evaluate(`document.documentElement.outerHTML`)
+        const m = forbidden.exec(html)
+        expect(!m, `${id} (${who ?? 'sin sesión'}) expone "${m?.[0]}"`)
+      }
+    }
+  },
+)
+
+await assert('Detalle: necesidad inexistente muestra un mensaje amable con un solo h1', async () => {
+  await goto('/necesidades/n-no-existe')
+  const t = await mainText()
+  expect(t.includes('No encontramos esta necesidad'), 'sin mensaje')
+  expect((await evaluate(`document.querySelectorAll('h1').length`)) === 1, 'h1 != 1')
+})
+
+// Observación de frontend-dev: ítems con la misma etiqueta se confunden (se identifican por `label`).
+{
+  await evaluate(`localStorage.clear()`)
+  await signInAs('Familia damnificada')
+  const id = await publishNeed({
+    ...CARPAS,
+    items: [
+      { label: 'Carpas', quantity: 3, unit: 'carpas' },
+      { label: 'Carpas', quantity: 4, unit: 'carpas' },
+    ],
+    barrio: 'Centro',
+  })
+  await signInAs('Empresa que ayuda')
+  await goto(`/necesidades/${id}`)
+  const both = await evaluate(`[0, 1].map(i => document.getElementById('commit-item-' + i).checked)`)
+  await clickId('commit-item-1')
+  await setValue('#commit-quantity', 2)
+  await clickText('main button', 'Me comprometo')
+  await sleep(400)
+  const items = (await store()).needs.find((n) => n.id === id).items
+  finding(
+    'Ítems con el mismo nombre se confunden',
+    `radios marcados a la vez: ${both}; tras elegir el 2.º ítem, committed = [${items.map((i) => i.committed)}] (esperado [0,2])`,
+  )
+}
+
+// ---------- Recorrido guiado (plan de pruebas de usuario, tarea 5) ----------
+await assert(
+  'Tarea 5 del plan de usuario: donante encuentra la necesidad de mayor prioridad sin ayuda y se compromete (390 px)',
+  async () => {
+    await evaluate(`localStorage.clear()`)
+    await viewport(390)
+    let pasos = 0
+    await signInAs('Empresa que ayuda')
+    pasos++ // ingresar con un perfil de demostración
+    await goto('/')
+    await evaluate(`document.querySelector('header button[aria-label^="Abrir menú"]').click()`)
+    await sleep(200)
+    await clickText('header a', 'Mapa')
+    pasos += 2 // abrir el menú e ir al mapa
+    await sleep(700)
+    await shot('tarea5-mapa-390')
+    const hasToggle = await evaluate(
+      `[...document.querySelectorAll('button')].some(b => b.innerText.trim() === 'Lista' && b.offsetParent !== null)`,
+    )
+    if (hasToggle) await clickText('button', 'Lista')
+    await sleep(300)
+    await evaluate(
+      `[...document.querySelectorAll('label')].find(l => l.innerText.includes('Dónde hace más falta')).click()`,
+    )
+    pasos++ // activar "Dónde hace más falta"
+    await sleep(500)
+    const first =
+      await evaluate(`(() => { const a = [...document.querySelectorAll('article')].find(x => x.offsetParent !== null);
+    return a ? { title: a.querySelector('h3').innerText, text: a.innerText.replace(/\\n/g, ' | ') } : null })()`)
+    expect(!!first, 'no hay tarjetas visibles en la lista')
+    expect(
+      first.text.includes('Sin ayuda') && first.text.includes('Prioridad alta'),
+      `la primera no es sin ayuda / alta: ${first.text}`,
+    )
+    await shot('tarea5-lista-390')
+    await clickText('article a', 'Me comprometo')
+    pasos++
+    await sleep(600)
+    expect((await pathNow()).startsWith('/necesidades/'), `no llegó al detalle: ${await pathNow()}`)
+    await shot('tarea5-detalle-390')
+    await clickText('main button', 'Me comprometo')
+    pasos++
+    await sleep(500)
+    expect((await mainText()).includes('Quedaste comprometido'), 'no confirmó el compromiso')
+    await viewport(1440)
+    return `${pasos} toques (con conmutador Lista: ${hasToggle}); primera tarjeta: ${first.title}`
+  },
+)
+
+console.log(`\nHallazgos documentados (no cuentan como fallo): ${hallazgos.length}`)
 
 // ---------- Responsive y accesibilidad ----------
 await resetBrowser()

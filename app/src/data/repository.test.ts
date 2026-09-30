@@ -1,5 +1,5 @@
 import { createLocalStorageRepository } from '@/data/localStorageRepository'
-import { mockRepository } from '@/data/mockRepository'
+import { createMockRepository } from '@/data/mockRepository'
 import type { Repository } from '@/data/repository'
 import { createMemoryStore } from '@/data/storage'
 
@@ -11,7 +11,7 @@ import { createMemoryStore } from '@/data/storage'
 type RepositoryFactory = () => Repository
 
 const ADAPTERS: [string, RepositoryFactory][] = [
-  ['mockRepository', () => mockRepository],
+  ['mockRepository', () => createMockRepository()],
   ['localStorageRepository (almacén en memoria)', () => createLocalStorageRepository(createMemoryStore())],
 ]
 
@@ -87,6 +87,7 @@ describe.each(ADAPTERS)('Contrato de Repository · %s', (_name, createRepository
 
 describe('Contrato de Repository · equivalencia entre adaptadores', () => {
   const local = () => createLocalStorageRepository(createMemoryStore())
+  const mockRepository = createMockRepository()
 
   it('listNeeds devuelve los mismos datos en ambos adaptadores', async () => {
     expect(await local().listNeeds()).toEqual(await mockRepository.listNeeds())

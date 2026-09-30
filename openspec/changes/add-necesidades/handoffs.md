@@ -4,3 +4,5 @@ Formato: `- [ ] H-### · de: <agente> · para: <agente> · <qué se necesita y p
 Al resolver: marcar `[x]` y agregar ` → ✔ <resultado>`. Gestionar con `.claude/scripts/orquestacion.mjs`.
 
 ## Abiertos y resueltos
+- [x] H-001 · de: test-engineer · para: backend-dev · createNeedIn (data/needsOperations.ts) arma la necesidad con MUNICIPIO_CENTER sin redondear (Quimbaya = 4.6232, -75.7626). localStorageRepository redondea al guardar pero devuelve la necesidad sin redondear (createNeed(...) != getNeed(id)); mockRepository nunca redondea y expone 4 decimales publicos (viola cuentas-y-privacidad: max 3 decimales). Solucion: aplicar roundCoordinates(location) en createNeedIn/buildNeed. Reproducir: npx vitest run src/data/needsContract.test.ts src/data/needsPersistence.test.ts (4 fallos) → ✔ roundCoordinates aplicado en createNeedIn; 297/297 pruebas en verde
+- [ ] H-002 · de: frontend-dev · para: test-engineer · app/e2e/verificar-ui.mjs usa la clave 'cdf-plus:v1:sesion' (y v1) pero DATA_VERSION ahora es 2 (cdf-plus:v2:*): fallan 4 comprobaciones de sesion/reset por eso, no por la UI. Actualiza las claves (idealmente leyendo el prefijo).

@@ -59,7 +59,7 @@ describe('Datos guardados en el equipo', () => {
 
     await data.repository.listNeeds()
 
-    expect(ls.getItem('cdf-plus:v1')).not.toBeNull()
+    expect(ls.getItem('cdf-plus:v2')).not.toBeNull()
   })
 })
 

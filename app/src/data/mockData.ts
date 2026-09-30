@@ -3,6 +3,7 @@ import type {
   DemoProfile,
   HousingOffer,
   HousingRequest,
+  Commitment,
   Municipio,
   Need,
   PrivateAddress,
@@ -47,6 +48,7 @@ export const needs: Need[] = [
   // Quimbaya: se está quedando atrás
   {
     id: 'n-482',
+    ownerId: 'u-familia',
     title: 'Carpas y agua para 5 familias',
     type: 'carpas',
     requester: 'familia',
@@ -387,3 +389,37 @@ export const privateAddresses: PrivateAddress[] = [
   { housingId: 'h-1', address: 'Calle 40 # 25-10, Las Américas, Calarcá' },
   { housingId: 'h-3', address: 'Vereda La Julia, finca El Recreo, Circasia' },
 ]
+
+/**
+ * Compromisos de demostración coherentes con `committed` y `delivered` de las necesidades sembradas:
+ * lo entregado queda confirmado y el resto comprometido, todo a nombre de la empresa de demostración (`u-10`).
+ */
+export const commitments: Commitment[] = needs.flatMap((need) =>
+  need.items.flatMap((item, index): Commitment[] => {
+    const base = { needId: need.id, itemLabel: item.label, helperId: 'u-10' }
+    const at = daysAgo(1)
+    const list: Commitment[] = []
+    if (item.delivered > 0) {
+      list.push({
+        ...base,
+        id: `c-${need.id}-${index}-e`,
+        quantity: item.delivered,
+        status: 'confirmado',
+        createdAt: at,
+        deliveredAt: at,
+        confirmedAt: at,
+        confirmedBy: need.ownerId ?? 'u-coordinador',
+      })
+    }
+    if (item.committed > item.delivered) {
+      list.push({
+        ...base,
+        id: `c-${need.id}-${index}-c`,
+        quantity: item.committed - item.delivered,
+        status: 'comprometido',
+        createdAt: at,
+      })
+    }
+    return list
+  }),
+)

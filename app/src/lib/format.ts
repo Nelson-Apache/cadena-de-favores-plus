@@ -22,3 +22,19 @@ export function initialsOf(name: string): string {
   const letters = words.length > 1 ? [words[0][0], words[1][0]] : [words[0]?.[0] ?? '?']
   return letters.join('').toUpperCase()
 }
+
+const dateFmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short', year: 'numeric' })
+const dateTimeFmt = new Intl.DateTimeFormat('es-CO', {
+  day: 'numeric',
+  month: 'short',
+  hour: 'numeric',
+  minute: '2-digit',
+})
+
+/** Fecha corta en español: "29 sept 2026". */
+export const formatDate = (iso: string) => dateFmt.format(new Date(iso))
+/** Fecha y hora corta: "29 sept, 3:45 p. m.". */
+export const formatDateTime = (iso: string) => dateTimeFmt.format(new Date(iso))
+
+/** Distancia en km con un decimal y coma: "2,8 km". */
+export const formatKm = (km: number) => `${km.toFixed(1).replace('.', ',')} km`

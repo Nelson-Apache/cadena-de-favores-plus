@@ -19,6 +19,17 @@ quiere ayudar no puede comprometerse. Es el ciclo central de la plataforma (requ
 - Diseños: `docs/design/stitch/pedir-ayuda`, `docs/design/stitch/detalle-necesidad`.
 - Funciona contra `mockRepository`; con `add-persistencia-local` los registros se conservan al recargar.
 
-## Preguntas abiertas
-- ¿Quién confirma la entrega cuando el receptor no tiene acceso a internet? (propuesta: un coordinador puede confirmar).
-- ¿Límite de necesidades activas por usuario para evitar duplicados?
+## Decisiones (resueltas con el usuario el 2026-09-29)
+- **Confirmación de entrega:** la confirma el receptor; si no tiene acceso a internet, un coordinador puede confirmarla por él.
+- **Límite:** máximo **3 necesidades activas por usuario**. Al llegar al tope, el formulario pide completar o cerrar una antes de publicar otra.
+
+## Preguntas abiertas (para las pruebas con usuarios)
+- ¿Puede alguien comprometerse con su propia necesidad? (hoy no hay regla que lo impida)
+- ¿Se puede cancelar o cerrar una necesidad para liberar cupo del máximo de 3? (hoy solo se libera al quedar "Atendida")
+- ¿Qué pasa si quien ayuda nunca entrega (compromiso vencido)?
+
+## Supuestos de implementación (backend-dev)
+- Necesidad activa = no "Atendida". El límite de 3 aplica también al coordinador.
+- La confirmación puede hacerse directo desde "comprometido" (receptor o coordinador), sin que quien ayuda marque la entrega.
+- Una necesidad nueva usa como coordenada el centro del municipio (sin dirección exacta ni teléfono).
+- `DATA_VERSION` = 2 (claves `cdf-plus:v2`): los datos guardados con v1 se descartan y se resiembran.

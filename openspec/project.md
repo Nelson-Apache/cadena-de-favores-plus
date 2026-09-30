@@ -62,7 +62,7 @@ Fuera de alcance (decisión del equipo): mapa de riesgo sísmico y de deslizamie
 | `red-lista` | Propuesta | `openspec/changes/add-red-lista` |
 | `vivienda-solidaria` | Propuesta | `openspec/changes/add-vivienda-solidaria` |
 | `coordinacion` | Propuesta | `openspec/changes/add-panel-coordinacion` |
-| `cuentas-y-privacidad` | Propuesta | `openspec/changes/add-persistencia-local` |
+| `cuentas-y-privacidad` | Implementada (local, ingreso simulado) | `openspec/specs/cuentas-y-privacidad` |
 
 ## Referencias
 - Documento de Design Thinking: `../../Cadena_de_Favores_Design_Thinking.docx` (junto a la carpeta del proyecto)

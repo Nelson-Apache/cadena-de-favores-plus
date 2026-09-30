@@ -4,7 +4,9 @@ import { AppShell } from '@/components/layout/AppShell'
 import { DemoDataCard } from '@/features/account/DemoDataCard'
 import { RequireSession } from '@/features/account/RequireSession'
 import { SignInPage } from '@/features/account/SignInPage'
+import { RequestHelpPage } from '@/features/help/RequestHelpPage'
 import { LandingPage } from '@/features/landing/LandingPage'
+import { NeedDetailPage } from '@/features/needs/NeedDetailPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PendingPage } from '@/pages/PendingPage'
 
@@ -29,29 +31,12 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: '/necesidades/:id',
-        element: (
-          <PendingPage
-            icon="assignment"
-            title="Detalle de una necesidad"
-            change="add-necesidades"
-            reference="detalle-necesidad"
-            summary="Prioridad con sus cuatro criterios, avance por ítem, compromisos y puntos cercanos sin ayuda."
-          />
-        ),
-      },
+      { path: '/necesidades/:id', element: <NeedDetailPage /> },
       {
         path: '/pedir-ayuda',
         element: (
           <RequireSession action="pedir ayuda">
-            <PendingPage
-              icon="sos"
-              title="Pedir ayuda"
-              change="add-necesidades"
-              reference="pedir-ayuda"
-              summary="Formulario para que un comerciante o una familia registre lo que necesita."
-            />
+            <RequestHelpPage />
           </RequireSession>
         ),
       },

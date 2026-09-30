@@ -63,23 +63,27 @@ export interface HousingOffer {
 }
 
 // ---------- Necesidades (spec: necesidades) ----------
-export type NeedType =
-  | 'techo'
-  | 'agua'
-  | 'alimento'
-  | 'carpas'
-  | 'salud'
-  | 'transporte'
-  | 'bodega'
-  | 'reparacion'
-  | 'mano_de_obra'
-  | 'equipos'
-  | 'asesoria'
-  | 'visibilidad'
+export const NEED_TYPES = [
+  'techo',
+  'agua',
+  'alimento',
+  'carpas',
+  'salud',
+  'transporte',
+  'bodega',
+  'reparacion',
+  'mano_de_obra',
+  'equipos',
+  'asesoria',
+  'visibilidad',
+] as const
+export type NeedType = (typeof NEED_TYPES)[number]
 
-export type Vulnerability = 'ninos' | 'adultos_mayores' | 'discapacidad' | 'enfermos'
+export const VULNERABILITIES = ['ninos', 'adultos_mayores', 'discapacidad', 'enfermos'] as const
+export type Vulnerability = (typeof VULNERABILITIES)[number]
 
-export type RequesterProfile = 'comerciante' | 'familia'
+export const REQUESTER_PROFILES = ['comerciante', 'familia'] as const
+export type RequesterProfile = (typeof REQUESTER_PROFILES)[number]
 
 export interface NeedItem {
   label: string
@@ -100,6 +104,56 @@ export interface Need {
   location: ApproxLocation
   /** Fecha de registro (ISO). */
   createdAt: string
+  /** Perfil que publicó la necesidad (receptor). Opcional: las necesidades sembradas de demostración pueden no tenerlo. */
+  ownerId?: string
+}
+
+/** Estado de un compromiso: quien ayuda se compromete, marca entregado y el receptor confirma. */
+export type CommitmentStatus = 'comprometido' | 'entregado' | 'confirmado'
+
+/** Compromiso de una persona o empresa con una cantidad de un ítem de una necesidad. */
+export interface Commitment {
+  id: string
+  needId: string
+  /** `label` del ítem de la necesidad. */
+  itemLabel: string
+  quantity: number
+  helperId: string
+  status: CommitmentStatus
+  createdAt: string
+  /** Cuando quien ayuda marcó la entrega (ISO). */
+  deliveredAt?: string
+  /** Cuando el receptor (o un coordinador) confirmó la entrega (ISO). */
+  confirmedAt?: string
+  /** Quién confirmó: el receptor o un coordinador que lo hizo por él. */
+  confirmedBy?: string
+}
+
+/** Reporte de una publicación sospechosa, para revisión de un coordinador. */
+export interface NeedReport {
+  id: string
+  needId: string
+  reason: string
+  /** Perfil que reporta; puede faltar si no ha ingresado. */
+  reporterId?: string
+  createdAt: string
+}
+
+/** Datos del formulario "Pedir ayuda". La ubicación pública se reduce a municipio y barrio (sin dirección exacta ni teléfono). */
+export interface NewNeedInput {
+  requester: RequesterProfile
+  type: NeedType
+  items: Array<{ label: string; unit: string; requested: number }>
+  peopleAffected: number
+  vulnerabilities: Vulnerability[]
+  municipio: Municipio
+  barrio: string
+}
+
+/** Quién actúa: su id y su rol (el coordinador puede confirmar por el receptor). */
+export interface Actor {
+  id: string
+  role: Role
 }
 
 /** Estado de la ayuda (color del marcador). Spec: mapa-de-prioridades. */
