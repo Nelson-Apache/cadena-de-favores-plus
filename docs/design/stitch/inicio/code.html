@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadena de Favores+ · Red Cívica del Quindío</title>
+<!-- Google Fonts: Sora & DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching the provided Token Set -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed-dim": "#d6baff",
+            "on-tertiary-container": "#d0b0ff",
+            "on-secondary-container": "#70634b",
+            "on-secondary-fixed-variant": "#51452f",
+            "inverse-on-surface": "#f3f0eb",
+            "on-primary-fixed-variant": "#004e5c",
+            "on-error": "#ffffff",
+            "surface-container": "#f0ede9",
+            "tertiary-fixed": "#ecdcff",
+            "error": "#ba1a1a",
+            "tertiary-container": "#5b3f86",
+            "on-error-container": "#93000a",
+            "secondary": "#6a5d45",
+            "on-secondary-fixed": "#231a08",
+            "tertiary": "#43276d",
+            "on-tertiary-fixed-variant": "#54387e",
+            "primary-container": "#0f5563",
+            "primary-fixed": "#b0ecfd",
+            "on-primary": "#ffffff",
+            "outline-variant": "#bfc8cb",
+            "on-background": "#1c1c19",
+            "primary": "#003d48",
+            "on-primary-fixed": "#001f26",
+            "on-surface-variant": "#40484b",
+            "surface-tint": "#286675",
+            "on-tertiary": "#ffffff",
+            "surface": "#fcf9f4",
+            "secondary-fixed": "#f3e0c2",
+            "on-primary-container": "#8dc8d8",
+            "on-tertiary-fixed": "#270550",
+            "on-surface": "#1c1c19",
+            "surface-container-high": "#ebe8e3",
+            "secondary-container": "#f3e0c2",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#94d0e0",
+            "outline": "#70787b",
+            "surface-dim": "#dcdad5",
+            "inverse-surface": "#31302d",
+            "inverse-primary": "#94d0e0",
+            "background": "#fcf9f4",
+            "surface-container-low": "#f6f3ee",
+            "secondary-fixed-dim": "#d6c4a8",
+            "surface-variant": "#e5e2dd",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e5e2dd",
+            "surface-bright": "#fcf9f4",
+            "on-secondary": "#ffffff",
+            // Custom palette overrides for Quindío identity requirements
+            "quindio-ink": "#13262B",
+            "quindio-petrol": "#0F5563",
+            "quindio-sand": "#FAF7F2",
+            "quindio-lilac": "#7B5EA7",
+            "quindio-slate": "#3B6FD8",
+            "alert-red": "#D64545",
+            "alert-amber": "#E0A100",
+            "alert-green": "#2E9E5B"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem"
+          },
+          fontFamily: {
+            "headline-lg": ["Sora", "sans-serif"],
+            "headline-md": ["Sora", "sans-serif"],
+            "headline-sm": ["Sora", "sans-serif"],
+            "display-lg": ["Sora", "sans-serif"],
+            "label-sm": ["DM Sans", "sans-serif"],
+            "label-md": ["DM Sans", "sans-serif"],
+            "body-sm": ["DM Sans", "sans-serif"],
+            "body-md": ["DM Sans", "sans-serif"],
+            "body-lg": ["DM Sans", "sans-serif"]
+          },
+          fontSize: {
+            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+            "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+            "label-md": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+            "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "display-lg": ["56px", { lineHeight: "64px", fontWeight: "700" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Subtle pulse animation */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- ========================================== -->
+<!-- 1. TOP NAVBAR (Shared Component: TopNavBar) -->
+<!-- ========================================== -->
+<header class="w-full sticky top-0 z-50 px-8 py-3 max-w-[1440px] mx-auto flex items-center justify-between bg-surface dark:bg-inverse-surface border-b border-outline-variant/40 dark:border-outline-variant/20 shadow-sm dark:shadow-none">
+<!-- Brand / Identity -->
+<a class="flex items-center gap-3 group focus:outline-none" href="#">
+<img alt="Cadena de Favores+ Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XY7Iq85SUqORU1WH8UPU37arkURBy-XVjcHW4GnP3FIgDpxZnxbowVGSBiMPDQnSxEAIjw_jCO21FI8gZyYbc8_8JbQu9-Hdn6qU_U-ABSlkLBMoWAvMN_pXwfzJTko7KsvKuls81c7IYX0FqM7x11Jfkiwd9lSqRchOiww5aUzZpbclWKN1-dq-jsT1fzPLN2kmT25eju8kmTHAgloGWzMd8ozofmZ-aqJnt14TlOTFjnFCFw4UlRqg"/>
+</a>
+<!-- Navigation links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-inverse-primary font-label-md text-label-md border-b-2 border-primary dark:border-inverse-primary pb-1 active:scale-[0.98] transition-transform duration-150" href="#mapa">Mapa</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md transition-colors duration-200 hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-2 py-1 rounded active:scale-[0.98]" href="#red-lista">Red lista</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md transition-colors duration-200 hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-2 py-1 rounded active:scale-[0.98]" href="#vivienda-solidaria">Vivienda solidaria</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md transition-colors duration-200 hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-2 py-1 rounded active:scale-[0.98]" href="#coordinacion">Coordinación</a>
+</nav>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-3">
+<!-- Pedir ayuda (Secondary action) -->
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-primary/5 active:scale-[0.98] transition-all" href="#solicitar">
+<span class="material-symbols-outlined text-[18px]">emergency_home</span>
+<span>Pedir ayuda</span>
+</a>
+<!-- Ofrecer ayuda (Primary action) -->
+<a class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 active:scale-[0.98] transition-all" href="#ofrecer">
+<span class="material-symbols-outlined text-[18px]">handshake</span>
+<span>Ofrecer ayuda</span>
+</a>
+<!-- Civic Volunteer Verified Avatar -->
+<div class="flex items-center pl-2 ml-1 border-l border-outline-variant/60">
+<div class="relative group cursor-pointer" title="Voluntario Cívico Verificado · Armenia">
+<img alt="Avatar de voluntario cívico verificado de Quindío" class="w-9 h-9 rounded-full object-cover border-2 border-primary-container/40" data-alt="A portrait of a verified warm and dignified Colombian disaster relief coordinator from Quindío, smiling calmly with mountains in the soft blurred background, wearing a neat civic teal vest. Soft cinematic daylight, clean modern documentary photography with rich warm tones, high dynamic range." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_mPRIP1H2hZhEXwhrTY8zTSxFyIMlFD-Y89UQkgTlabmex9FzhfDfuGvp97IpwAqPVGeictDXakw6mKaotc4TnA3tK_18JCFhb0OlK4ZThb0pCZBqy4faztM47H4OUKTi6Qgq-v0wCVqdgfIdANNtAUJtCIB57RSlhmLmnCRWT7a5iA4NGRFq6rMRllGfSc8jRR1eSgwZh84gIsEg1bVjpapQecfThU9HsAlMdopYOGBec2ggEOmcvfZv5ZJQ7D8iebaa6XE-KUM"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-alert-green rounded-full ring-2 ring-surface"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- 2. HERO SECTION EN FONDO TINTA OSCURO      -->
+<!-- ========================================== -->
+<section class="bg-quindio-ink text-surface pt-10 pb-16 px-6 lg:px-8 border-b border-outline-variant/20 relative overflow-hidden">
+<!-- Ambient Coffee Axis Mountain Graphic subtle texture -->
+<div class="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#FAF7F2_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+<!-- Columna Izquierda: Mensaje Central -->
+<div class="lg:col-span-6 flex flex-col items-start gap-5">
+<!-- Civic Badge Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-primary-fixed-dim font-label-sm text-label-sm tracking-wide">
+<span class="w-2 h-2 rounded-full bg-alert-amber animate-pulse"></span>
+<span>Red Cívica Ciudadana del Quindío · Prevención y Respuesta</span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-lg text-display-lg font-bold text-surface tracking-tight leading-[1.08]">
+          La ayuda lista antes de que la necesites.
+        </h1>
+<!-- Subtitle -->
+<p class="font-body-lg text-body-lg text-inverse-on-surface/90 font-normal leading-relaxed max-w-xl">
+          Organizamos recursos pre-acordados, albergues temporales, viviendas solidarias y canalización de necesidades urgentes en los 12 municipios del Quindío, todo coordinado en un mapa cívico en tiempo real.
+        </p>
+<!-- CTA Cluster -->
+<div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-quindio-petrol text-white font-label-md text-label-md font-semibold hover:bg-quindio-petrol/90 transition-all shadow-lg shadow-black/20 hover:scale-[1.01] active:scale-[0.98]" href="#mapa-interactivo">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span>Explorar el mapa en vivo</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white/5 border border-white/20 text-surface font-label-md text-label-md font-medium hover:bg-white/10 transition-all active:scale-[0.98]" href="#red-lista">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span>Registrar lo que puedo prestar</span>
+</a>
+</div>
+<!-- Trust Note -->
+<div class="flex items-center gap-3 pt-3 text-white/70 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-alert-green text-[20px]">verified</span>
+<span>En articulación directa con líderes comunales y brigadas locales en Armenia, Calarcá, Montenegro y Quimbaya.</span>
+</div>
+</div>
+<!-- Columna Derecha: Visor del Mapa Táctico Ilustrado -->
+<div class="lg:col-span-6 w-full" id="mapa">
+<div class="bg-[#172D33] rounded-xl border border-white/15 p-4 shadow-2xl relative overflow-hidden backdrop-blur-sm">
+<!-- Visor Header Bar -->
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-alert-red pulse-ring"></span>
+<span class="font-headline-sm text-headline-sm text-white font-medium">Visor Táctico Departamental Quindío 4.2</span>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-white/60 bg-black/30 px-2.5 py-1 rounded-full border border-white/10">
+<span class="w-1.5 h-1.5 rounded-full bg-alert-green"></span>
+<span>12 Nodos Conectados</span>
+</div>
+</div>
+<!-- Dynamic Tactical Map Mockup -->
+<div class="relative w-full h-[360px] rounded-lg bg-[#0F2227] overflow-hidden border border-white/10">
+<!-- Simulated Stylized Topographic Map Background of Quindío Cordillera -->
+<div class="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-900 via-[#102930] to-black"></div>
+<svg class="absolute inset-0 w-full h-full opacity-25" fill="none" stroke="#8DC8D8" stroke-width="0.8" viewbox="0 0 500 350">
+<!-- Contour terrain paths -->
+<path d="M 20 180 Q 140 120 250 200 T 480 140" stroke-dasharray="3,3"></path>
+<path d="M 50 240 Q 180 170 300 250 T 490 210"></path>
+<path d="M 10 90 Q 160 40 320 110 T 490 60" stroke-dasharray="2,4"></path>
+<!-- Municipal Connectors -->
+<line stroke="#FAF7F2" stroke-dasharray="4 2" stroke-width="1.2" x1="160" x2="250" y1="110" y2="180"></line>
+<line stroke="#FAF7F2" stroke-dasharray="4 2" stroke-width="1.2" x1="250" x2="360" y1="180" y2="190"></line>
+<line stroke="#FAF7F2" stroke-dasharray="4 2" stroke-width="1.2" x1="250" x2="210" y1="180" y2="250"></line>
+</svg>
+<!-- Map Markers -->
+<!-- Marker 1: Quimbaya (ROJO: Sin Ayuda) -->
+<div class="absolute top-10 left-10 group cursor-pointer z-20">
+<div class="flex items-center gap-2">
+<span class="relative flex h-5 w-5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-alert-red opacity-75"></span>
+<span class="relative inline-flex rounded-full h-5 w-5 bg-alert-red text-white items-center justify-center font-bold text-[10px]">!</span>
+</span>
+<div class="bg-[#1C2024]/90 backdrop-blur-md border border-alert-red/60 text-white rounded-lg p-2 max-w-[210px] shadow-lg">
+<div class="flex items-center justify-between text-[11px] font-semibold text-alert-red mb-0.5">
+<span>Quimbaya · La Estación</span>
+<span class="bg-alert-red/20 px-1 rounded text-[9px]">Urgente</span>
+</div>
+<p class="text-[11px] text-white/90 leading-tight">3 familias sin techo temporal tras colapso parcial de muro.</p>
+<span class="inline-block mt-1 text-[9px] font-bold text-alert-red">ESTADO: Sin ayuda</span>
+</div>
+</div>
+</div>
+<!-- Marker 2: Circasia / Montenegro (LILA: Vivienda Solidaria) -->
+<div class="absolute top-28 right-8 group cursor-pointer z-20">
+<div class="flex items-center gap-2 flex-row-reverse">
+<div class="w-6 h-6 rounded-full bg-quindio-lilac flex items-center justify-center shadow-lg ring-2 ring-white/30 text-white">
+<span class="material-symbols-outlined text-[14px]">holiday_village</span>
+</div>
+<div class="bg-[#241A33]/90 backdrop-blur-md border border-quindio-lilac/70 text-white rounded-lg p-2 max-w-[210px] shadow-lg">
+<div class="flex items-center justify-between text-[11px] font-semibold text-tertiary-fixed-dim mb-0.5">
+<span>Circasia / Montenegro</span>
+<span class="bg-quindio-lilac/40 px-1 rounded text-[9px]">Sello Arriendo</span>
+</div>
+<p class="text-[11px] text-white/90 leading-tight">Finca cafetera habilitada con cupo solidario para 6 familias.</p>
+<span class="inline-block mt-1 text-[9px] font-bold text-tertiary-fixed-dim">Vivienda Solidaria Activa</span>
+</div>
+</div>
+</div>
+<!-- Marker 3: Armenia (VERDE: Atendida) -->
+<div class="absolute bottom-16 left-28 group cursor-pointer z-20">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-alert-green flex items-center justify-center shadow-lg ring-2 ring-white/30 text-white">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="bg-[#122B1E]/90 backdrop-blur-md border border-alert-green/70 text-white rounded-lg p-2 max-w-[220px] shadow-lg">
+<div class="flex items-center justify-between text-[11px] font-semibold text-emerald-400 mb-0.5">
+<span>Armenia · Parque Sucre</span>
+<span class="bg-alert-green/30 text-emerald-300 px-1 rounded text-[9px]">Cubierta</span>
+</div>
+<p class="text-[11px] text-white/90 leading-tight">400 kits de agua potable entregados por brigada vecinal.</p>
+<span class="inline-block mt-1 text-[9px] font-bold text-alert-green">ESTADO: Atendida</span>
+</div>
+</div>
+</div>
+<!-- Marker 4: Calarcá (AZUL PIZARRA: Red Lista) -->
+<div class="absolute bottom-6 right-16 group cursor-pointer z-20">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-quindio-slate flex items-center justify-center shadow-lg ring-2 ring-white/30 text-white">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+</div>
+<div class="bg-[#15233D]/90 backdrop-blur-md border border-quindio-slate/70 text-white rounded-lg p-2 max-w-[200px] shadow-lg">
+<div class="text-[11px] font-semibold text-blue-300 mb-0.5">Calarcá · Variante</div>
+<p class="text-[11px] text-white/90 leading-tight">2 plantas eléctricas diésel &amp; motosierras listas en taller.</p>
+<span class="inline-block mt-1 text-[9px] font-bold text-blue-300">Red Lista: Despacho 15 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Pulse Feed -->
+<div class="mt-3 flex items-center justify-between bg-black/40 px-3.5 py-2 rounded-lg border border-white/10 text-xs">
+<div class="flex items-center gap-2 text-surface-variant">
+<span class="w-2 h-2 rounded-full bg-alert-amber animate-ping"></span>
+<span class="font-body-sm text-body-sm font-medium text-white/90">Último registro hace 4 min:</span>
+<span class="text-white/70">1 tanque de agua de 1000L disponible en La Tebaida.</span>
+</div>
+<a class="text-primary-fixed-dim hover:underline flex items-center gap-1 font-label-sm text-label-sm font-semibold" href="#mapa-interactivo">
+              Ver pantalla completa
+              <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 3. FRANJA DE MÉTRICAS EN VIVO              -->
+<!-- ========================================== -->
+<section class="relative -mt-6 z-30 px-6 max-w-[1240px] mx-auto">
+<div class="bg-surface rounded-xl border border-outline-variant/60 shadow-lg p-6 grid grid-cols-2 md:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x divide-outline-variant/40">
+<!-- Metric 1 -->
+<div class="flex flex-col items-center text-center px-4 pt-2 md:pt-0">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-quindio-slate/10 text-quindio-slate mb-1">
+<span class="material-symbols-outlined text-[14px]">inventory</span>
+          Red Lista
+        </span>
+<span class="font-headline-lg text-[36px] font-bold text-quindio-ink tracking-tight">1.240</span>
+<span class="font-headline-sm text-[15px] font-medium text-on-surface">Recursos disponibles</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Maquinaria, motosierras, vehículos 4x4 y aljibes.</p>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-quindio-lilac/10 text-quindio-lilac mb-1">
+<span class="material-symbols-outlined text-[14px]">home_work</span>
+          Solidaria
+        </span>
+<span class="font-headline-lg text-[36px] font-bold text-quindio-ink tracking-tight">312</span>
+<span class="font-headline-sm text-[15px] font-medium text-on-surface">Viviendas y techos</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Alojamientos con verificación de habitabilidad técnica.</p>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-alert-amber/15 text-alert-amber mb-1">
+<span class="material-symbols-outlined text-[14px]">traffic</span>
+          Triaje Activo
+        </span>
+<span class="font-headline-lg text-[36px] font-bold text-quindio-ink tracking-tight">86</span>
+<span class="font-headline-sm text-[15px] font-medium text-on-surface">Necesidades prioritarias</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Alertas comunitarias validadas con semáforo activo.</p>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-alert-green/10 text-alert-green mb-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+          Departamental
+        </span>
+<span class="font-headline-lg text-[36px] font-bold text-quindio-ink tracking-tight">12 / 12</span>
+<span class="font-headline-sm text-[15px] font-medium text-on-surface">Municipios enlazados</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Cobertura cívica activa con mesas comunitarias.</p>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 4. SECCIÓN: ANTES · DURANTE · DESPUÉS      -->
+<!-- ========================================== -->
+<section class="py-20 px-6 max-w-[1240px] mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-14">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">history_edu</span>
+<span>Aprender del sismo de 1999</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-quindio-ink tracking-tight">
+        Resiliencia sísmica planificada, no improvisada
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3">
+        El Quindío demostró que la reconstrucción nace del tejido vecinal. Cadena de Favores+ sistematiza esa solidaridad en tres fases coordinadas de acción cívica.
+      </p>
+</div>
+<!-- Timeline Grid (3 Steps) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Continuous horizontal connector line for desktop -->
+<div class="hidden md:block absolute top-1/4 left-1/6 right-1/6 h-[2px] bg-outline-variant/50 -z-0"></div>
+<!-- Fase 1: Antes -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-7 flex flex-col items-start relative z-10 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded-xl bg-quindio-slate/10 text-quindio-slate flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-5 border border-quindio-slate/20">
+          01
+        </div>
+<div class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-quindio-slate/15 text-quindio-slate mb-2">
+          ANTES · PREVENCIÓN
+        </div>
+<h3 class="font-headline-md text-headline-sm font-semibold text-quindio-ink mb-2">
+          Inventario Preventivo &amp; Red Lista
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Registro anticipado de herramientas pesadas, aljibes comunitarios, motobombas, generadores diésel y capacidades técnicas de ingenieros y constructores antes de cualquier evento. Pactos cívicos firmados con finqueros y gremios de la región cafetera.
+        </p>
+<div class="mt-6 pt-4 border-t border-outline-variant/30 w-full flex items-center text-xs text-on-surface-variant gap-2 font-medium">
+<span class="material-symbols-outlined text-quindio-slate text-[16px]">check_box</span>
+<span>Protocolo de préstamo sin burocracia</span>
+</div>
+</div>
+<!-- Fase 2: Durante -->
+<div class="bg-surface-container-lowest rounded-xl border-2 border-primary-container p-7 flex flex-col items-start relative z-10 shadow-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-5">
+          02
+        </div>
+<div class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-alert-red/15 text-alert-red mb-2">
+          DURANTE · 72 HORAS CRÍTICAS
+        </div>
+<h3 class="font-headline-md text-headline-sm font-semibold text-quindio-ink mb-2">
+          Alerta, Triaje &amp; Semáforo Táctico
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Georreferenciación inmediata de llamados de auxilio con filtro semáforo riguroso. Se evita la duplicación masiva de alimentos en una sola cuadra mientras veredas rurales de Pijao, Córdoba o Génova permanecen aisladas sin agua o carpas.
+        </p>
+<div class="mt-6 pt-4 border-t border-outline-variant/30 w-full flex items-center text-xs text-on-surface-variant gap-2 font-medium">
+<span class="material-symbols-outlined text-alert-amber text-[16px]">traffic</span>
+<span>Validación cruzada con comités JAC</span>
+</div>
+</div>
+<!-- Fase 3: Después -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-7 flex flex-col items-start relative z-10 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded-xl bg-quindio-lilac/10 text-quindio-lilac flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-5 border border-quindio-lilac/20">
+          03
+        </div>
+<div class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-quindio-lilac/15 text-quindio-lilac mb-2">
+          DESPUÉS · RECONSTRUCCIÓN
+        </div>
+<h3 class="font-headline-md text-headline-sm font-semibold text-quindio-ink mb-2">
+          Vivienda Solidaria &amp; Reactivación
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Hospedaje temporal digno bajo el modelo "Arriendo Solidario": tarifas congeladas de arriendo ético anti-especulación. Bancos de herramientas compartidas para habilitar talleres locales y tiendas de barrio en las zonas intervenidas.
+        </p>
+<div class="mt-6 pt-4 border-t border-outline-variant/30 w-full flex items-center text-xs text-on-surface-variant gap-2 font-medium">
+<span class="material-symbols-outlined text-quindio-lilac text-[16px]">verified</span>
+<span>Sello Arriendo Ético Certificado</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 5. SECCIÓN: TRES PILARES OPERATIVOS        -->
+<!-- ========================================== -->
+<section class="py-16 px-6 bg-surface-container-low border-y border-outline-variant/40">
+<div class="max-w-[1240px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<span class="text-quindio-petrol font-label-md text-label-md font-semibold tracking-wider">HERRAMIENTAS CIUDADANAS EN MARCHA</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-quindio-ink tracking-tight mt-1">
+            Los tres motores de nuestra red cívica
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+          Diseñados específicamente para la geografía y particularidades del Quindío, integrando fincas cafeteras, cascos urbanos y vías terciarias.
+        </p>
+</div>
+<!-- Bento Grid de Pilares -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Pilar 1: Red Lista de Recursos (Col 4) -->
+<div class="lg:col-span-4 bg-surface rounded-xl border border-outline-variant/60 p-6 flex flex-col justify-between shadow-sm" id="red-lista">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-quindio-slate/10 text-quindio-slate flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">handyman</span>
+</div>
+<span class="text-xs font-semibold px-3 py-1 rounded-full bg-quindio-slate/10 text-quindio-slate border border-quindio-slate/30">
+                Inventario Pre-acordado
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-quindio-ink mb-2">Red Lista de Recursos</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Catálogo geolocalizado de bienes mecánicos, logísticos e insumos de emergencia que propietarios y empresas ponen a disposición para emergencias inmediatas.
+            </p>
+<!-- Categorías destacadas -->
+<div class="space-y-2.5 mb-6">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-high/60 text-sm">
+<span class="flex items-center gap-2 font-medium text-quindio-ink">
+<span class="material-symbols-outlined text-quindio-slate text-[18px]">power</span>
+                  Plantas Eléctricas diésel
+                </span>
+<span class="font-bold text-quindio-slate">48 un.</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-high/60 text-sm">
+<span class="flex items-center gap-2 font-medium text-quindio-ink">
+<span class="material-symbols-outlined text-quindio-slate text-[18px]">local_shipping</span>
+                  Camionetas 4x4 y Volquetas
+                </span>
+<span class="font-bold text-quindio-slate">112 un.</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-high/60 text-sm">
+<span class="flex items-center gap-2 font-medium text-quindio-ink">
+<span class="material-symbols-outlined text-quindio-slate text-[18px]">water_drop</span>
+                  Aljibes y Tanques &gt;1000L
+                </span>
+<span class="font-bold text-quindio-slate">85 un.</span>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-quindio-slate text-quindio-slate font-label-md text-label-md font-semibold hover:bg-quindio-slate hover:text-white transition-colors" href="#catalogo">
+<span>Explorar catálogo de recursos</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Pilar 2: Vivienda Solidaria & Sello Arriendo Solidario (Col 4) -->
+<div class="lg:col-span-4 bg-surface rounded-xl border-2 border-quindio-lilac/40 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden" id="vivienda-solidaria">
+<!-- Lilac Stamp Badge Ribbon -->
+<div class="absolute -top-3 -right-3">
+<div class="bg-quindio-lilac text-white text-[10px] font-bold py-1.5 px-6 rotate-12 shadow-sm uppercase tracking-wider">
+              Sello Ético
+            </div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-quindio-lilac/10 text-quindio-lilac flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">roofing</span>
+</div>
+<!-- Sello Arriendo Solidario Circular Ink Style -->
+<div class="flex items-center gap-1.5 border-2 border-quindio-lilac border-dashed rounded-full px-2.5 py-1 text-quindio-lilac text-[11px] font-bold">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>Arriendo Solidario</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-quindio-ink mb-2">Vivienda Solidaria</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+              Red de fincas turísticas, apartamentos desocupados y cuartos habitables puestos a disposición de familias damnificadas sin ánimo de lucro o con canon cívico congelado.
+            </p>
+<div class="p-3.5 bg-quindio-lilac/5 rounded-xl border border-quindio-lilac/20 mb-6">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-quindio-lilac text-[20px] mt-0.5">hotel_class</span>
+<div>
+<h4 class="font-label-md text-label-md font-semibold text-quindio-lilac">Garantías del Sello Ético</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-snug">
+                    Tarifas fijadas con la Mesa Departamental, dictamen de habitabilidad por ingenieros voluntarios de Armenia y pacto de no desalojo intempestivo.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-quindio-lilac text-white font-label-md text-label-md font-semibold hover:bg-quindio-lilac/90 transition-colors shadow-sm" href="#viviendas-catalogo">
+<span>Consultar albergues y fincas</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Pilar 3: Mapa de Prioridades (Col 4) -->
+<div class="lg:col-span-4 bg-surface rounded-xl border border-outline-variant/60 p-6 flex flex-col justify-between shadow-sm" id="coordinacion">
+<div>
+<div class="flex items-center justify-between mb-5">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">hub</span>
+</div>
+<span class="text-xs font-semibold px-3 py-1 rounded-full bg-alert-amber/15 text-alert-amber border border-alert-amber/30">
+                Semáforo Activo
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-quindio-ink mb-2">Mapa de Prioridades</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+              Algoritmo cívico de triaje territorial que balancea las entregas de socorro en tiempo real, conectando donantes con la necesidad verificada más crítica.
+            </p>
+<!-- Semáforo Indicator Legend -->
+<div class="bg-surface-container-low rounded-xl p-3 border border-outline-variant/40 space-y-2 mb-6">
+<div class="flex items-center gap-2.5 text-xs">
+<span class="w-3 h-3 rounded-full bg-alert-red flex-shrink-0"></span>
+<span class="font-medium text-quindio-ink">Rojo (Urgencia Crítica):</span>
+<span class="text-on-surface-variant">Sin atención en &gt;12 horas</span>
+</div>
+<div class="flex items-center gap-2.5 text-xs">
+<span class="w-3 h-3 rounded-full bg-alert-amber flex-shrink-0"></span>
+<span class="font-medium text-quindio-ink">Amarillo (En camino):</span>
+<span class="text-on-surface-variant">Brigada o camión despachado</span>
+</div>
+<div class="flex items-center gap-2.5 text-xs">
+<span class="w-3 h-3 rounded-full bg-alert-green flex-shrink-0"></span>
+<span class="font-medium text-quindio-ink">Verde (Resuelta):</span>
+<span class="text-on-surface-variant">Requerimiento validado al 100%</span>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-primary-container text-primary-container font-label-md text-label-md font-semibold hover:bg-primary-container hover:text-white transition-colors" href="#tablero">
+<span>Abrir tablero táctico en vivo</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 6. SECCIÓN: ¿CÓMO QUIERES PARTICIPAR HOY? -->
+<!-- ========================================== -->
+<section class="py-20 px-6 max-w-[1240px] mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<span class="text-primary-container font-label-md text-label-md font-semibold tracking-wider">RESPUESTA INTEGRAL</span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-quindio-ink tracking-tight mt-1">
+        ¿Cómo quieres participar hoy?
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+        La red se activa mediante tres vías específicas para canalizar solicitudes genuinas y aportes organizados.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1: Comerciante / Productor afectado -->
+<div class="bg-surface rounded-xl border border-outline-variant/60 p-7 flex flex-col justify-between hover:border-quindio-petrol/60 transition-all">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-quindio-petrol flex items-center justify-center mb-5">
+<span class="material-symbols-outlined text-[26px]">storefront</span>
+</div>
+<h3 class="font-headline-md text-headline-sm font-bold text-quindio-ink mb-2">Comerciante o Productor</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+            ¿Tienes un taller, tienda de abarrotes o cultivo con afectaciones? Pide relevo solidario, reporta daños de infraestructura o accede al banco comunal de herramientas compartidas.
+          </p>
+<ul class="text-xs text-on-surface-variant space-y-2 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-alert-green text-[16px]">check_circle</span>
+<span>Relevo de turnos y cuadrillas</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-alert-green text-[16px]">check_circle</span>
+<span>Herramientas eléctricas y soldadura</span>
+</li>
+</ul>
+</div>
+<a class="inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-primary-container text-primary-container font-label-md text-label-md font-semibold hover:bg-primary-container/5 transition-colors" href="#solicitud-comercial">
+<span>Pedir apoyo comercial</span>
+<span class="material-symbols-outlined text-[16px]">store</span>
+</a>
+</div>
+<!-- Card 2: Familia Damnificada (Destacada) -->
+<div class="bg-surface-container-lowest rounded-xl border-2 border-quindio-petrol p-7 flex flex-col justify-between shadow-lg relative" id="solicitar">
+<div class="absolute -top-3 left-6">
+<span class="bg-quindio-petrol text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Prioridad Humanitaria
+          </span>
+</div>
+<div>
+<div class="w-12 h-12 rounded-xl bg-quindio-petrol text-white flex items-center justify-center mb-5 mt-1">
+<span class="material-symbols-outlined text-[26px]">family_restroom</span>
+</div>
+<h3 class="font-headline-md text-headline-sm font-bold text-quindio-ink mb-2">Familia Damnificada</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+            ¿Necesitas techo temporal, alimentos no perecederos, pañales o agua potable? Registra tu solicitud familiar validada con tu presidente de JAC o líder barrial.
+          </p>
+<ul class="text-xs text-on-surface-variant space-y-2 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-quindio-petrol text-[16px]">check_circle</span>
+<span>Cupo preferencial en Fincas Solidarias</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-quindio-petrol text-[16px]">check_circle</span>
+<span>Kits de higiene y alimentación familiar</span>
+</li>
+</ul>
+</div>
+<a class="inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-quindio-petrol text-white font-label-md text-label-md font-semibold hover:bg-quindio-petrol/90 shadow-md transition-all" href="#solicitud-familiar">
+<span>Registrar solicitud familiar</span>
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+</a>
+</div>
+<!-- Card 3: Empresa o Voluntario que Ayuda -->
+<div class="bg-surface rounded-xl border border-outline-variant/60 p-7 flex flex-col justify-between hover:border-quindio-petrol/60 transition-all" id="ofrecer">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-quindio-petrol flex items-center justify-center mb-5">
+<span class="material-symbols-outlined text-[26px]">volunteer_activism</span>
+</div>
+<h3 class="font-headline-md text-headline-sm font-bold text-quindio-ink mb-2">Empresa o Voluntario</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+            ¿Tienes camioneta 4x4, aljibe, motosierras, espacio habitable o brazos disponibles? Inscribe tus recursos para recibir alertas directas según cercanía.
+          </p>
+<ul class="text-xs text-on-surface-variant space-y-2 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-alert-green text-[16px]">check_circle</span>
+<span>Certificado cívico de donación / voluntariado</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-alert-green text-[16px]">check_circle</span>
+<span>Despachos coordinados sin pérdida de tiempo</span>
+</li>
+</ul>
+</div>
+<a class="inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-primary-container text-primary-container font-label-md text-label-md font-semibold hover:bg-primary-container/5 transition-colors" href="#registro-recursos">
+<span>Poner recursos a disposición</span>
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 7. BLOQUE DE CONFIANZA Y TRANSPARENCIA     -->
+<!-- ========================================== -->
+<section class="py-16 px-6 bg-surface-container border-t border-outline-variant/40">
+<div class="max-w-[1240px] mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-12">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-outline-variant/60 text-quindio-petrol font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<span>Transparencia Radical y Cívica</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-quindio-ink tracking-tight">
+          Plataforma 100% Cívica e Independiente
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+          La confianza comunitaria es el cimiento de nuestra resiliencia en el Quindío. Sin afiliaciones partidistas ni intermediarios burocráticos.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Trust 1 -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[24px]">badge</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-quindio-ink mb-2">
+            Identidad Verificada con Cédula / NIT
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Cada solicitud de ayuda o préstamo de maquinaria pasa por un cruce de validación comunitaria con las Juntas de Acción Comunal (JAC) de los barrios y veredas para evitar fraudes o suplantaciones.
+          </p>
+</div>
+<!-- Trust 2 -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-quindio-ink mb-2">
+            Protección de Datos · Ley 1581 de 2012
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Los datos sensibles de ubicación familiar y damnificados están encriptados y protegidos bajo el marco legal de la República de Colombia, con uso exclusivo y confidencial para rescate humanitario.
+          </p>
+</div>
+<!-- Trust 3 -->
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/50">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[24px]">visibility</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-quindio-ink mb-2">
+            Auditoría Cívica Abierta
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Trazabilidad pública en línea de cada kit y maquinaria asignada: bitácora fotográfica de entrega en terreno con acta firmada por el comité de vecinos receptor.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 8. FOOTER OSCURO COMPLETO (Shared: Footer) -->
+<!-- ========================================== -->
+<footer class="bg-quindio-ink text-surface border-t border-outline-variant/30">
+<div class="w-full px-8 py-12 max-w-[1440px] mx-auto flex flex-col gap-10">
+<!-- Top Grid: Brand & Directory -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+<!-- Brand Info (Col 2) -->
+<div class="lg:col-span-2 flex flex-col items-start gap-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-quindio-petrol flex items-center justify-center text-white font-bold">
+              +
+            </div>
+<span class="font-headline-sm text-headline-sm font-bold text-white tracking-tight">
+              Cadena de Favores+
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-white/70 max-w-sm leading-relaxed">
+            Red cívica ciudadana del departamento del Quindío para la articulación preventiva, auxilio oportuno y reconstrucción comunitaria ante desastres naturales.
+          </p>
+<div class="text-xs text-white/50 pt-2">
+            Iniciativa cívica independiente sin afiliación partidista ni fines de lucro.
+          </div>
+</div>
+<!-- Directorio de Emergencias Oficiales -->
+<div>
+<h4 class="font-headline-sm text-[16px] font-semibold text-primary-fixed-dim mb-4">Líneas Oficiales</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-white/80">
+<li>
+<a class="hover:text-primary-fixed hover:underline flex items-center gap-2" href="tel:123">
+<span class="material-symbols-outlined text-[16px] text-alert-red">phone_in_talk</span>
+<span>Línea Única de Emergencias 123</span>
+</a>
+</li>
+<li>
+<a class="hover:text-primary-fixed hover:underline flex items-center gap-2" href="tel:132">
+<span class="material-symbols-outlined text-[16px] text-alert-red">health_and_safety</span>
+<span>Cruz Roja Quindío (132)</span>
+</a>
+</li>
+<li>
+<a class="hover:text-primary-fixed hover:underline flex items-center gap-2" href="tel:144">
+<span class="material-symbols-outlined text-[16px] text-alert-amber">shield</span>
+<span>Defensa Civil Seccional (144)</span>
+</a>
+</li>
+<li>
+<a class="hover:text-primary-fixed hover:underline flex items-center gap-2" href="tel:119">
+<span class="material-symbols-outlined text-[16px] text-orange-400">fire_truck</span>
+<span>Bomberos Departamentales (119)</span>
+</a>
+</li>
+<li>
+<a class="hover:text-primary-fixed hover:underline text-xs text-white/60 pt-1 block" href="#">
+                Consejo Departamental de Gestión del Riesgo (CDGRD)
+              </a>
+</li>
+</ul>
+</div>
+<!-- Cobertura Quindío (12 Municipios) -->
+<div>
+<h4 class="font-headline-sm text-[16px] font-semibold text-primary-fixed-dim mb-4">12 Municipios</h4>
+<div class="grid grid-cols-2 gap-x-2 gap-y-1.5 text-xs text-white/70">
+<span>• Armenia</span>
+<span>• Calarcá</span>
+<span>• Circasia</span>
+<span>• Filandia</span>
+<span>• Montenegro</span>
+<span>• Quimbaya</span>
+<span>• La Tebaida</span>
+<span>• Salento</span>
+<span>• Pijao</span>
+<span>• Génova</span>
+<span>• Buenavista</span>
+<span>• Córdoba</span>
+</div>
+</div>
+<!-- Links Institucionales & Legales -->
+<div>
+<h4 class="font-headline-sm text-[16px] font-semibold text-primary-fixed-dim mb-4">Enlaces Cívicos</h4>
+<ul class="space-y-2 font-body-sm text-body-sm text-white/80">
+<li><a class="hover:text-primary-fixed hover:underline transition-colors" href="#">Mesa de Donaciones y Arriendo Solidario</a></li>
+<li><a class="hover:text-primary-fixed hover:underline transition-colors" href="#">Protocolo Sísmico Cafetero</a></li>
+<li><a class="hover:text-primary-fixed hover:underline transition-colors" href="#">Política de Privacidad y Habeas Data</a></li>
+<li><a class="hover:text-primary-fixed hover:underline transition-colors" href="#">Términos de Voluntariado JAC</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar & Mandatory Legal Text from Shared Components JSON -->
+<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
+<p class="text-center md:text-left leading-relaxed">
+          © 2025 Cadena de Favores+ Quindío. Tratamiento de datos según Ley 1581 de 2012 de la República de Colombia. Red cívica ciudadana sin filiación partidista.
+        </p>
+<div class="flex items-center gap-4 text-primary-fixed-dim">
+<span>Armenia, Quindío, Colombia</span>
+<span class="w-1.5 h-1.5 rounded-full bg-alert-green"></span>
+<span>Sistema Operativo</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

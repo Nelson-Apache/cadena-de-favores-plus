@@ -1,0 +1,64 @@
+/* Tailwind, fuentes e íconos se empaquetan en el build (npm): la app no depende de ningún CDN. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-surface font-body text-ink antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.primary.DEFAULT');
+    outline-offset: 2px;
+  }
+}
+
+/* ---------- Marcadores del mapa (ver src/features/map/markers.ts) ---------- */
+.cdf-marker {
+  background: transparent;
+  border: 0;
+}
+.cdf-pin {
+  display: block;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--c);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 8px rgba(19, 38, 43, 0.35);
+  transition: transform 0.15s ease;
+}
+.cdf-pin.is-selected {
+  box-shadow:
+    0 0 0 4px rgba(15, 85, 99, 0.35),
+    0 4px 12px rgba(19, 38, 43, 0.4);
+}
+.cdf-square,
+.cdf-house {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(19, 38, 43, 0.3);
+}
+.cdf-square {
+  background: #3b6fd8;
+  border-radius: 6px;
+}
+.cdf-house {
+  background: #7b5ea7;
+  border-radius: 9px;
+}
+
+.leaflet-container {
+  font-family: 'DM Sans Variable', system-ui, sans-serif;
+  background: #efe6d8;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+}

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadena de Favores+ | Ofrecer una vivienda solidaria</title>
+<!-- Google Fonts: Sora & DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;family=Sora:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed": "#f3e0c2",
+            "inverse-primary": "#94d0e0",
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary-container": "#5b3f86",
+            "on-surface": "#1c1c19",
+            "on-tertiary-fixed": "#270550",
+            "background": "#fcf9f4",
+            "surface": "#fcf9f4",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#231a08",
+            "surface-dim": "#dcdad5",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#94d0e0",
+            "surface-container-highest": "#e5e2dd",
+            "on-secondary-container": "#70634b",
+            "on-secondary-fixed-variant": "#51452f",
+            "on-background": "#1c1c19",
+            "secondary-fixed-dim": "#d6c4a8",
+            "outline": "#70787b",
+            "surface-container": "#f0ede9",
+            "on-primary": "#ffffff",
+            "surface-tint": "#286675",
+            "on-surface-variant": "#40484b",
+            "tertiary-fixed": "#ecdcff",
+            "surface-container-low": "#f6f3ee",
+            "surface-bright": "#fcf9f4",
+            "outline-variant": "#bfc8cb",
+            "surface-variant": "#e5e2dd",
+            "error-container": "#ffdad6",
+            "secondary": "#6a5d45",
+            "on-tertiary-fixed-variant": "#54387e",
+            "on-error-container": "#93000a",
+            "secondary-container": "#f3e0c2",
+            "tertiary": "#43276d",
+            "primary-container": "#0f5563",
+            "primary-fixed": "#b0ecfd",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#d6baff",
+            "surface-container-high": "#ebe8e3",
+            "on-primary-fixed-variant": "#004e5c",
+            "on-primary-container": "#8dc8d8",
+            "inverse-on-surface": "#f3f0eb",
+            "primary": "#003d48",
+            "on-primary-fixed": "#001f26",
+            "on-tertiary-container": "#d0b0ff",
+            "inverse-surface": "#31302d"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "body-md": ["DM Sans"],
+            "headline-md": ["Sora"],
+            "headline-lg": ["Sora"],
+            "label-md": ["DM Sans"],
+            "display-lg": ["Sora"],
+            "headline-sm": ["Sora"],
+            "body-lg": ["DM Sans"],
+            "label-sm": ["DM Sans"],
+            "body-sm": ["DM Sans"]
+          },
+          "fontSize": {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "display-lg": ["56px", { "lineHeight": "64px", "fontWeight": "700" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TOP APP BAR (Shared Components JSON Anchor) -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-surface-container-highest dark:border-outline-variant shadow-sm dark:shadow-none sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-7xl mx-auto h-20">
+<!-- Brand Logo / Product Anchor -->
+<a class="flex items-center gap-3 group text-primary dark:text-inverse-primary focus:outline-none" href="#">
+<img alt="Logo Cadena de Favores+ Red Cívica del Quindío" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XY7Iq85SUqORU1WH8UPU37arkURBy-XVjcHW4GnP3FIgDpxZnxbowVGSBiMPDQnSxEAIjw_jCO21FI8gZyYbc8_8JbQu9-Hdn6qU_U-ABSlkLBMoWAvMN_pXwfzJTko7KsvKuls81c7IYX0FqM7x11Jfkiwd9lSqRchOiww5aUzZpbclWKN1-dq-jsT1fzPLN2kmT25eju8kmTHAgloGWzMd8ozofmZ-aqJnt14TlOTFjnFCFw4UlRqg"/>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary pb-1 transition-colors duration-150" href="#">
+          Mapa
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary pb-1 transition-colors duration-150" href="#">
+          Red lista
+        </a>
+<!-- ACTIVE STATE: Vivienda solidaria mapped directly from page intent -->
+<a class="text-tertiary dark:text-tertiary-fixed border-b-2 border-tertiary dark:border-tertiary-fixed font-label-md text-label-md font-semibold pb-1 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[18px]">cottage</span>
+          Vivienda solidaria
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-inverse-primary pb-1 transition-colors duration-150" href="#">
+          Coordinación
+        </a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-primary font-label-md text-label-md border border-outline-variant hover:bg-surface-container transition-colors duration-150 active:scale-95" type="button">
+          Pedir ayuda
+        </button>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm hover:opacity-95 transition-opacity active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+          Ofrecer ayuda
+        </button>
+<!-- Trailing Notifications -->
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors duration-150 relative" type="button">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<!-- Volunteer Avatar -->
+<div class="flex items-center pl-1">
+<div class="w-9 h-9 rounded-full ring-2 ring-primary/20 overflow-hidden bg-secondary-container flex items-center justify-center font-headline-sm text-label-sm font-bold text-primary">
+            AM
+          </div>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS: Two-column fluid layout -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-gutter py-8">
+<!-- Breadcrumb & Civic Banner Header -->
+<div class="mb-8">
+<div class="flex flex-wrap items-center justify-between gap-4 mb-3">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-tertiary transition-colors" href="#">Vivienda solidaria</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Ofrecer vivienda solidaria</span>
+</nav>
+<!-- Seismic Protocol Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/70 border border-secondary/20 text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span class="font-medium">Protocolo activo: Respuesta sísmica Cordillera Central (Quindío)</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-surface-container-highest pb-6">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 mb-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold tracking-wide">
+<span class="material-symbols-outlined text-[14px]">volunteer_activism</span>
+            Programa Cívico de Reasentamiento Temporal · Quindío
+          </div>
+<h1 class="text-headline-lg font-headline-lg text-primary flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-sm">cottage</span>
+</span>
+            Ofrecer una vivienda solidaria
+          </h1>
+<p class="mt-2 text-body-md font-body-md text-on-surface-variant max-w-2xl">
+            Ayuda a una familia que perdió o desalojó su casa a tener un lugar seguro mientras reconstruyen su hogar en los 12 municipios del Quindío.
+          </p>
+</div>
+<div class="flex items-center gap-3 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-low px-4 py-2.5 rounded-xl border border-surface-container-highest">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span>Red comunitaria coordinada con Cruz Roja y Bomberos</span>
+</div>
+</div>
+</div>
+<!-- 2 COLUMNS GRID (7 cols / 5 cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Structured Form Steps (7 Columns) -->
+<section class="lg:col-span-7 space-y-6">
+<!-- 1. Tipo de oferta -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">1</span>
+              Tipo de oferta habitacional
+            </h2>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Obligatorio</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            Selecciona el modelo de acogida que deseas proveer a la comunidad damnificada.
+          </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<!-- Opción a: Gratis -->
+<label class="relative flex flex-col p-4 rounded-xl border border-outline-variant/60 bg-surface cursor-pointer hover:border-primary/50 transition-all text-left">
+<input class="sr-only" name="housing_type" type="radio" value="free"/>
+<span class="material-symbols-outlined text-primary mb-2 text-[26px]">favorite</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface">Gratis ($0)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 leading-snug">
+                Acogida solidaria y refugio de urgencia sin cobro.
+              </span>
+</label>
+<!-- Opción b: Arriendo solidario (SELECTED) -->
+<label class="relative flex flex-col p-4 rounded-xl border-2 border-tertiary bg-tertiary-fixed/30 cursor-pointer shadow-sm text-left ring-2 ring-tertiary/20">
+<input checked="" class="sr-only" name="housing_type" type="radio" value="solidary"/>
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-tertiary text-[26px]">handshake</span>
+<span class="w-5 h-5 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-body-md font-bold text-tertiary">Arriendo solidario</span>
+</div>
+<span class="inline-block mt-0.5 text-[11px] font-semibold text-tertiary uppercase tracking-wider">Precio reducido</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 leading-snug">
+                Tarifa cívica ética por debajo del mercado local.
+              </span>
+</label>
+<!-- Opción c: Arriendo normal -->
+<label class="relative flex flex-col p-4 rounded-xl border border-outline-variant/60 bg-surface cursor-pointer hover:border-primary/50 transition-all text-left">
+<input class="sr-only" name="housing_type" type="radio" value="regular"/>
+<span class="material-symbols-outlined text-on-surface-variant mb-2 text-[26px]">apartment</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface">Arriendo regular</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 leading-snug">
+                Tarifa regular del Quindío sin reducción solidaria.
+              </span>
+</label>
+</div>
+</article>
+<!-- 2. Precio al mes y comparación cívica -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">2</span>
+              Precio mensual y validación ética
+            </h2>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+              Califica para Sello Cívico
+            </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-5">
+            Las viviendas con precios reducidos reciben acompañamiento de veeduría y exención de intermediación.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+<!-- Input del precio -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="price_input">
+                Aporte mensual acordado (COP)
+              </label>
+<div class="relative rounded-xl border-2 border-primary/30 focus-within:border-primary bg-surface overflow-hidden">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-primary font-bold text-body-lg">
+                  $
+                </span>
+<input class="block w-full pl-9 pr-16 py-3 font-headline-md text-headline-sm text-primary bg-transparent border-0 focus:ring-0 font-bold tracking-tight" id="price_input" type="text" value="450.000"/>
+<span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-on-surface-variant font-label-sm text-label-sm font-medium">
+                  / mes
+                </span>
+</div>
+<span class="text-label-sm text-on-surface-variant mt-1.5 block">
+                Incluye servicios básicos de acueducto y energía.
+              </span>
+</div>
+<!-- Gráfico Comparativo Visual -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest">
+<div class="flex justify-between items-center text-label-sm font-label-sm mb-1.5">
+<span class="text-tertiary font-bold">Tu tarifa: $450.000</span>
+<span class="text-on-surface-variant line-through">Ref. mercado: $620.000</span>
+</div>
+<!-- Barra de progreso comparativo -->
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden flex">
+<div class="bg-tertiary h-full rounded-full transition-all duration-500" style="width: 72.5%;"></div>
+</div>
+<div class="flex items-center gap-1.5 mt-2.5 text-label-sm font-label-sm text-tertiary font-medium">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+<span><strong>27% por debajo del mercado</strong> en Calarcá y Armenia.</span>
+</div>
+</div>
+</div>
+<!-- Impact Explanation Banner -->
+<div class="mt-4 p-3.5 rounded-xl bg-surface-container flex items-start gap-3 border border-surface-container-highest">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">policy</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+<strong class="text-primary font-semibold">Explicación de impacto:</strong> Tu tarifa califica para congelación de cobro garantizada y exención comunitaria sin contratos abusivos ni intermediarios usureros.
+            </p>
+</div>
+</article>
+<!-- 3. Capacidad y habitabilidad -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">3</span>
+              Capacidad y habitabilidad
+            </h2>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Condiciones físicas</span>
+</div>
+<!-- Stepper de personas & distribución -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<!-- Personas Stepper -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest flex items-center justify-between">
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-semibold">Capacidad de acogida</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Familias o grupo conviviente</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<div class="text-center min-w-[70px]">
+<span class="font-headline-sm text-headline-sm text-primary block leading-none font-bold">4</span>
+<span class="text-[11px] font-label-sm text-on-surface-variant uppercase font-medium">personas</span>
+</div>
+<button class="w-9 h-9 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Distribución interna resumen -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-container-highest flex flex-col justify-center">
+<span class="block font-label-md text-label-md text-on-surface font-semibold mb-2">Distribución disponible</span>
+<div class="flex flex-wrap gap-2 text-label-sm font-label-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface text-primary border border-outline-variant/50 font-medium">
+<span class="material-symbols-outlined text-[16px]">bed</span> 2 Habitaciones
+                </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface text-primary border border-outline-variant/50 font-medium">
+<span class="material-symbols-outlined text-[16px]">bathtub</span> 1 Baño privado
+                </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface text-primary border border-outline-variant/50 font-medium">
+<span class="material-symbols-outlined text-[16px]">water_drop</span> Agua continua
+                </span>
+</div>
+</div>
+</div>
+<!-- Checkboxes de condiciones prioritarias -->
+<div class="space-y-3">
+<span class="block font-label-md text-label-md text-on-surface font-semibold mb-2">
+              Condiciones de inclusión prioritaria para la emergencia:
+            </span>
+<!-- Check 1 -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-secondary-fixed-dim/60 bg-surface hover:bg-surface-container-low transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-tertiary focus:ring-tertiary w-5 h-5 border-outline-variant" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">child_friendly</span>
+                  Niños bienvenidos
+                </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Espacio seguro sin desniveles peligrosos ni balcones desprotegidos post-sismo.
+                </p>
+</div>
+</label>
+<!-- Check 2 -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-secondary-fixed-dim/60 bg-surface hover:bg-surface-container-low transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-tertiary focus:ring-tertiary w-5 h-5 border-outline-variant" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">accessible</span>
+                  Apto para adultos mayores / movilidad reducida
+                </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Primer piso, acceso sin gradas pronunciadas o con rampas firmes verificadas.
+                </p>
+</div>
+</label>
+<!-- Check 3 -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-secondary-fixed-dim/60 bg-surface hover:bg-surface-container-low transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-tertiary focus:ring-tertiary w-5 h-5 border-outline-variant" type="checkbox"/>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">pets</span>
+                  Mascotas permitidas
+                </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Acepta perros o gatos de compañía familiar para evitar separaciones traumáticas.
+                </p>
+</div>
+</label>
+</div>
+</article>
+<!-- 4. Tiempo de disponibilidad -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">4</span>
+              Tiempo estimado de disponibilidad
+            </h2>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Duración del pacto</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            ¿Por cuánto tiempo puedes asegurar este espacio para la familia?
+          </p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="py-2.5 px-3 rounded-xl border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container transition-all" type="button">
+              1 semana
+            </button>
+<button class="py-2.5 px-3 rounded-xl border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container transition-all" type="button">
+              1 mes
+            </button>
+<!-- Selected Pill -->
+<button class="py-2.5 px-3 rounded-xl bg-tertiary text-on-tertiary font-label-md text-label-md font-semibold ring-2 ring-tertiary/30 shadow-sm flex items-center justify-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+              3 meses
+            </button>
+<button class="py-2.5 px-3 rounded-xl border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container transition-all" type="button">
+              Más de 3 meses
+            </button>
+</div>
+</article>
+<!-- 5. Inspección de habitabilidad y seguridad sismo-resistente -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">5</span>
+              Seguridad sismo-resistente
+            </h2>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              Norma NSR-10
+            </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            Validación de integridad estructural por mesa técnica de ingenieros del Quindío o entidades de socorro.
+          </p>
+<div class="space-y-3 mb-5">
+<!-- Radio 1 (Active) -->
+<label class="flex items-start gap-3 p-3.5 rounded-xl border-2 border-primary/40 bg-surface-container-low cursor-pointer">
+<input checked="" class="mt-0.5 text-primary focus:ring-primary w-4 h-4" name="inspection" type="radio" value="approved"/>
+<div>
+<span class="font-label-md text-label-md text-primary font-bold block">
+                  Sí, cuenta con visita técnica aprobada
+                </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                  Inspección certificada por Cruz Roja Quindío, Bomberos Departamentales o Sociedad Quindiana de Ingenieros.
+                </span>
+</div>
+</label>
+<!-- Radio 2 -->
+<label class="flex items-start gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface cursor-pointer hover:bg-surface-container-low">
+<input class="mt-0.5 text-primary focus:ring-primary w-4 h-4" name="inspection" type="radio" value="in_progress"/>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">
+                  En trámite de revisión técnica
+                </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                  Turno agendado en la mesa de socorro municipal.
+                </span>
+</div>
+</label>
+<!-- Radio 3 -->
+<label class="flex items-start gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface cursor-pointer hover:bg-surface-container-low">
+<input class="mt-0.5 text-primary focus:ring-primary w-4 h-4" name="inspection" type="radio" value="needed"/>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">
+                  No cuenta aún con revisión
+                </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                  Se programará una inspección cívica gratuita prioritaria antes de alojar a la familia.
+                </span>
+</div>
+</label>
+</div>
+<!-- Document Upload Area (Attached) -->
+<div class="p-3.5 rounded-xl bg-surface-container border border-surface-container-highest flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">
+                  Acta_inspeccion_Calarca_2024.pdf
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                  1.4 MB · <span class="text-emerald-700 font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">check</span> Verificada por Defensa Civil</span>
+</span>
+</div>
+</div>
+<button class="text-label-sm font-label-sm text-primary hover:underline font-semibold px-2 py-1" type="button">
+              Reemplazar
+            </button>
+</div>
+</article>
+<!-- 6. Ubicación y privacidad protegida -->
+<article class="bg-surface-container-lowest border border-[#E6DFD3] rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center gap-2">
+<span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-label-md font-bold">6</span>
+              Ubicación y privacidad protegida
+            </h2>
+<span class="material-symbols-outlined text-primary text-[20px]">lock</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            Solo mostramos el sector general para salvaguardar tu tranquilidad familiar.
+          </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="municipality">
+                Municipio del Quindío
+              </label>
+<select class="w-full rounded-xl border-outline-variant bg-surface text-on-surface font-body-md text-body-md py-2.5 focus:border-primary focus:ring-primary" id="municipality">
+<option selected="" value="calarca">Calarcá, Quindío</option>
+<option value="armenia">Armenia, Quindío</option>
+<option value="circasia">Circasia, Quindío</option>
+<option value="filandia">Filandia, Quindío</option>
+<option value="salento">Salento, Quindío</option>
+<option value="montenegro">Montenegro, Quindío</option>
+<option value="quimbaya">Quimbaya, Quindío</option>
+<option value="latebaida">La Tebaida, Quindío</option>
+<option value="buenavista">Buenavista, Quindío</option>
+<option value="cordoba">Córdoba, Quindío</option>
+<option value="pijao">Pijao, Quindío</option>
+<option value="genova">Génova, Quindío</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="sector">
+                Sector o barrio seguro
+              </label>
+<input class="w-full rounded-xl border-outline-variant bg-surface text-on-surface font-body-md text-body-md py-2.5 focus:border-primary focus:ring-primary" id="sector" type="text" value="Barrio Versalles (zona delimitada segura)"/>
+</div>
+</div>
+<div class="mb-4">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="phone">
+              Teléfono de contacto del propietario voluntario
+            </label>
+<div class="relative rounded-xl border border-outline-variant bg-surface max-w-sm">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">phone</span>
+</span>
+<input class="w-full pl-10 py-2.5 bg-transparent border-0 font-body-md text-body-md focus:ring-primary" id="phone" type="tel" value="+57 314 820 9411"/>
+</div>
+</div>
+<!-- Privacy Banner under Ley 1581 -->
+<div class="p-4 rounded-xl bg-surface-container border border-surface-container-highest flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[22px] mt-0.5 shrink-0">shield</span>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-primary font-semibold">Privacidad cívica protegida:</strong> La dirección exacta y el teléfono solo se comparten cuando las dos partes aceptan formalmente la postulación bajo veeduría ciudadana y protocolos de la <strong>Ley 1581 de 2012</strong> de la República de Colombia.
+            </div>
+</div>
+</article>
+</section>
+<!-- RIGHT COLUMN: Sticky Real-time Public Card Preview (5 Columns) -->
+<aside class="lg:col-span-5 sticky top-28 space-y-6">
+<div class="bg-surface-container-lowest border-2 border-tertiary/30 rounded-xl p-5 shadow-md">
+<!-- Preview Header -->
+<div class="flex items-center justify-between border-b border-surface-container-highest pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="font-headline-sm text-label-md font-bold text-primary">Vista previa en tiempo real</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-semibold font-label-sm">
+              Ficha pública para familias
+            </span>
+</div>
+<!-- Preview Real Card -->
+<div class="rounded-xl border border-[#E6DFD3] overflow-hidden bg-surface shadow-sm hover:shadow-md transition-shadow">
+<!-- Card Image Container with Sello -->
+<div class="relative h-52 w-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A warm, sunlit interior of a welcoming traditional Quindío home with polished wooden floors, large open windows showing lush green Andean coffee mountains, clean comfortable sofas, and reassuring civic disaster shelter ambiance with earthen tones and soft morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2O6Y94U0EhxUVxsfMsN_UBv2dv5sIGqT8ATzE_a7fyxzCRV8iaY0tu45ggEu5C6gfdKklRTmMilHt1TC-4NaNFj1PcZwjYmr7EvBrSCjUCj9ReKcTNYjELQMq_idGmtpj3eOuTynzsyFLo-czZLboqbyJjces8BM8QRXlrtMechdwFpNGxU3zCNx2nrOqx92HUNc8OgyH-Q5LKkq2NuPz41Nkwx7oKcHNtTBwaNISE_JAuHpPEKI3MoazJFXKPs8IxS9mz_DAiMA"/>
+<!-- Badge Superior -->
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-sm px-3 py-1 rounded-full text-[12px] font-label-sm font-bold text-emerald-800 shadow-sm flex items-center gap-1.5 border border-emerald-200">
+<span class="material-symbols-outlined text-[15px] text-emerald-700">task_alt</span>
+                Habitabilidad certificada pos-sismo
+              </div>
+<!-- Sello Arriendo Solidario Quindío (Circular Ink Stamp Aesthetic) -->
+<div class="absolute bottom-3 right-3 w-20 h-20 rounded-full bg-[#7B5EA7] text-white p-1.5 shadow-lg ring-2 ring-white/80 flex flex-col items-center justify-center text-center rotate-[-8deg] transform hover:rotate-0 transition-transform">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">handshake</span>
+<span class="text-[8px] font-headline-md font-extrabold tracking-tight uppercase leading-tight">SELLO OFICIAL</span>
+<span class="text-[9px] font-bold text-amber-200 uppercase">ARRIENDO SOLIDARIO</span>
+<span class="text-[7px] opacity-90 uppercase">QUINDÍO ÉTICO</span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 space-y-4">
+<!-- Location & Title -->
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">location_on</span>
+<span class="font-medium text-tertiary">Calarcá · Barrio Versalles</span>
+<span class="text-outline-variant">•</span>
+<span>Zona segura</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary font-bold">
+                  Apartamento 2 habs en Calarcá
+                </h3>
+</div>
+<!-- Price & Discount -->
+<div class="flex items-baseline justify-between bg-surface-container-low p-3 rounded-xl border border-surface-container-highest">
+<div>
+<span class="text-headline-md font-headline-md font-bold text-tertiary">$450.000</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant"> / mes</span>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-on-surface-variant line-through block">$620.000 ref</span>
+<span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    -27% tarifa ética
+                  </span>
+</div>
+</div>
+<!-- Tag Pills of Attributes -->
+<div class="flex flex-wrap gap-1.5 font-label-sm text-label-sm">
+<span class="px-2.5 py-1 rounded-full bg-surface-container border border-surface-container-highest text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">groups</span>
+                  Hasta 4 personas
+                </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container border border-surface-container-highest text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">schedule</span>
+                  3 meses
+                </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container border border-surface-container-highest text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">family_restroom</span>
+                  Niños y mayores
+                </span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container border border-surface-container-highest text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">pets</span>
+                  Mascotas permitidas
+                </span>
+</div>
+<!-- Host verified profile preview -->
+<div class="flex items-center gap-3 pt-3 border-t border-surface-container-highest">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">
+                  GO
+                </div>
+<div class="flex-1 min-w-0">
+<span class="font-label-md text-label-md font-bold text-on-surface block truncate">Familia Gómez Osorio</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-emerald-600">verified</span> Voluntarios verificados desde 2021
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CTAs and Submit Panel -->
+<div class="mt-5 space-y-3">
+<button class="w-full py-3.5 px-6 rounded-xl bg-primary text-on-primary font-headline-sm text-body-md font-bold shadow-md hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="button">
+              Publicar vivienda solidaria
+              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-2.5 px-3 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors" type="button">
+                Guardar borrador
+              </button>
+<button class="py-2.5 px-3 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center justify-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                Simular vista
+              </button>
+</div>
+</div>
+<!-- Community Trust Box -->
+<div class="mt-5 p-3.5 rounded-xl bg-secondary-fixed/30 border border-secondary-fixed flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px] shrink-0">groups_3</span>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed-variant leading-snug">
+<strong>Más de 142 familias</strong> ya han sido reubicadas temporalmente gracias a la red ciudadana en Calarcá, Armenia y Montenegro.
+            </p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- FOOTER (Shared Components JSON Anchor) -->
+<footer class="bg-surface-container-low dark:bg-surface-dim border-t border-surface-container-highest dark:border-outline-variant mt-16">
+<div class="w-full px-gutter py-space-xl max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="space-y-1 text-center md:text-left">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary flex items-center justify-center md:justify-start gap-2">
+<span>Cadena de Favores+</span>
+<span class="text-label-sm font-label-sm font-normal text-on-surface-variant">· Quindío Solidario</span>
+</div>
+<p class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm max-w-xl">
+          © 2025 Cadena de Favores+ • Red Comunitaria y Cívica del Departamento del Quindío (12 Municipios: Armenia, Calarcá, Circasia, Filandia, Salento, Montenegro, Quimbaya, La Tebaida, Buenavista, Córdoba, Pijao, Génova)
+        </p>
+</div>
+<!-- Links defined in JSON -->
+<nav class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+<a class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm hover:text-primary dark:hover:text-inverse-primary underline-offset-4 hover:underline transition-colors duration-150" href="#">
+          Protocolos de emergencia departamental
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm hover:text-primary dark:hover:text-inverse-primary underline-offset-4 hover:underline transition-colors duration-150" href="#">
+          Cruz Roja Quindío
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm hover:text-primary dark:hover:text-inverse-primary underline-offset-4 hover:underline transition-colors duration-150" href="#">
+          Defensa Civil
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm hover:text-primary dark:hover:text-inverse-primary underline-offset-4 hover:underline transition-colors duration-150" href="#">
+          Líneas de atención 123
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant text-body-sm font-body-sm hover:text-primary dark:hover:text-inverse-primary underline-offset-4 hover:underline transition-colors duration-150" href="#">
+          Términos y datos solidarios
+        </a>
+</nav>
+</div>
+</footer>
+</body></html>

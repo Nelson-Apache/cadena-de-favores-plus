@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadena de Favores+ | Red Cívica del Quindío</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&amp;family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#31302d",
+            "on-tertiary-fixed-variant": "#54387e",
+            "on-primary-fixed": "#001f26",
+            "on-tertiary-container": "#d0b0ff",
+            "on-surface-variant": "#40484b",
+            "secondary": "#6a5d45",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#8dc8d8",
+            "background": "#fcf9f4",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#1c1c19",
+            "on-background": "#1c1c19",
+            "primary-container": "#0f5563",
+            "surface-dim": "#dcdad5",
+            "on-tertiary-fixed": "#270550",
+            "outline-variant": "#bfc8cb",
+            "primary-fixed-dim": "#94d0e0",
+            "outline": "#70787b",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed-dim": "#d6c4a8",
+            "secondary-container": "#f3e0c2",
+            "error": "#ba1a1a",
+            "tertiary-container": "#5b3f86",
+            "inverse-on-surface": "#f3f0eb",
+            "primary": "#003d48",
+            "secondary-fixed": "#f3e0c2",
+            "tertiary-fixed-dim": "#d6baff",
+            "surface-bright": "#fcf9f4",
+            "on-secondary-fixed-variant": "#51452f",
+            "primary-fixed": "#b0ecfd",
+            "surface-container-high": "#ebe8e3",
+            "surface-container": "#f0ede9",
+            "on-primary-fixed-variant": "#004e5c",
+            "surface": "#fcf9f4",
+            "tertiary": "#43276d",
+            "surface-tint": "#286675",
+            "surface-container-highest": "#e5e2dd",
+            "tertiary-fixed": "#ecdcff",
+            "surface-container-low": "#f6f3ee",
+            "on-secondary-fixed": "#231a08",
+            "inverse-primary": "#94d0e0",
+            "surface-variant": "#e5e2dd",
+            "on-secondary-container": "#70634b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "headline-lg": ["Sora"],
+            "body-lg": ["DM Sans"],
+            "headline-sm": ["Sora"],
+            "display-lg": ["Sora"],
+            "label-sm": ["DM Sans"],
+            "headline-md": ["Sora"],
+            "body-sm": ["DM Sans"]
+          },
+          "fontSize": {
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg": ["56px", { "lineHeight": "64px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #bfc8cb;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #70787b;
+    }
+    @keyframes subtle-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.18); }
+    }
+    .animate-pulse-slow {
+      animation: subtle-pulse 2.2s infinite ease-in-out;
+    }
+    @keyframes radar-ring {
+      0% { transform: scale(0.9); opacity: 0.9; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .radar-ring {
+      animation: radar-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased h-screen w-screen overflow-hidden flex flex-col">
+<!-- ========================================== -->
+<!-- SHARED COMPONENT: TopNavBar (Web Header)   -->
+<!-- ========================================== -->
+<header class="flex justify-between items-center w-full px-6 py-3 border-b border-outline-variant bg-surface docked full-width top-0 z-50 shadow-sm shrink-0 h-16">
+<!-- Brand Anchor & Identity -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3 group focus:outline-none" href="#">
+<img alt="Cadena de Favores+" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XY7Iq85SUqORU1WH8UPU37arkURBy-XVjcHW4GnP3FIgDpxZnxbowVGSBiMPDQnSxEAIjw_jCO21FI8gZyYbc8_8JbQu9-Hdn6qU_U-ABSlkLBMoWAvMN_pXwfzJTko7KsvKuls81c7IYX0FqM7x11Jfkiwd9lSqRchOiww5aUzZpbclWKN1-dq-jsT1fzPLN2kmT25eju8kmTHAgloGWzMd8ozofmZ-aqJnt14TlOTFjnFCFw4UlRqg"/>
+<span class="sr-only">Cadena de Favores+</span>
+</a>
+<!-- Navigation Links (Web Desktop) -->
+<nav class="hidden md:flex items-center gap-6 ml-4">
+<!-- Exact match for current screen is 'Mapa' -->
+<a class="text-label-md font-label-md text-primary font-bold border-b-2 border-primary pb-1 flex items-center gap-1.5 transition-colors" href="#mapa">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span>Mapa</span>
+</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 flex items-center gap-1.5" href="#red-lista">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+<span>Red lista</span>
+</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 flex items-center gap-1.5" href="#vivienda-solidaria">
+<span class="material-symbols-outlined text-[18px]">real_estate_agent</span>
+<span>Vivienda solidaria</span>
+</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors pb-1 flex items-center gap-1.5" href="#coordinacion">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+<span>Coordinación</span>
+</a>
+</nav>
+</div>
+<!-- Right Actions Cluster -->
+<div class="flex items-center gap-3">
+<!-- Icon Actions -->
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors duration-150 relative focus:outline-none" title="Notificaciones cívicas" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span>
+</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors duration-150 focus:outline-none" title="Guía y Ayuda" type="button">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-1"></div>
+<!-- Trailing Secondary Action -->
+<button class="px-3.5 py-1.5 text-label-md font-label-md text-primary border border-outline-variant bg-surface-container-low hover:bg-surface-container rounded-xl flex items-center gap-2 transition-all duration-150 active:scale-95 shadow-sm" type="button">
+<span class="w-2 h-2 rounded-full bg-error inline-block animate-pulse"></span>
+<span>Pedir ayuda</span>
+</button>
+<!-- Trailing Primary Action -->
+<button class="px-4 py-1.5 text-label-md font-label-md bg-primary-container text-on-primary hover:opacity-95 rounded-xl font-semibold flex items-center gap-1.5 transition-all duration-150 active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">volunteer_activism</span>
+<span>Ofrecer ayuda</span>
+</button>
+<!-- Volunteer Avatar -->
+<div class="flex items-center gap-2 pl-1">
+<div class="relative cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center font-headline-sm text-primary text-xs font-bold border border-outline-variant shadow-xs">
+            AQ
+          </div>
+<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#2E9E5B] ring-2 ring-surface" title="Voluntario verificado y activo"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- MAIN WORKSPACE: Dual Panel Airbnb-style    -->
+<!-- ========================================== -->
+<main class="flex-1 flex overflow-hidden w-full relative">
+<!-- ---------------------------------------- -->
+<!-- LEFT PANEL: Priority Feed (420px Fixed)  -->
+<!-- ---------------------------------------- -->
+<aside class="w-[430px] shrink-0 h-full border-r border-outline-variant bg-surface flex flex-col z-20 shadow-md">
+<!-- Panel Header & Quick Filters -->
+<div class="p-4 border-b border-outline-variant bg-surface-container-low/70 shrink-0 space-y-3">
+<!-- Search bar -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px] pointer-events-none">search</span>
+<input class="w-full pl-10 pr-10 py-2 bg-surface rounded-xl border border-outline-variant text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs" placeholder="Buscar municipio, vereda o barrio..." type="text" value="Quimbaya, Quindío"/>
+<button class="absolute right-2.5 w-6 h-6 rounded-lg text-outline hover:text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<!-- Segmented Controls Pill -->
+<div class="grid grid-cols-4 p-1 bg-surface-container rounded-xl text-center text-label-sm font-label-sm font-medium">
+<button class="py-1.5 rounded-lg bg-surface text-primary shadow-xs font-semibold">Todo (38)</button>
+<button class="py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors">Necesidades (24)</button>
+<button class="py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors">Recursos (9)</button>
+<button class="py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors">Viviendas (5)</button>
+</div>
+<!-- Filter Chips Row -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar text-label-sm font-label-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary/20 shrink-0">
+<span>Municipio: Quimbaya</span>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface-variant border border-outline-variant/60 shrink-0 transition-colors">
+<span>Tipo de recurso</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface-variant border border-outline-variant/60 shrink-0 transition-colors">
+<span>Estado</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface-variant border border-outline-variant/60 shrink-0 transition-colors">
+<span>Prioridad</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+<!-- Priority Switch Highlight -->
+<div class="flex items-center justify-between px-3 py-2 rounded-xl bg-error-container/40 border border-error/20">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-pulse"></span>
+<div>
+<p class="text-label-sm font-label-sm font-semibold text-on-surface">Dónde hace más falta</p>
+<p class="text-[11px] text-on-surface-variant leading-none">Priorizando sectores con &gt;48h sin auxilio</p>
+</div>
+</div>
+<!-- Toggle active -->
+<button class="w-10 h-5 bg-[#0F5563] rounded-full p-0.5 flex items-center justify-end transition-colors focus:outline-none" type="button">
+<div class="w-4 h-4 rounded-full bg-white shadow-xs"></div>
+</button>
+</div>
+</div>
+<!-- Feed List (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-3.5 space-y-3.5 custom-scrollbar bg-surface-container-low/30">
+<!-- CARD 1: Necesidad Crítica (Quimbaya) -->
+<article class="p-4 rounded-xl bg-surface border-2 border-error/30 shadow-xs hover:shadow-md transition-all duration-200 relative group">
+<!-- Top Badges -->
+<div class="flex items-center justify-between gap-2 mb-2">
+<div class="flex items-center gap-1.5">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D64545] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D64545]"></span>
+</span>
+<span class="text-label-sm font-label-sm font-bold text-[#D64545] uppercase tracking-wide">Sin ayuda</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full text-[11px] font-label-sm font-semibold bg-error-container text-on-error-container">
+                Prioridad Alta
+              </span>
+<span class="text-[11px] text-outline font-label-sm">· Hace 3 días</span>
+</div>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-base font-bold text-on-surface mb-1 leading-snug group-hover:text-primary transition-colors">
+            Carpas para 5 familias – Quimbaya, barrio La Española
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[13px] leading-relaxed mb-3">
+            Sismo causó fisuras estructurales en cubiertas de teja. 14 personas pernoctan a la intemperie frente al polideportivo. Requiere carpas impermeables 4x4m y lonas plásticas.
+          </p>
+<!-- Progress Bar -->
+<div class="space-y-1 mb-3 bg-surface-container-high/60 p-2 rounded-lg">
+<div class="flex justify-between items-center text-[12px] font-label-sm">
+<span class="font-medium text-on-surface">2 de 5 carpas coordinadas</span>
+<span class="font-bold text-[#0F5563]">40% cubierto</span>
+</div>
+<div class="w-full bg-outline-variant/40 rounded-full h-2 overflow-hidden">
+<div class="bg-[#0F5563] h-2 rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 text-[12px] text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+              Sector La Española / Polideportivo
+            </span>
+<button class="px-3.5 py-1.5 rounded-lg bg-[#0F5563] hover:bg-[#003d48] text-white text-label-sm font-label-sm font-semibold transition-transform active:scale-95 shadow-xs">
+              Me comprometo
+            </button>
+</div>
+</article>
+<!-- CARD 2: Vivienda Solidaria (Sello Ético Lila) -->
+<article class="p-4 rounded-xl bg-surface border border-[#7B5EA7]/30 shadow-xs hover:shadow-md transition-all duration-200 relative group">
+<div class="flex items-center justify-between gap-2 mb-2">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#ecdcff] text-[#43276d]">
+<span class="material-symbols-outlined text-[14px]">home</span>
+<span class="text-[11px] font-label-sm font-bold uppercase tracking-wider">Sello Arriendo Solidario Verificado</span>
+</div>
+<span class="text-[11px] text-outline font-label-sm">Inspección técnica IDIGER</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-base font-bold text-on-surface mb-1 leading-snug group-hover:text-[#43276d] transition-colors">
+            Apartamento 2 habs – Calarcá, Centro
+          </h3>
+<div class="flex flex-wrap gap-2 my-2 text-[12px] font-label-sm text-[#43276d] bg-[#ecdcff]/30 p-2 rounded-lg border border-[#7B5EA7]/15">
+<span class="font-bold">$450.000 / mes</span>
+<span>•</span>
+<span>4 personas máx.</span>
+<span>•</span>
+<span>3 meses de acogida</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[13px] leading-relaxed mb-3">
+            Inmueble con sismo-resistencia certificada. Cuenta con gas natural, cocina equipada y acceso independiente. Prioridad familias con menores o adultos mayores damnificados.
+          </p>
+<div class="flex items-center justify-between pt-1 text-[12px] text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#7B5EA7]">verified</span>
+              Arrendador Cívico Validado
+            </span>
+<button class="px-3 py-1.5 rounded-lg border border-[#7B5EA7] text-[#43276d] hover:bg-[#ecdcff]/50 text-label-sm font-label-sm font-medium transition-colors">
+              Ver detalles y postular
+            </button>
+</div>
+</article>
+<!-- CARD 3: Recurso Red Lista (Azul Pizarra) -->
+<article class="p-4 rounded-xl bg-surface border border-[#3B6FD8]/30 shadow-xs hover:shadow-md transition-all duration-200 relative group">
+<div class="flex items-center justify-between gap-2 mb-2">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-50 text-[#3B6FD8] border border-[#3B6FD8]/20">
+<span class="material-symbols-outlined text-[14px]">warehouse</span>
+<span class="text-[11px] font-label-sm font-bold uppercase tracking-wider">Infraestructura logística</span>
+</div>
+<span class="text-[11px] text-[#2E9E5B] font-label-sm font-semibold flex items-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E9E5B]"></span> Disponible hoy
+            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-base font-bold text-on-surface mb-1 leading-snug group-hover:text-[#3B6FD8] transition-colors">
+            Bodega 200 m² – Calarcá, disponible
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[13px] leading-relaxed mb-2">
+            Custodia comunitaria verificada. Apta para punto de acopio regional de víveres secos, frazadas o resguardo de herramientas pesadas. Fácil maniobra de camiones 3.5 ton.
+          </p>
+<div class="bg-surface-container p-2 rounded-lg text-[12px] text-on-surface-variant flex items-center justify-between mb-3">
+<span>Contacto: Brigada Quindío Norte</span>
+<span class="font-medium text-primary">Respuesta inmediata</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-[12px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">forklift</span>
+              Muelle de carga
+            </span>
+<button class="px-3.5 py-1.5 rounded-lg bg-[#3B6FD8] hover:bg-blue-700 text-white text-label-sm font-label-sm font-medium transition-transform active:scale-95 shadow-xs">
+              Solicitar traslado
+            </button>
+</div>
+</article>
+<!-- CARD 4: Necesidad En Camino (Montenegro) -->
+<article class="p-4 rounded-xl bg-surface border border-amber-300 shadow-xs hover:shadow-md transition-all duration-200 relative group">
+<div class="flex items-center justify-between gap-2 mb-2">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#E0A100]"></span>
+<span class="text-label-sm font-label-sm font-bold text-[#b48000] uppercase tracking-wide">En camino</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-label-sm font-semibold bg-amber-100 text-amber-900">
+              Prioridad Media
+            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-base font-bold text-on-surface mb-1 leading-snug group-hover:text-amber-800 transition-colors">
+            Tanque de agua potable 1000L – Montenegro, Vereda Cantores
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[13px] leading-relaxed mb-3">
+            Ruptura de acueducto veredal afectó a 32 habitantes rurales. Despacho coordinado mediante camioneta particular desde Armenia.
+          </p>
+<div class="p-2.5 rounded-lg bg-amber-50/80 border border-amber-200/60 flex items-center gap-2.5 text-[12px]">
+<span class="material-symbols-outlined text-amber-700 text-[18px]">local_shipping</span>
+<div class="leading-tight">
+<span class="font-semibold text-amber-950">Despacho saliendo desde Armenia</span>
+<p class="text-amber-800 text-[11px]">Llegada estimada: 45 min · Conductor: Don Germán P.</p>
+</div>
+</div>
+</article>
+</div>
+<!-- Left Panel Bottom Summary Bar -->
+<div class="p-3 border-t border-outline-variant bg-surface-container-low text-label-sm font-label-sm text-on-surface-variant flex justify-between items-center shrink-0">
+<span class="flex items-center gap-1 text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-[#2E9E5B]">check_circle</span>
+<span>18 necesidades resueltas hoy</span>
+</span>
+<button class="text-primary hover:underline text-[12px] font-medium flex items-center gap-0.5">
+<span>Descargar reporte PDF</span>
+<span class="material-symbols-outlined text-[14px]">download</span>
+</button>
+</div>
+</aside>
+<!-- ---------------------------------------- -->
+<!-- RIGHT AREA: Cartographic Interactive Map -->
+<!-- ---------------------------------------- -->
+<section class="flex-1 h-full relative overflow-hidden bg-[#FAF7F2] select-none flex flex-col justify-between" data-location="Quindío, Colombia">
+<!-- Stylized Coffee Region Topography & Vector Map Canvas -->
+<div class="absolute inset-0 z-0 bg-[#f7f3eb]">
+<svg class="w-full h-full object-cover" fill="none" viewbox="0 0 1000 750" xmlns="http://www.w3.org/2000/svg">
+<!-- Topographic contours (Cordillera Central foothills) -->
+<g opacity="0.4" stroke="#e0dacf" stroke-width="1.2">
+<path d="M-50 200 C 150 150, 250 350, 450 280 C 650 210, 800 400, 1050 300" fill="none"></path>
+<path d="M-50 280 C 180 230, 320 420, 520 340 C 720 270, 850 480, 1050 380" fill="none"></path>
+<path d="M-50 360 C 220 310, 380 500, 580 430 C 780 350, 900 560, 1050 470" fill="none"></path>
+<path d="M-50 450 C 250 400, 420 590, 640 520 C 820 440, 930 650, 1050 560" fill="none"></path>
+<path d="M-50 550 C 280 500, 480 670, 700 600 C 880 530, 980 730, 1050 660" fill="none"></path>
+</g>
+<!-- River La Vieja & local streams -->
+<g opacity="0.3" stroke="#8dc8d8" stroke-linecap="round" stroke-width="2.5">
+<path d="M 120 40 Q 180 200 140 400 T 210 740" fill="none"></path>
+<path d="M 140 400 Q 280 430 350 490" fill="none" stroke-width="1.5"></path>
+<path d="M 540 180 Q 480 290 350 490" fill="none" stroke-width="1.5"></path>
+</g>
+<!-- Interconnected Municipal Highway Arteries -->
+<g stroke="#d5cebe" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+<!-- Vía Armenia - Quimbaya via Montenegro -->
+<path d="M 520 420 L 370 410 L 260 260"></path>
+<!-- Vía Armenia - Calarcá -->
+<path d="M 520 420 L 680 435"></path>
+<!-- Vía Calarcá - Salento -->
+<path d="M 680 435 L 610 210"></path>
+<!-- Vía Armenia - Circasia - Filandia -->
+<path d="M 520 420 L 510 290 L 410 180"></path>
+<!-- Vía Armenia - La Tebaida -->
+<path d="M 520 420 L 410 590"></path>
+<!-- Vía Montenegro - Quimbaya -->
+<path d="M 370 410 L 260 260"></path>
+<!-- Vía Filandia - Quimbaya -->
+<path d="M 410 180 L 260 260"></path>
+</g>
+<!-- Highway secondary lines -->
+<g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+<path d="M 520 420 L 370 410 L 260 260"></path>
+<path d="M 520 420 L 680 435"></path>
+<path d="M 680 435 L 610 210"></path>
+<path d="M 520 420 L 510 290 L 410 180"></path>
+<path d="M 520 420 L 410 590"></path>
+<path d="M 370 410 L 260 260"></path>
+<path d="M 410 180 L 260 260"></path>
+</g>
+<!-- Municipal Urban Boundaries (Soft organic polygons) -->
+<!-- Armenia Urban -->
+<path d="M 480 390 C 560 380, 570 450, 520 460 C 470 470, 460 410, 480 390 Z" fill="#e9e4db" stroke="#cfc7b7" stroke-dasharray="3 3"></path>
+<!-- Calarcá Urban -->
+<path d="M 650 410 C 720 415, 710 470, 670 465 C 630 460, 630 420, 650 410 Z" fill="#e9e4db" stroke="#cfc7b7" stroke-dasharray="3 3"></path>
+<!-- Quimbaya Urban -->
+<path d="M 230 240 C 290 230, 290 280, 250 290 C 220 295, 210 250, 230 240 Z" fill="#eededb" stroke="#D64545" stroke-dasharray="3 3" stroke-opacity="0.4"></path>
+<!-- Montenegro Urban -->
+<path d="M 340 390 C 400 385, 395 435, 360 430 C 330 425, 320 395, 340 390 Z" fill="#f5ede0" stroke="#cfc7b7" stroke-dasharray="3 3"></path>
+<!-- La Tebaida Urban -->
+<path d="M 380 570 C 440 565, 435 615, 400 610 C 370 605, 360 575, 380 570 Z" fill="#e9e4db" stroke="#cfc7b7" stroke-dasharray="3 3"></path>
+<!-- Department Label & Mountain Peaks -->
+<text fill="#918a7c" font-family="Sora" font-size="28" font-weight="700" letter-spacing="4" opacity="0.3" x="650" y="140">CORDILLERA CENTRAL</text>
+<text fill="#918a7c" font-family="DM Sans" font-size="14" letter-spacing="2" opacity="0.6" x="210" y="690">VALLE DEL CAUCA / LÍMITE SUR</text>
+</svg>
+<!-- Municipal Base Labels on Map -->
+<div class="absolute top-[220px] left-[225px] text-[13px] font-headline-sm font-bold text-on-surface/80 tracking-wide pointer-events-none drop-shadow-xs">
+          QUIMBAYA
+          <span class="block text-[10px] font-body-sm font-normal text-error font-medium">14 urgencias activas</span>
+</div>
+<div class="absolute top-[160px] left-[390px] text-[12px] font-headline-sm font-bold text-on-surface/60 pointer-events-none">
+          FILANDIA
+        </div>
+<div class="absolute top-[190px] left-[590px] text-[12px] font-headline-sm font-bold text-on-surface/60 pointer-events-none">
+          SALENTO
+        </div>
+<div class="absolute top-[270px] left-[495px] text-[12px] font-headline-sm font-bold text-on-surface/60 pointer-events-none">
+          CIRCASIA
+        </div>
+<div class="absolute top-[390px] left-[345px] text-[13px] font-headline-sm font-bold text-on-surface/80 pointer-events-none">
+          MONTENEGRO
+        </div>
+<div class="absolute top-[400px] left-[505px] text-[15px] font-headline-sm font-extrabold text-primary tracking-wide pointer-events-none">
+          ARMENIA
+          <span class="block text-[10px] font-body-sm font-normal text-[#2E9E5B] font-semibold">Nodo Central Operativo</span>
+</div>
+<div class="absolute top-[425px] left-[660px] text-[13px] font-headline-sm font-bold text-on-surface/80 pointer-events-none">
+          CALARCÁ
+        </div>
+<div class="absolute top-[575px] left-[390px] text-[12px] font-headline-sm font-bold text-on-surface/70 pointer-events-none">
+          LA TEBAIDA
+        </div>
+</div>
+<!-- ---------------------------------------- -->
+<!-- MAP OVERLAYS & FLOATING UI               -->
+<!-- ---------------------------------------- -->
+<!-- 1. Floating Top Critical Alert Banner -->
+<div class="relative z-10 m-4 max-w-xl self-center w-full">
+<div class="bg-surface/95 backdrop-blur-md border border-error/40 p-3.5 rounded-2xl shadow-lg flex items-center justify-between gap-3 transition-transform hover:scale-[1.01]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">crisis_alert</span>
+</div>
+<div>
+<p class="text-label-md font-label-md font-bold text-on-surface leading-tight">
+                Quimbaya tiene 14 necesidades sin ayuda
+              </p>
+<p class="text-body-sm font-body-sm text-[13px] text-on-surface-variant leading-tight">
+                Se requiere apoyo urgente en carpas impermeables y suministro de agua potable.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="px-3 py-1.5 rounded-xl bg-[#0F5563] text-white text-label-sm font-label-sm font-semibold hover:bg-primary transition-colors shadow-xs">
+              Ver clúster
+            </button>
+<button class="w-7 h-7 rounded-lg text-outline hover:text-on-surface flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. Interactive Map Nodes & Pins (Absolute Cartographic Placement) -->
+<div class="absolute inset-0 pointer-events-none z-10">
+<!-- QUIMBAYA: Cluster & Expanded Tooltip Pin -->
+<div class="absolute top-[280px] left-[260px] pointer-events-auto group">
+<!-- Pulse Radar Ring -->
+<div class="absolute -top-3 -left-3 w-12 h-12 rounded-full bg-[#D64545] opacity-30 radar-ring pointer-events-none"></div>
+<!-- Pin Marker -->
+<button class="relative w-8 h-8 rounded-full bg-[#D64545] text-white shadow-lg flex items-center justify-center ring-4 ring-white transform hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+</button>
+<!-- Interactive Open Popover Tooltip for Card 1 -->
+<div class="absolute bottom-10 -left-32 w-72 bg-surface p-3.5 rounded-2xl shadow-2xl border border-outline-variant/80 z-30 transition-all pointer-events-auto">
+<div class="flex items-center justify-between text-[11px] mb-1">
+<span class="font-bold text-[#D64545] uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D64545]"></span> Crítico · Quimbaya
+              </span>
+<span class="text-outline">La Española</span>
+</div>
+<p class="font-headline-sm text-[13px] font-bold text-on-surface leading-snug mb-1">
+              Carpas para 5 familias
+            </p>
+<p class="text-[12px] text-on-surface-variant mb-2">Meta: 5 carpas impermeables (faltan 3).</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-1.5 rounded-lg bg-[#0F5563] text-white text-[12px] font-label-sm font-semibold hover:bg-primary transition-colors text-center">
+                Coordinar donación
+              </button>
+<button class="w-7 h-7 rounded-lg border border-outline-variant text-outline hover:text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">share</span>
+</button>
+</div>
+<!-- Arrow tip -->
+<div class="absolute -bottom-2 left-36 transform -translate-x-1/2 w-4 h-4 bg-surface border-b border-r border-outline-variant/80 rotate-45"></div>
+</div>
+<!-- Secondary nearby Red Pins in Quimbaya Cluster -->
+<div class="absolute -top-10 left-8">
+<div class="w-6 h-6 rounded-full bg-[#D64545] text-white shadow-md flex items-center justify-center ring-2 ring-white text-[11px] font-bold animate-pulse-slow">
+              3
+            </div>
+</div>
+<div class="absolute top-6 -left-8">
+<div class="w-6 h-6 rounded-full bg-[#D64545] text-white shadow-md flex items-center justify-center ring-2 ring-white text-[11px] font-bold">
+              2
+            </div>
+</div>
+</div>
+<!-- MONTENEGRO: Amber En Camino Markers -->
+<div class="absolute top-[430px] left-[370px] pointer-events-auto">
+<div class="relative group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-[#E0A100] text-on-primary shadow-lg flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+</div>
+<span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-surface/90 px-2 py-0.5 rounded-md text-[11px] font-bold text-amber-900 border border-amber-300 shadow-xs whitespace-nowrap">
+              6 despachos en ruta
+            </span>
+</div>
+</div>
+<!-- ARMENIA: Green Resolved Hub Cluster -->
+<div class="absolute top-[445px] left-[520px] pointer-events-auto">
+<div class="relative group cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#2E9E5B] text-white shadow-lg flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<span class="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-surface/95 px-2.5 py-0.5 rounded-full text-[11px] font-bold text-[#2E9E5B] border border-[#2E9E5B]/40 shadow-xs whitespace-nowrap">
+              18 resueltas
+            </span>
+</div>
+<!-- Second small resolved dot -->
+<div class="absolute top-4 left-8 w-5 h-5 rounded-full bg-[#2E9E5B] text-white ring-2 ring-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[12px]">check</span>
+</div>
+</div>
+<!-- CALARCÁ: Lila (Vivienda Solidaria) & Azul (Red Lista) Markers -->
+<!-- Lila Vivienda Solidaria -->
+<div class="absolute top-[420px] left-[700px] pointer-events-auto">
+<div class="relative group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-[#7B5EA7] text-white shadow-lg flex items-center justify-center ring-4 ring-white transform hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">real_estate_agent</span>
+</div>
+<!-- Floating Mini Badge -->
+<div class="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-[#ecdcff] px-2 py-0.5 rounded-md text-[10px] font-bold text-[#43276d] border border-[#7B5EA7]/30 shadow-xs whitespace-nowrap">
+              Vivienda Solidaria ($450k)
+            </div>
+</div>
+</div>
+<!-- Azul Pizarra Red Lista (Bodega 200m2) -->
+<div class="absolute top-[475px] left-[665px] pointer-events-auto">
+<div class="relative group cursor-pointer">
+<div class="w-8 h-8 rounded-xl bg-[#3B6FD8] text-white shadow-lg flex items-center justify-center ring-4 ring-white transform hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">warehouse</span>
+</div>
+<div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-blue-50 px-2 py-0.5 rounded-md text-[10px] font-bold text-[#3B6FD8] border border-blue-200 shadow-xs whitespace-nowrap">
+              Bodega 200 m² disponible
+            </div>
+</div>
+</div>
+<!-- CIRCASIA: Active Volunteer Brigade -->
+<div class="absolute top-[310px] left-[520px] pointer-events-auto">
+<div class="w-7 h-7 rounded-full bg-surface text-primary border-2 border-primary shadow-sm flex items-center justify-center ring-2 ring-white">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</div>
+</div>
+<!-- LA TEBAIDA: Water Distribution Point -->
+<div class="absolute top-[610px] left-[420px] pointer-events-auto">
+<div class="w-7 h-7 rounded-full bg-[#2E9E5B] text-white shadow-md flex items-center justify-center ring-2 ring-white">
+<span class="material-symbols-outlined text-[15px]">water_drop</span>
+</div>
+</div>
+</div>
+<!-- 3. Floating Right Map Controls (Zoom & Layers) -->
+<div class="absolute top-20 right-5 z-20 flex flex-col gap-2 pointer-events-auto">
+<!-- Layer Selector Group -->
+<div class="bg-surface rounded-xl shadow-md border border-outline-variant/80 p-1 flex flex-col">
+<button class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center hover:bg-surface-container-high transition-colors" title="Capa Cívica">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</button>
+</div>
+<!-- Zoom & Location Group -->
+<div class="bg-surface rounded-xl shadow-md border border-outline-variant/80 p-1 flex flex-col divide-y divide-outline-variant/60">
+<button class="w-9 h-9 rounded-t-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" title="Acercar">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<button class="w-9 h-9 text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" title="Alejar">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<button class="w-9 h-9 rounded-b-lg text-primary hover:bg-surface-container flex items-center justify-center transition-colors" title="Centrar en mi ubicación">
+<span class="material-symbols-outlined text-[20px]">my_location</span>
+</button>
+</div>
+</div>
+<!-- 4. Floating Legend Card (Bottom-Right) -->
+<div class="relative z-10 m-4 self-end max-w-xs w-full pointer-events-auto">
+<div class="bg-surface/95 backdrop-blur-md border border-outline-variant/90 p-3.5 rounded-2xl shadow-xl">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/50 mb-2">
+<span class="text-label-sm font-label-sm font-bold text-on-surface uppercase tracking-wide">Convenciones de Mapa</span>
+<span class="text-[11px] text-outline">Quindío SOS</span>
+</div>
+<ul class="space-y-1.5 text-[12px] font-label-sm">
+<li class="flex items-center gap-2.5 text-on-surface">
+<span class="w-3 h-3 rounded-full bg-[#D64545] shrink-0 ring-2 ring-error-container"></span>
+<span class="font-medium">Sin ayuda (Urgencia crítica)</span>
+</li>
+<li class="flex items-center gap-2.5 text-on-surface">
+<span class="w-3 h-3 rounded-full bg-[#E0A100] shrink-0 ring-2 ring-amber-100"></span>
+<span class="font-medium">En camino (Despacho activo)</span>
+</li>
+<li class="flex items-center gap-2.5 text-on-surface">
+<span class="w-3 h-3 rounded-full bg-[#2E9E5B] shrink-0 ring-2 ring-emerald-100"></span>
+<span class="font-medium">Atendida (Meta cubierta)</span>
+</li>
+<li class="flex items-center gap-2.5 text-on-surface">
+<span class="w-3 h-3 rounded-md bg-[#3B6FD8] shrink-0 ring-2 ring-blue-100 flex items-center justify-center"></span>
+<span class="font-medium">Recurso Red lista (Bodegas / Maquinaria)</span>
+</li>
+<li class="flex items-center gap-2.5 text-on-surface">
+<span class="w-3.5 h-3.5 rounded-full bg-[#7B5EA7] shrink-0 ring-2 ring-[#ecdcff] flex items-center justify-center text-white text-[9px]">
+<span class="material-symbols-outlined text-[10px]">home</span>
+</span>
+<span class="font-medium">Vivienda solidaria (Acogida)</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- 5. Real-time Status Footer Bar -->
+<footer class="relative z-10 w-full bg-surface/90 backdrop-blur-sm border-t border-outline-variant px-5 py-2 flex items-center justify-between text-body-sm text-[12px] text-on-surface-variant shrink-0">
+<div class="flex items-center gap-2 font-medium">
+<span class="material-symbols-outlined text-outline text-[16px]">sensors</span>
+<span>Último reporte sismológico: Réplica M3.1 hace 42 min · Sin novedades en vías principales</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">call</span>
+            Línea de socorro: 123
+          </span>
+<span class="text-outline">|</span>
+<span class="text-[11px] text-outline">Gobernación del Quindío &amp; Sociedad Civil</span>
+</div>
+</footer>
+</section>
+</main>
+</body></html>

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
+coverage/
+
+# Estado local de la orquestación (por sesión)
+.claude/state/
+.claude/settings.local.json

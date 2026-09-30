@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadena de Favores+ | Panel de Coordinación Departamental del Quindío</title>
+<!-- Google Fonts: Sora (Headings) & DM Sans (Body/Labels) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#8dc8d8",
+            "surface-container-low": "#f6f3ee",
+            "tertiary-container": "#5b3f86",
+            "tertiary-fixed-dim": "#d6baff",
+            "surface-tint": "#286675",
+            "on-surface-variant": "#40484b",
+            "primary-fixed-dim": "#94d0e0",
+            "primary-fixed": "#b0ecfd",
+            "inverse-surface": "#31302d",
+            "on-secondary-fixed-variant": "#51452f",
+            "secondary-fixed-dim": "#d6c4a8",
+            "on-primary-fixed": "#001f26",
+            "primary": "#003d48",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#e5e2dd",
+            "outline-variant": "#bfc8cb",
+            "on-tertiary": "#ffffff",
+            "inverse-on-surface": "#f3f0eb",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "secondary-container": "#f3e0c2",
+            "inverse-primary": "#94d0e0",
+            "primary-container": "#0f5563",
+            "surface-dim": "#dcdad5",
+            "surface-container-highest": "#e5e2dd",
+            "surface-container": "#f0ede9",
+            "on-tertiary-fixed-variant": "#54387e",
+            "on-tertiary-container": "#d0b0ff",
+            "secondary": "#6a5d45",
+            "on-secondary-container": "#70634b",
+            "outline": "#70787b",
+            "on-primary-fixed-variant": "#004e5c",
+            "surface-container-high": "#ebe8e3",
+            "on-background": "#1c1c19",
+            "on-tertiary-fixed": "#270550",
+            "tertiary": "#43276d",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#f3e0c2",
+            "on-surface": "#1c1c19",
+            "surface-bright": "#fcf9f4",
+            "surface": "#fcf9f4",
+            "background": "#fcf9f4",
+            "civic-red": "#D64545",
+            "civic-amber": "#E0A100",
+            "civic-green": "#2E9E5B",
+            "civic-slate": "#3B6FD8",
+            "civic-purple": "#7B5EA7"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display-lg": ["Sora"],
+            "body-lg": ["DM Sans"],
+            "body-sm": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "label-md": ["DM Sans"],
+            "label-sm": ["DM Sans"],
+            "headline-sm": ["Sora"],
+            "headline-lg": ["Sora"],
+            "headline-md": ["Sora"]
+          },
+          "fontSize": {
+            "display-lg": ["56px", { "lineHeight": "64px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-white">
+<!-- ================= TOP APP BAR (Shared Component: TopNavBar) ================= -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant/40 dark:border-outline/30 shadow-sm docked full-width top-0 sticky z-50">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex items-center justify-between h-20">
+<!-- Brand Logo & Isotype -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-3.5 group" href="#">
+<!-- Geometric Cross & Links Emblem -->
+<div class="relative w-10 h-10 flex items-center justify-center">
+<span class="absolute w-4 h-9 rounded-full border-[3px] border-primary-container group-hover:scale-105 transition-transform duration-150"></span>
+<span class="absolute h-4 w-9 rounded-full border-[3px] border-[#4880ED] opacity-90 group-hover:scale-105 transition-transform duration-150"></span>
+<span class="relative z-10 w-2.5 h-2.5 rounded-full bg-[#E0A100]"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">Cadena de Favores</span>
+<span class="font-headline-md text-headline-md font-bold text-primary-container leading-none">+</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-widest text-outline">RED CÍVICA DEL QUINDÍO</span>
+</div>
+</a>
+<!-- Global Navigation Links -->
+<nav class="hidden md:flex items-center gap-6 ml-6">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors pb-1" href="#">
+            Mapa de Emergencia
+          </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors pb-1" href="#">
+            Red de Necesidades
+          </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors pb-1" href="#">
+            Arriendo Solidario
+          </a>
+<!-- Active Tab: Mando Departamental / Coordinación -->
+<a class="border-b-2 border-primary-container dark:border-inverse-primary text-primary-container dark:text-inverse-primary font-label-md text-label-md pb-1 flex items-center gap-1.5 font-semibold" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            Mando Departamental
+          </a>
+</nav>
+</div>
+<!-- Trailing Controls & Verification Profile -->
+<div class="flex items-center gap-3">
+<!-- Secondary Action: Pedir Ayuda / Centro Regulador -->
+<button class="px-3.5 py-2 rounded-xl border border-outline-variant/70 text-primary-container hover:bg-surface-container-high transition-colors font-label-md text-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">sos</span>
+          Pedir auxilio
+        </button>
+<!-- Primary Action: Ofrecer Ayuda / Publicar Alerta -->
+<button class="px-4 py-2 rounded-xl bg-primary-container hover:bg-primary text-white font-label-md text-label-md transition-all shadow-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">volunteer_activism</span>
+          Ofrecer ayuda
+        </button>
+<div class="h-6 w-px bg-outline-variant/40 mx-1"></div>
+<!-- Trailing Icon Actions -->
+<button class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors" title="Notificaciones activas">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-civic-red ring-2 ring-surface"></span>
+</button>
+<button class="p-2 rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors" title="Compartir canal departamental">
+<span class="material-symbols-outlined text-[22px]">emergency_share</span>
+</button>
+<!-- User Verified Badge Pill -->
+<div class="flex items-center gap-2.5 pl-2 py-1 pr-3 bg-surface-container rounded-full border border-outline-variant/50">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-headline-sm text-xs font-bold ring-2 ring-surface-container-low">
+            CR
+          </div>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface leading-tight">Mesa Armenia</span>
+<span class="text-[11px] text-outline leading-tight">Quindío Central</span>
+</div>
+<span class="material-symbols-outlined text-[#2E9E5B] text-[16px] ml-0.5" title="Coordinador Verificado">verified</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN CONTENT CANVAS ================= -->
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-margin py-8 flex flex-col gap-8">
+<!-- 1. DASHBOARD HEADER & FILTERS BAR -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<!-- Civic Status Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline-variant/60 text-primary-container text-xs font-medium mb-2.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-civic-green opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-civic-green"></span>
+</span>
+            Red Regional de Atención y Coordinación Cívica Sísmica
+          </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Panel de Coordinación – Resumen por municipio</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Monitoreo y despacho solidario en tiempo real ante eventos sísmicos en el Quindío.</p>
+</div>
+<!-- Date Range, Municipality Filter & Export CTA -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Time Selector -->
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-2 rounded-xl border border-outline-variant/60 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-outline">schedule</span>
+<select class="bg-transparent border-0 p-0 text-on-surface focus:ring-0 font-label-md text-label-md cursor-pointer pr-4">
+<option>Últimas 48 horas</option>
+<option>Últimas 24 horas</option>
+<option>Última semana</option>
+<option>Evento principal (19 Ene)</option>
+</select>
+</div>
+<!-- Municipalities Selector -->
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-2 rounded-xl border border-outline-variant/60 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-outline">location_city</span>
+<select class="bg-transparent border-0 p-0 text-on-surface focus:ring-0 font-label-md text-label-md cursor-pointer pr-4">
+<option>Todos los 12 municipios</option>
+<option>Armenia (Capital)</option>
+<option>Quimbaya (Prioritario)</option>
+<option>Calarcá</option>
+<option>Montenegro</option>
+<option>Circasia</option>
+<option>La Tebaida</option>
+</select>
+</div>
+<!-- Aid Category Selector -->
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-2 rounded-xl border border-outline-variant/60 text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-outline">category</span>
+<select class="bg-transparent border-0 p-0 text-on-surface focus:ring-0 font-label-md text-label-md cursor-pointer pr-4">
+<option>Todas las ayudas</option>
+<option>Agua potable &amp; Saneamiento</option>
+<option>Vivienda Solidaria</option>
+<option>Remoción &amp; Herramientas</option>
+<option>Alimentación &amp; Kits</option>
+</select>
+</div>
+<!-- Export Report -->
+<button class="bg-surface-container hover:bg-surface-container-high text-primary-container px-3.5 py-2 rounded-xl border border-outline-variant/60 font-label-md text-label-md flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+            Exportar informe (PDF/CSV)
+          </button>
+</div>
+</div>
+</div>
+<!-- 2. SEMÁFORO HUMANITARIO / KPIS CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1: Sin Ayuda (Rojo #D64545) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/50 relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-civic-red"></div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs uppercase tracking-wider font-semibold text-outline">Sin ayuda</span>
+<div class="font-display-lg text-4xl text-on-surface font-bold tracking-tight mt-1">86</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-civic-red border border-red-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-civic-red"></span>
+            Urgente
+          </span>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-xs text-on-surface-variant font-label-sm">
+<span>Necesidades activas</span>
+<span class="font-medium text-civic-red">+14 nuevas en las últimas 6h</span>
+</div>
+</div>
+<!-- Card 2: En Camino (Ámbar #E0A100) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/50 relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-civic-amber"></div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs uppercase tracking-wider font-semibold text-outline">En camino</span>
+<div class="font-display-lg text-4xl text-on-surface font-bold tracking-tight mt-1">124</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-[#8C6400] border border-amber-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-civic-amber"></span>
+            Despachos
+          </span>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-xs text-on-surface-variant font-label-sm">
+<span>En ruta solidaria</span>
+<span class="font-medium text-on-surface">48 brigadas en ruta activa</span>
+</div>
+</div>
+<!-- Card 3: Atendidas (Verde #2E9E5B) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/50 relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-civic-green"></div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs uppercase tracking-wider font-semibold text-outline">Atendidas</span>
+<div class="font-display-lg text-4xl text-on-surface font-bold tracking-tight mt-1">402</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-civic-green border border-emerald-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-civic-green"></span>
+            Resueltas
+          </span>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-xs text-on-surface-variant font-label-sm">
+<span>Impacto cívico</span>
+<span class="font-medium text-civic-green">Tasa de cobertura: 65.7%</span>
+</div>
+</div>
+<!-- Card 4: Tiempo medio de respuesta (Petróleo #0F5563) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/50 relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-primary-container"></div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs uppercase tracking-wider font-semibold text-outline">Tiempo medio</span>
+<div class="font-display-lg text-4xl text-primary font-bold tracking-tight mt-1">9 h</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-primary-container border border-outline-variant/40 flex items-center gap-1">
+            Promedio departamental
+          </span>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container flex items-center justify-between text-xs text-on-surface-variant font-label-sm">
+<span>Evolución diaria</span>
+<span class="font-medium text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+            ↓ 2.4 h respecto a ayer
+          </span>
+</div>
+</div>
+</div>
+<!-- 3. CENTRAL SECTION (2 COLUMNS: Visual Analytics & Realtime Dispatch Alerts) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN (~65% -> 8 cols): Distribution Chart & Regional Heatmap -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- A) Horizontal Stacked Bar Chart per Municipality -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/50 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-surface-container">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Distribución de atención por municipio</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Comparativa de carga y capacidad de resolución humanitaria</p>
+</div>
+<!-- Interactive Legend -->
+<div class="flex items-center gap-3 text-xs font-label-sm">
+<span class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-civic-red"></span> Sin ayuda
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-civic-amber"></span> En camino
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-civic-green"></span> Atendida
+              </span>
+</div>
+</div>
+<!-- Stacked Bars List -->
+<div class="space-y-4">
+<!-- Armenia -->
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1.5">
+<span class="font-semibold text-on-surface w-24">Armenia</span>
+<span class="text-outline text-right">24 sin ayuda · 45 en camino · 104 atendidas (173 total)</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 14%;" title="Armenia: 24 sin ayuda"></div>
+<div class="bg-civic-amber h-full" style="width: 26%;" title="Armenia: 45 en camino"></div>
+<div class="bg-civic-green h-full" style="width: 60%;" title="Armenia: 104 atendidas"></div>
+</div>
+</div>
+<!-- Calarcá -->
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1.5">
+<span class="font-semibold text-on-surface w-24">Calarcá</span>
+<span class="text-outline text-right">15 sin ayuda · 20 en camino · 48 atendidas (83 total)</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 18%;" title="Calarcá: 15 sin ayuda"></div>
+<div class="bg-civic-amber h-full" style="width: 24%;" title="Calarcá: 20 en camino"></div>
+<div class="bg-civic-green h-full" style="width: 58%;" title="Calarcá: 48 atendidas"></div>
+</div>
+</div>
+<!-- QUIMBAYA - HIGHLIGHTED / CRITICAL ATTENTION -->
+<div class="p-3.5 rounded-xl border-2 border-civic-red/40 bg-red-50/40 relative">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<div class="flex items-center gap-2">
+<span class="font-bold text-on-surface text-sm">Quimbaya</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-red-100 text-civic-red border border-red-300 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                    Prioridad crítica de despacho: Se está quedando atrás
+                  </span>
+</div>
+<span class="text-xs font-semibold text-civic-red">31 sin auxilio · 15 en camino · 14 atendidas</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex ring-1 ring-civic-red/20">
+<div class="bg-civic-red h-full" style="width: 52%;" title="Quimbaya: 31 sin auxilio"></div>
+<div class="bg-civic-amber h-full" style="width: 25%;" title="Quimbaya: 15 en camino"></div>
+<div class="bg-civic-green h-full" style="width: 23%;" title="Quimbaya: 14 atendidas"></div>
+</div>
+</div>
+<!-- Montenegro -->
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1.5">
+<span class="font-semibold text-on-surface w-24">Montenegro</span>
+<span class="text-outline text-right">14 sin ayuda · 18 en camino · 24 atendidas (56 total)</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 25%;"></div>
+<div class="bg-civic-amber h-full" style="width: 32%;"></div>
+<div class="bg-civic-green h-full" style="width: 43%;"></div>
+</div>
+</div>
+<!-- Circasia -->
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1.5">
+<span class="font-semibold text-on-surface w-24">Circasia</span>
+<span class="text-outline text-right">6 sin ayuda · 10 en camino · 24 atendidas (40 total)</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 15%;"></div>
+<div class="bg-civic-amber h-full" style="width: 25%;"></div>
+<div class="bg-civic-green h-full" style="width: 60%;"></div>
+</div>
+</div>
+<!-- La Tebaida -->
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1.5">
+<span class="font-semibold text-on-surface w-24">La Tebaida</span>
+<span class="text-outline text-right">8 sin ayuda · 10 en camino · 22 atendidas (40 total)</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 20%;"></div>
+<div class="bg-civic-amber h-full" style="width: 25%;"></div>
+<div class="bg-civic-green h-full" style="width: 55%;"></div>
+</div>
+</div>
+<!-- Filandia & Salento compact row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1">
+<span class="font-semibold text-on-surface">Filandia</span>
+<span class="text-outline">2 sin ayuda / 4 / 14</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 10%;"></div>
+<div class="bg-civic-amber h-full" style="width: 20%;"></div>
+<div class="bg-civic-green h-full" style="width: 70%;"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs font-label-md mb-1">
+<span class="font-semibold text-on-surface">Salento</span>
+<span class="text-outline">2 sin ayuda / 3 / 12</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-civic-red h-full" style="width: 12%;"></div>
+<div class="bg-civic-amber h-full" style="width: 18%;"></div>
+<div class="bg-civic-green h-full" style="width: 70%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- B) Interactive Heatmap / Geographic Criticidad -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/50 shadow-sm flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Mapa de calor de criticidad – Quindío</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Focos de acumulación de necesidades y centros logísticos departamentales</p>
+</div>
+<!-- Layer Toggle -->
+<div class="flex items-center bg-surface-container p-1 rounded-xl text-xs font-label-sm border border-outline-variant/40">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest font-medium text-primary shadow-xs">Densidad de solicitudes</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface">Centros de acopio</button>
+</div>
+</div>
+<!-- Schematic Interactive Quindío Vector Map Canvas -->
+<div class="relative w-full h-72 rounded-xl bg-surface-container-low border border-outline-variant/40 overflow-hidden flex items-center justify-center p-4">
+<!-- Regional Topographic Grid Background Graphic -->
+<svg class="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="civic-grid" patternunits="userSpaceOnUse" width="32">
+<path d="M 32 0 L 0 0 0 32" fill="none" stroke="#70787B" stroke-width="0.7"></path>
+</pattern>
+</defs>
+<rect fill="url(#civic-grid)" height="100%" width="100%"></rect>
+</svg>
+<!-- Quindío Contour Silhouette Schematic -->
+<svg class="w-full max-w-[500px] h-full" fill="none" viewbox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+<!-- Department Outline -->
+<path d="M120 40 C170 20, 260 10, 340 30 C390 40, 440 80, 420 140 C400 190, 360 230, 290 240 C220 250, 160 220, 120 180 C80 140, 70 80, 120 40 Z" fill="#E5E2DD" fill-opacity="0.6" stroke="#BFC8CB" stroke-dasharray="4 2" stroke-width="2"></path>
+<!-- Hotspot Radial Blurs -->
+<!-- Quimbaya Hotspot (Intense Red Glow) -->
+<circle cx="160" cy="110" fill="#D64545" fill-opacity="0.35" r="45"></circle>
+<circle cx="160" cy="110" fill="#D64545" fill-opacity="0.55" r="22"></circle>
+<!-- Armenia Hotspot (Amber/Moderate Glow) -->
+<circle cx="260" cy="130" fill="#E0A100" fill-opacity="0.3" r="38"></circle>
+<!-- Calarcá Hotspot (Amber Glow) -->
+<circle cx="310" cy="140" fill="#E0A100" fill-opacity="0.25" r="28"></circle>
+<!-- Salento & Filandia (Green Mild Status) -->
+<circle cx="280" cy="65" fill="#2E9E5B" fill-opacity="0.25" r="22"></circle>
+<circle cx="210" cy="65" fill="#2E9E5B" fill-opacity="0.25" r="20"></circle>
+</svg>
+<!-- Node Pin: Quimbaya (Critical) -->
+<div class="absolute left-[30%] top-[40%] flex flex-col items-center group cursor-pointer">
+<span class="relative flex h-5 w-5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-civic-red opacity-80"></span>
+<span class="relative inline-flex rounded-full h-5 w-5 bg-civic-red text-white text-[10px] font-bold items-center justify-center shadow-md">!</span>
+</span>
+<div class="mt-1 px-2 py-0.5 rounded bg-surface-container-lowest shadow-sm border border-civic-red/40 text-[11px] font-bold text-civic-red">
+                Quimbaya (31 alertas)
+              </div>
+</div>
+<!-- Node Pin: Armenia Central -->
+<div class="absolute left-[52%] top-[50%] flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-civic-amber border-2 border-white shadow flex items-center justify-center text-white text-[9px] font-bold"></div>
+<div class="mt-1 px-2 py-0.5 rounded bg-surface-container-lowest shadow-sm border border-outline-variant text-[11px] font-semibold text-on-surface">
+                Armenia (Centro de Mando)
+              </div>
+</div>
+<!-- Node Pin: Calarcá -->
+<div class="absolute left-[64%] top-[56%] flex flex-col items-center group cursor-pointer">
+<div class="w-3.5 h-3.5 rounded-full bg-civic-amber border-2 border-white shadow"></div>
+<span class="text-[10px] font-medium text-on-surface-variant bg-surface-container-lowest/90 px-1.5 rounded mt-0.5">Calarcá</span>
+</div>
+<!-- Node Pin: Montenegro -->
+<div class="absolute left-[38%] top-[58%] flex flex-col items-center group cursor-pointer">
+<div class="w-3 h-3 rounded-full bg-civic-amber border-2 border-white shadow"></div>
+<span class="text-[10px] font-medium text-on-surface-variant bg-surface-container-lowest/90 px-1.5 rounded mt-0.5">Montenegro</span>
+</div>
+<!-- Node Pin: Salento (Green) -->
+<div class="absolute left-[58%] top-[24%] flex flex-col items-center group cursor-pointer">
+<div class="w-3 h-3 rounded-full bg-civic-green border-2 border-white shadow"></div>
+<span class="text-[10px] font-medium text-civic-green bg-surface-container-lowest/90 px-1.5 rounded mt-0.5">Salento (Estable)</span>
+</div>
+<!-- Map Metadata Overlay Card -->
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/95 backdrop-blur-xs p-2.5 rounded-xl border border-outline-variant/60 shadow-xs flex items-center gap-3">
+<div class="flex items-center gap-1.5 text-xs text-on-surface font-label-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-civic-red"></span> Crítico
+              </div>
+<div class="flex items-center gap-1.5 text-xs text-on-surface font-label-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-civic-amber"></span> Medio
+              </div>
+<div class="flex items-center gap-1.5 text-xs text-on-surface font-label-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-civic-green"></span> Controlado
+              </div>
+<span class="text-[11px] text-outline border-l border-outline-variant/50 pl-2">Coord: 4°32'N 75°40'O</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (~35% -> 4 cols): Realtime Alertas y Despachos en Vivo -->
+<div class="lg:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/50 shadow-sm flex flex-col gap-4">
+<!-- Card Header with Live Pulse -->
+<div class="flex items-center justify-between pb-3 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Alertas y Despachos</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-civic-red border border-red-200">
+<span class="w-1.5 h-1.5 rounded-full bg-civic-red mr-1 animate-pulse"></span> EN VIVO
+              </span>
+</div>
+<span class="text-xs text-outline font-label-sm">Hoy, 16:42</span>
+</div>
+<!-- Alert 1: Reasignación solidaria inteligente -->
+<div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200/80 flex flex-col gap-2.5">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2 text-amber-900 font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px] text-civic-amber">swap_horiz</span>
+                Reasignación solidaria
+              </div>
+<span class="text-[10px] text-amber-800 font-medium">Hace 4 min</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Armenia recibió <strong>3 ofertas de tanques de agua</strong> para una necesidad ya cubierta. El algoritmo de proximidad sugiere redirigirlas a <strong>Quimbaya (Sector El Laurel)</strong>.
+            </p>
+<div class="pt-1 flex items-center justify-end">
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-white text-xs font-label-md font-medium hover:bg-primary transition-all flex items-center gap-1 shadow-xs">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Confirmar reasignación
+              </button>
+</div>
+</div>
+<!-- Alert 2: Red Lista (Reserved Slate Blue #3B6FD8) -->
+<div class="p-4 rounded-xl bg-[#F0F5FF] border border-[#C5D8FB] flex flex-col gap-2.5">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2 text-civic-slate font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px] text-civic-slate">handyman</span>
+                Red lista · Equipamiento
+              </div>
+<span class="text-[10px] text-[#2952A3] font-medium">Hace 22 min</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+<strong>12 recursos de la Red lista</strong> deben confirmar disponibilidad semestral activa (motosierras de rescate y generadores en <strong>Montenegro</strong> y <strong>Calarcá</strong>).
+            </p>
+<div class="pt-1 flex items-center justify-end">
+<button class="px-3 py-1.5 rounded-lg border border-civic-slate text-civic-slate hover:bg-white text-xs font-label-md font-medium transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">send_time_extension</span>
+                Notificar a propietarios
+              </button>
+</div>
+</div>
+<!-- Alert 3: Vivienda Solidaria (Reserved Purple #7B5EA7) -->
+<div class="p-4 rounded-xl bg-[#F7F2FC] border border-[#DDD0F0] flex flex-col gap-2.5">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2 text-civic-purple font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px] text-civic-purple">night_shelter</span>
+                Vivienda Solidaria
+              </div>
+<span class="text-[10px] text-[#55377D] font-medium">Hace 38 min</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+<strong>3 cupos habitacionales</strong> disponibles en Calarcá esperando asignación urgente para familias evacuadas preventivamente por ladera en riesgo.
+            </p>
+<div class="pt-1 flex items-center justify-end">
+<button class="px-3 py-1.5 rounded-lg bg-civic-purple text-white text-xs font-label-md font-medium hover:opacity-95 transition-all flex items-center gap-1 shadow-xs">
+<span class="material-symbols-outlined text-[15px]">sensor_occupied</span>
+                Asignar familias
+              </button>
+</div>
+</div>
+<!-- Direct Line to Civil Defense and Firefighters -->
+<div class="mt-2 p-3.5 rounded-xl bg-surface-container border border-outline-variant/60 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-on-surface">Mesa Técnica Directa</span>
+<span class="text-[11px] text-outline">Bomberos &amp; Defensa Civil Quindío</span>
+</div>
+</div>
+<a class="px-2.5 py-1 rounded-lg bg-surface-container-lowest border border-outline-variant/80 text-primary-container text-xs font-semibold hover:bg-surface-container-high transition-colors" href="tel:144">
+              Llamar 144
+            </a>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. FULL-WIDTH TABLE: "Necesidades prioritarias sin atender" -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden flex flex-col">
+<!-- Table Header & Toolbar -->
+<div class="p-6 border-b border-surface-container flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Necesidades prioritarias sin atender</h2>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-civic-red border border-red-200">
+            86 pendientes
+          </span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Search input -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-outline-variant/70 text-xs text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-0" placeholder="Buscar por barrio, insumo o familia..." type="text"/>
+</div>
+<!-- Quick Filter by Urgency -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container text-xs font-label-md text-on-surface-variant hover:text-on-surface border border-outline-variant/60 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+            Filtrar urgencia
+          </button>
+</div>
+</div>
+<!-- Table Body Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-outline text-[11px] uppercase tracking-wider font-semibold border-b border-surface-container">
+<th class="py-3 px-6">Necesidad &amp; Categoría</th>
+<th class="py-3 px-6">Municipio &amp; Sector</th>
+<th class="py-3 px-6">Prioridad</th>
+<th class="py-3 px-6 text-center">Afectados</th>
+<th class="py-3 px-6">Espera</th>
+<th class="py-3 px-6">Avance Solidario</th>
+<th class="py-3 px-6 text-right">Acción Operativa</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-sm">
+<!-- Row 1: Quimbaya (Crítica) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-red-100 text-civic-red flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">3 Tanques potables 1.000L &amp; Pastillas cloración</div>
+<span class="text-xs text-outline">Agua potable y saneamiento básico</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="font-medium text-on-surface">Quimbaya</div>
+<div class="text-xs text-outline">Barrio La Estación (Sector Puente)</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-civic-red border border-red-200">
+                  Crítica
+                </span>
+</td>
+<td class="py-4 px-6 text-center font-semibold text-on-surface">
+                38 personas
+              </td>
+<td class="py-4 px-6">
+<span class="text-xs font-bold text-civic-red">3 días</span>
+</td>
+<td class="py-4 px-6 w-44">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-civic-amber h-full rounded-full" style="width: 15%"></div>
+</div>
+<span class="text-xs font-medium text-outline">15%</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container hover:bg-primary text-white text-xs font-label-md font-medium transition-colors shadow-xs">
+                  Asignar ayuda
+                </button>
+</td>
+</tr>
+<!-- Row 2: Montenegro (Crítica) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">handyman</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">Motosierras y guantes de carnaza para escombros</div>
+<span class="text-xs text-outline">Herramientas &amp; Remoción de vía</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="font-medium text-on-surface">Montenegro</div>
+<div class="text-xs text-outline">Vereda Cantores (Vía a Quimbaya)</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-civic-red border border-red-200">
+                  Crítica
+                </span>
+</td>
+<td class="py-4 px-6 text-center font-semibold text-on-surface">
+                65 personas
+              </td>
+<td class="py-4 px-6">
+<span class="text-xs font-bold text-civic-red">4 días</span>
+</td>
+<td class="py-4 px-6 w-44">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-civic-red h-full rounded-full" style="width: 0%"></div>
+</div>
+<span class="text-xs font-medium text-outline">0%</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container hover:bg-primary text-white text-xs font-label-md font-medium transition-colors shadow-xs">
+                  Asignar ayuda
+                </button>
+</td>
+</tr>
+<!-- Row 3: Armenia (Alta) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-blue-100 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">engineering</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">Peritaje técnico estructural preliminar</div>
+<span class="text-xs text-outline">Evaluación técnica voluntaria</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="font-medium text-on-surface">Armenia</div>
+<div class="text-xs text-outline">Comuna 2 · B. La Fachada mz 14</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#8C6400] border border-amber-200">
+                  Alta
+                </span>
+</td>
+<td class="py-4 px-6 text-center font-semibold text-on-surface">
+                12 personas
+              </td>
+<td class="py-4 px-6">
+<span class="text-xs font-medium text-on-surface-variant">2 días</span>
+</td>
+<td class="py-4 px-6 w-44">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-civic-amber h-full rounded-full" style="width: 40%"></div>
+</div>
+<span class="text-xs font-medium text-outline">40%</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container hover:bg-primary text-white text-xs font-label-md font-medium transition-colors shadow-xs">
+                  Asignar ayuda
+                </button>
+</td>
+</tr>
+<!-- Row 4: Circasia (Alta) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-purple-100 text-civic-purple flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">bed</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">15 Colchonetas y cobijas térmicas</div>
+<span class="text-xs text-outline">Alojamiento temporal / Albergue comunal</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="font-medium text-on-surface">Circasia</div>
+<div class="text-xs text-outline">Coliseo Municipal (Zona C)</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-[#8C6400] border border-amber-200">
+                  Alta
+                </span>
+</td>
+<td class="py-4 px-6 text-center font-semibold text-on-surface">
+                24 personas
+              </td>
+<td class="py-4 px-6">
+<span class="text-xs font-medium text-on-surface-variant">2 días</span>
+</td>
+<td class="py-4 px-6 w-44">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-civic-green h-full rounded-full" style="width: 60%"></div>
+</div>
+<span class="text-xs font-medium text-outline">60%</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container hover:bg-primary text-white text-xs font-label-md font-medium transition-colors shadow-xs">
+                  Asignar ayuda
+                </button>
+</td>
+</tr>
+<!-- Row 5: La Tebaida (Media) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-emerald-100 text-civic-green flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">nutrition</span>
+</div>
+<div>
+<div class="font-semibold text-on-surface">Kits de víveres no perecederos y leche en polvo</div>
+<span class="text-xs text-outline">Seguridad alimentaria infantil</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="font-medium text-on-surface">La Tebaida</div>
+<div class="text-xs text-outline">Barrio Nueva Tebaida etapa 2</div>
+</td>
+<td class="py-4 px-6">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-on-surface-variant border border-gray-200">
+                  Media
+                </span>
+</td>
+<td class="py-4 px-6 text-center font-semibold text-on-surface">
+                19 personas
+              </td>
+<td class="py-4 px-6">
+<span class="text-xs font-medium text-on-surface-variant">1 día</span>
+</td>
+<td class="py-4 px-6 w-44">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-civic-amber h-full rounded-full" style="width: 35%"></div>
+</div>
+<span class="text-xs font-medium text-outline">35%</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container hover:bg-primary text-white text-xs font-label-md font-medium transition-colors shadow-xs">
+                  Asignar ayuda
+                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 bg-surface-container-low border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-label-md">
+<span class="text-outline">Mostrando 5 de 86 necesidades prioritarias</span>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-outline cursor-not-allowed">
+            Anterior
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-white font-medium">1</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors">2</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors">18</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors">
+            Siguiente
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= FOOTER CÍVICO (Shared Component: Footer) ================= -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant/30 dark:border-outline/20 mt-12 docked full-width bottom">
+<div class="w-full max-w-[1440px] mx-auto px-margin py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary dark:text-inverse-primary">Cadena de Favores+</span>
+<span class="hidden sm:inline text-outline">•</span>
+<span class="text-on-surface-variant dark:text-surface-variant font-body-sm text-body-sm">
+          © 2024 Cadena de Favores+ • Red Cívica Departamental del Quindío
+        </span>
+</div>
+<!-- Links Protocol and Civic Directory -->
+<div class="flex flex-wrap items-center justify-center gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-sm text-label-sm hover:underline hover:text-primary transition-colors" href="#">
+          Mesa Humanitaria
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-sm text-label-sm hover:underline hover:text-primary transition-colors" href="#">
+          Protocolo Sísmico
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-sm text-label-sm hover:underline hover:text-primary transition-colors" href="#">
+          Gobernación del Quindío
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-sm text-label-sm hover:underline hover:text-primary transition-colors" href="#">
+          Privacidad y Datos Cívicos
+        </a>
+<a class="text-primary dark:text-inverse-primary font-label-sm text-label-sm font-semibold hover:underline" href="#">
+          Contacto Urgente
+        </a>
+</div>
+</div>
+</footer>
+</body></html>

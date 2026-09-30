@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background text-on-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pedir ayuda • Cadena de Favores+ Quindío</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Sora & DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#ebe8e3",
+            "error": "#ba1a1a",
+            "surface-variant": "#e5e2dd",
+            "inverse-on-surface": "#f3f0eb",
+            "on-secondary-fixed-variant": "#51452f",
+            "tertiary-container": "#5b3f86",
+            "background": "#fcf9f4",
+            "secondary-container": "#f3e0c2",
+            "surface-tint": "#286675",
+            "primary-fixed-dim": "#94d0e0",
+            "outline-variant": "#bfc8cb",
+            "on-secondary-container": "#70634b",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#1c1c19",
+            "on-background": "#1c1c19",
+            "inverse-surface": "#31302d",
+            "outline": "#70787b",
+            "on-primary-fixed-variant": "#004e5c",
+            "on-tertiary-fixed-variant": "#54387e",
+            "on-tertiary-fixed": "#270550",
+            "on-primary-container": "#8dc8d8",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "primary-fixed": "#b0ecfd",
+            "primary": "#003d48",
+            "on-secondary-fixed": "#231a08",
+            "on-primary": "#ffffff",
+            "primary-container": "#0f5563",
+            "surface-container": "#f0ede9",
+            "tertiary-fixed-dim": "#d6baff",
+            "tertiary-fixed": "#ecdcff",
+            "on-tertiary-container": "#d0b0ff",
+            "secondary": "#6a5d45",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#dcdad5",
+            "on-surface-variant": "#40484b",
+            "inverse-primary": "#94d0e0",
+            "surface-container-highest": "#e5e2dd",
+            "tertiary": "#43276d",
+            "on-primary-fixed": "#001f26",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f6f3ee",
+            "surface": "#fcf9f4",
+            "secondary-fixed": "#f3e0c2",
+            "surface-bright": "#fcf9f4",
+            "secondary-fixed-dim": "#d6c4a8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "label-sm": ["DM Sans"],
+            "headline-lg": ["Sora"],
+            "display-lg": ["Sora"],
+            "body-md": ["DM Sans"],
+            "headline-sm": ["Sora"],
+            "body-lg": ["DM Sans"],
+            "headline-md": ["Sora"],
+            "label-md": ["DM Sans"],
+            "body-sm": ["DM Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "display-lg": ["56px", { "lineHeight": "64px", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar Component (Shared Anchor) -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-surface-container shadow-sm dark:shadow-none border-b border-outline-variant/40 dark:border-outline-variant/20">
+<div class="w-full max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Brand Logo with Interlocking Links -->
+<a class="flex items-center gap-3 group focus:outline-none" href="#">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform duration-150">
+<span class="material-symbols-outlined text-[24px]" data-icon="share">share</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-semibold text-primary dark:text-inverse-primary tracking-tight">Cadena de Favores+</span>
+<span class="font-label-sm text-label-sm text-secondary -mt-1 tracking-normal font-medium">Quindío Solidario</span>
+</div>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md pb-1 hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Mapa</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md pb-1 hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Red lista</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md pb-1 hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Vivienda solidaria</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md pb-1 hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Coordinación</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Active Action for current context: Pedir ayuda -->
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-high text-primary font-label-md text-label-md font-semibold border border-primary/20 shadow-xs hover:bg-surface-container-highest transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="sos">sos</span>
+          Pedir ayuda
+        </a>
+<!-- Secondary Action: Ofrecer ayuda -->
+<a class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-medium shadow-sm hover:bg-primary transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="volunteer_activism">volunteer_activism</span>
+          Ofrecer ayuda
+        </a>
+<!-- Notifications -->
+<button aria-label="Notificaciones del sistema" class="w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors text-primary relative" type="button">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span>
+</button>
+<!-- Civic User Avatar -->
+<div class="w-10 h-10 rounded-xl overflow-hidden ring-1 ring-outline-variant/50 cursor-pointer bg-surface-container-high flex items-center justify-center ml-1">
+<img class="w-full h-full object-cover" data-alt="A portrait of a compassionate female community coordinator in Armenia Quindio wearing a neutral terracotta polo shirt in a warm, naturally illuminated community office setting. The aesthetic is warm and grounded in soft earth tones, deep petroleum teals, and cream textures, conveying serene civic empathy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzmTdyS2GfYFvFCY_XZS56M_KCGUr8YCWuMMeNpR17dHYelSPIFXBOB7OFIlIk_2c1RUNLQMaU-lxZZRIZ-RwCc71H4qOgkR3XvoE_3DPw_ql4VmRmbXeywSBahr4hVA_Qvqx9tf72JXkgJF1o9--ktuUrsY4kByVDagXnZdtQlXMODqQtxUdQNryvv3bgAslbLlOsvcqKJ4g0p4TV8MbSaJ_LEnZTSxi2iTn0IJ5IL1jmqeMU-oU4AoJP_AEW1Pei6uFN81siW6E"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Emergency Ticker / Status Bar -->
+<div class="bg-secondary-container/40 border-b border-secondary-container py-2.5 px-6">
+<div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-3 text-on-secondary-container">
+<div class="flex items-center gap-2 font-label-sm text-label-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-pulse"></span>
+<span class="font-bold">Monitoreo activo Quindío:</span>
+<span class="font-normal">Mesa de contingencia desplegada en Calarcá, Armenia, Quimbaya y Montenegro. Canales cívicos abiertos 24h.</span>
+</div>
+<div class="flex items-center gap-4 text-xs font-medium">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]" data-icon="verified_user">verified_user</span> Red Cívica Verificada</span>
+<span class="hidden md:inline text-outline-variant">•</span>
+<span class="hidden md:inline">Protocolo departamental de sismo activo</span>
+</div>
+</div>
+</div>
+<!-- Main Content Layout (12 Columns Desktop: 8 cols Form + 4 cols Sidebar) -->
+<main class="w-full max-w-[1200px] mx-auto px-6 py-10 flex-grow">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Primary Column: 8 Columns (Request Flow) -->
+<section class="lg:col-span-8 flex flex-col gap-8">
+<!-- Welcoming & Calm Header -->
+<div class="flex flex-col gap-3">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/50 text-secondary font-label-sm text-label-sm font-semibold tracking-wide">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="handshake">handshake</span>
+            Mesa de Auxilio Cívico • Quindío Resiliente
+          </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight text-balance">
+            Cuéntanos qué necesitas. Te conectamos con quien puede ayudar.
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+            Cada solicitud ingresa directamente a las redes de auxilio ciudadano y brigadas voluntarias activas en los 12 municipios del departamento. No estás solo.
+          </p>
+</div>
+<!-- Profile Selector (Segmented Toggle) -->
+<div class="bg-surface-container-low p-2 rounded-xl border border-outline-variant/40 flex flex-col sm:flex-row gap-2">
+<!-- Option: Familia Damnificada (Active State) -->
+<label class="flex-1 relative flex items-center gap-3.5 p-4 rounded-xl cursor-pointer bg-surface-container-lowest border-2 border-primary-container shadow-xs transition-all">
+<input checked="" class="sr-only" name="profile_role" type="radio" value="family"/>
+<div class="w-9 h-9 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="family_restroom">family_restroom</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary text-base">Soy una familia damnificada</span>
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Vivienda, abrigo, enseres o apoyo vital primario</p>
+</div>
+</label>
+<!-- Option: Comerciante Afectado -->
+<label class="flex-1 relative flex items-center gap-3.5 p-4 rounded-xl cursor-pointer bg-surface-container-lowest/60 hover:bg-surface-container-lowest border border-outline-variant/50 transition-all group">
+<input class="sr-only" name="profile_role" type="radio" value="merchant"/>
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="storefront">storefront</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-base transition-colors">Soy comerciante afectado</span>
+<span class="w-4 h-4 rounded-full border border-outline-variant"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Recuperación de local, inventario o bodega comunitaria</p>
+</div>
+</label>
+</div>
+<!-- Section: Selección de Necesidad Principal (Bento Grid Cards) -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">1. ¿Cuál es la necesidad principal más urgente?</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Selecciona una categoría prioritaria para activar el protocolo cívico correspondiente.</p>
+</div>
+<span class="text-xs font-medium px-2 py-1 rounded bg-surface-container-high text-on-surface-variant">Paso 1 de 3</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+<!-- Item 1: Techo / Vivienda (Con Badge Lila Especial) -->
+<label class="relative p-4 rounded-xl border-2 border-tertiary-container bg-surface-container-lowest flex flex-col justify-between cursor-pointer transition-all hover:shadow-sm">
+<input checked="" class="sr-only" name="main_need" type="radio" value="housing"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]" data-icon="roofing">roofing</span>
+</div>
+<!-- Sello Especial Vivienda Solidaria -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide bg-tertiary-fixed text-on-tertiary-fixed border border-tertiary-container/30">
+<span class="material-symbols-outlined text-[13px]" data-icon="home_pin">home_pin</span>
+                  Vivienda
+                </span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-primary text-[15px] font-semibold">Techo / Vivienda</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Hospedaje temporal o albergue seguro</p>
+</div>
+<div class="mt-3 flex items-center text-xs font-semibold text-tertiary">
+<span>Conexión directa red solidaria</span>
+</div>
+</label>
+<!-- Item 2: Agua potable -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="water"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/30 text-primary-container flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="water_drop">water_drop</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Agua potable</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Botellones, bidones y filtros purificadores</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Insumo vital</div>
+</label>
+<!-- Item 3: Alimentos no perecederos -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="food"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/30 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="nutrition">nutrition</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Alimentos víveres</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Kits nutricionales y leche de fórmula</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Despensa básica</div>
+</label>
+<!-- Item 4: Carpas y albergue rápido -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="tents"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="camping">camping</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Carpas y albergue</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Plásticos, esterillas y toldos térmicos</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Campamento seguro</div>
+</label>
+<!-- Item 5: Transporte / Evacuación -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="transport"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="local_shipping">local_shipping</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Transporte y flete</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Camionetas para evacuación de personas o bienes</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Movilidad rural/urbana</div>
+</label>
+<!-- Item 6: Bodega y acopio de enseres -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="storage"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="warehouse">warehouse</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Bodega y acopio</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Custodia comunitaria para proteger muebles</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Espacio seco</div>
+</label>
+<!-- Item 7: Reparación de local comercial -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="repairs"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="construction">construction</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Reparación de local</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Puntales, tejas de zinc y apoyo técnico</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Reactivación civil</div>
+</label>
+<!-- Item 8: Asesoría jurídica y seguros -->
+<label class="relative p-4 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-primary-container flex flex-col justify-between cursor-pointer transition-all hover:shadow-xs group">
+<input class="sr-only" name="main_need" type="radio" value="legal"/>
+<div class="flex items-start justify-between mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="gavel">gavel</span>
+</div>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary text-[15px]">Asesoría y seguros</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">Reclamaciones, escrituras y trámites bancarios</p>
+</div>
+<div class="mt-3 text-xs text-outline font-medium">Acompañamiento legal</div>
+</label>
+</div>
+</div>
+<!-- Section: Formulario Detallado & Urgencia -->
+<div class="bg-surface-container-lowest p-6 sm:p-8 rounded-xl border border-outline-variant/50 shadow-xs flex flex-col gap-6">
+<div class="border-b border-outline-variant/30 pb-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">2. Detalles de tu grupo y urgencia</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Esta información permite al algoritmo de priorización asignar recursos de inmediato a las familias con mayor riesgo vital.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Personas en el núcleo -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between" for="people_count">
+<span>Número de personas afectadas</span>
+<span class="text-xs font-normal text-on-surface-variant">En tu grupo conviviente</span>
+</label>
+<div class="flex items-center rounded-xl border border-outline-variant/70 bg-surface-container-low px-3 py-1.5 focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container">
+<button class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-surface-variant text-lg font-bold select-none" type="button">−</button>
+<input class="w-full text-center bg-transparent border-0 font-headline-sm text-headline-sm text-primary focus:ring-0" id="people_count" max="25" min="1" type="number" value="4"/>
+<button class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-surface-variant text-lg font-bold select-none" type="button">+</button>
+</div>
+</div>
+<!-- Cantidad estimada o recurso puntual -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="resource_detail">
+                Detalle del insumo o requerimiento
+              </label>
+<input class="w-full rounded-xl border border-outline-variant/70 bg-surface px-4 py-3 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="resource_detail" placeholder="Ej: 2 colchonetas dobles, 4 cobijas térmicas, pañales etapa 3" type="text"/>
+</div>
+</div>
+<!-- Casillas de Vulnerabilidad Crítica -->
+<div class="flex flex-col gap-3">
+<span class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-error" data-icon="priority_high">priority_high</span>
+              Condición de vulnerabilidad en el grupo (Marca todas las que apliquen):
+            </span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Check 1: Niños -->
+<label class="flex items-center gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low hover:bg-surface-variant/40 cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container border-outline-variant" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Niños, niñas o lactantes (0 - 12 años)</span>
+</label>
+<!-- Check 2: Adultos mayores -->
+<label class="flex items-center gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low hover:bg-surface-variant/40 cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container border-outline-variant" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Adultos mayores (65+ años)</span>
+</label>
+<!-- Check 3: Discapacidad -->
+<label class="flex items-center gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low hover:bg-surface-variant/40 cursor-pointer transition-colors">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container border-outline-variant" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Discapacidad o movilidad reducida</span>
+</label>
+<!-- Check 4: Enfermedad / Medicamentos -->
+<label class="flex items-center gap-3 p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low hover:bg-surface-variant/40 cursor-pointer transition-colors">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container border-outline-variant" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Personas enfermas / requieren medicamentos</span>
+</label>
+</div>
+</div>
+<!-- Ubicación Territorial Quindío -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="municipality_select">
+                Municipio del Quindío
+              </label>
+<div class="relative">
+<select class="w-full rounded-xl border border-outline-variant/70 bg-surface px-4 py-3 font-body-sm text-body-sm text-on-surface appearance-none focus:border-primary-container focus:ring-1 focus:ring-primary-container pr-10" id="municipality_select">
+<option selected="" value="quimbaya">Quimbaya</option>
+<option value="armenia">Armenia (Capital)</option>
+<option value="calarca">Calarcá</option>
+<option value="circasia">Circasia</option>
+<option value="montenegro">Montenegro</option>
+<option value="latebaida">La Tebaida</option>
+<option value="filandia">Filandia</option>
+<option value="salento">Salento</option>
+<option value="tebaida">Génova</option>
+<option value="pijao">Pijao</option>
+<option value="cordoba">Córdoba</option>
+<option value="buenavista">Buenavista</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-on-surface-variant pointer-events-none text-[20px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="address_reference">
+                Barrio, vereda o punto de referencia
+              </label>
+<input class="w-full rounded-xl border border-outline-variant/70 bg-surface px-4 py-3 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="address_reference" placeholder="Ej: Vereda La Soledad, 200m adelante de la escuela" type="text"/>
+</div>
+</div>
+<!-- Breve caja de descripción adicional -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between" for="additional_notes">
+<span>¿Hay algo más que debamos saber sobre la situación?</span>
+<span class="text-xs font-normal text-on-surface-variant">Opcional</span>
+</label>
+<textarea class="w-full rounded-xl border border-outline-variant/70 bg-surface p-4 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="additional_notes" placeholder="Coméntanos detalles sobre el estado del camino, si no hay luz en la zona, o si el predio presenta riesgo de deslizamiento..." rows="3"></textarea>
+</div>
+<!-- Botones de Acción y Teléfono Empático -->
+<div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-outline-variant/30">
+<button class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-headline-sm text-headline-sm text-[16px] font-semibold shadow-md hover:bg-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+              Publicar mi necesidad
+            </button>
+<!-- Alternativa sin conectividad estable -->
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-primary-container transition-colors py-2 px-3 rounded-lg hover:bg-surface-container-high" href="https://wa.me/573000000000">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="phone_in_talk">phone_in_talk</span>
+<span>Prefiero que me llamen por teléfono / WhatsApp</span>
+</a>
+</div>
+<!-- Sello de Privacidad Legal (Habeas Data Colombia) -->
+<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary shrink-0 mt-0.5" data-icon="lock">lock</span>
+<p class="leading-relaxed">
+              Tus datos se tratan con estricta confidencialidad bajo la <strong>Ley Estatutaria 1581 de 2012</strong> de Protección de Datos Personales de Colombia, exclusivamente para coordinación humanitaria y logística de ayuda ciudadana. No se comparten con fines comerciales ni proselitistas.
+            </p>
+</div>
+</div>
+</section>
+<!-- Secondary Column: 4 Columns (Civic Sidebar, sticky) -->
+<aside class="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-28">
+<!-- Tarjeta Informativa: Algoritmo Cívico Transparente -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/50 shadow-xs flex flex-col gap-5">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="tune">tune</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-base text-primary">Así calculamos tu prioridad</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Algoritmo de triaje cívico comunitario</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Para garantizar que el auxilio llegue primero a quienes corren peligro inminente, nuestro sistema civil evalúa 4 criterios automáticos:
+          </p>
+<ol class="flex flex-col gap-3 font-body-sm text-body-sm">
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+<span><strong>Vulnerabilidad biológica:</strong> Presencia de menores, personas de la tercera edad o enfermos crónicos.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+<span><strong>Afectación estructural:</strong> Pérdida total o parcial de techo, agrietamiento grave o anegamiento.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+<span><strong>Ventana de tiempo:</strong> Horas acumuladas sin confirmación de víveres o abrigo verificable.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+<span><strong>Proximidad operativa:</strong> Brigadas y fletes de la Red lista con disponibilidad en tu municipio.</span>
+</li>
+</ol>
+<!-- Semáforo de Estado Cívico -->
+<div class="pt-3 border-t border-outline-variant/30 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Convención de semáforo cívico:</span>
+<div class="grid grid-cols-3 gap-2 text-center text-xs">
+<div class="flex flex-col items-center p-2 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<span class="w-3 h-3 rounded-full mb-1" style="background-color: #D64545;"></span>
+<span class="font-bold text-on-surface">Sin ayuda</span>
+<span class="text-[10px] text-on-surface-variant">Alta prioridad</span>
+</div>
+<div class="flex flex-col items-center p-2 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<span class="w-3 h-3 rounded-full mb-1" style="background-color: #E0A100;"></span>
+<span class="font-bold text-on-surface">En camino</span>
+<span class="text-[10px] text-on-surface-variant">Brigada asignada</span>
+</div>
+<div class="flex flex-col items-center p-2 rounded-lg bg-surface-container-low border border-outline-variant/20">
+<span class="w-3 h-3 rounded-full mb-1" style="background-color: #2E9E5B;"></span>
+<span class="font-bold text-on-surface">Atendida</span>
+<span class="text-[10px] text-on-surface-variant">Verificada</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tarjeta Destacada de Alivio Inmediato: Viviendas Solidarias (Lila #7B5EA7) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-2 border-tertiary-container/30 shadow-xs flex flex-col gap-4 relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="houseboat">houseboat</span>
+</span>
+<span class="font-label-sm text-label-sm font-bold text-tertiary uppercase tracking-wider">Alivio Inmediato</span>
+</div>
+<!-- Sello Tinta Lila -->
+<div class="w-9 h-9 rounded-full border border-tertiary flex items-center justify-center text-tertiary rotate-12">
+<span class="material-symbols-outlined text-[18px]" data-icon="approval">approval</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-base text-tertiary font-bold">
+              Mientras tanto: viviendas solidarias en Quimbaya (5 cupos)
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1">
+              Familias anfitrionas verificadas en el casco urbano y veredas aledañas con habitaciones habitables de acogida temporal.
+            </p>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-medium text-on-surface">Finca El Recuerdo (Vereda Trocaderos)</span>
+</div>
+<span class="font-bold text-tertiary">3 cupos</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-medium text-on-surface">Casa Familia Gómez (Barrio Buenos Aires)</span>
+</div>
+<span class="font-bold text-tertiary">2 cupos</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-between p-3 rounded-lg bg-tertiary text-on-tertiary font-label-md text-label-md font-semibold hover:bg-tertiary-container transition-colors" href="#">
+<span>Ver cupos en Quimbaya</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Tarjeta de Línea de Apoyo Directo -->
+<div class="bg-surface-container-high/60 p-5 rounded-xl border border-outline-variant/40 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary font-semibold font-headline-sm text-headline-sm text-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="support_agent">support_agent</span>
+            Línea cívica departamental de auxilio
+          </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs leading-relaxed">
+            Si estás incomunicado o la señal móvil es intermitente, comunícate a través de repetidoras de radioaficionados o a nuestra línea enlace:
+          </p>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+<div class="flex flex-col">
+<span class="text-xs text-outline">Línea gratuita de ayuda Quindío:</span>
+<span class="font-headline-sm text-headline-sm text-base text-primary font-bold">(606) 741 0022</span>
+</div>
+<a class="p-2 rounded-md bg-primary-container text-on-primary hover:bg-primary" href="tel:6067410022">
+<span class="material-symbols-outlined text-[18px]" data-icon="call">call</span>
+</a>
+</div>
+<span class="text-[11px] text-outline text-center">Radiofrecuencia comunitaria VHF: 146.520 MHz Simplex</span>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Component (Shared Anchor) -->
+<footer class="w-full mt-auto bg-surface-container-low dark:bg-surface-container-high border-t border-outline-variant/40 dark:border-outline-variant/20">
+<div class="w-full max-w-[1200px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Brand & Copyright -->
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary dark:text-inverse-primary">
+          Cadena de Favores+
+        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant text-center md:text-left">
+          © 2024 Cadena de Favores+ Quindío. Solidaridad comunitaria y transparencia civil.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<nav class="flex flex-wrap justify-center gap-6 items-center">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Mesa de Coordinación</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Protocolos de Emergencia</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Términos Cívicos</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Reportar Novedad</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Datos Abiertos</a>
+</nav>
+</div>
+</footer>
+</body></html>
